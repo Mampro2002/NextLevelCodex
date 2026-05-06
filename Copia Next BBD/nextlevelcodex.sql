@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-05-2026 a las 18:18:14
+-- Tiempo de generación: 06-05-2026 a las 18:11:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -64,6 +64,13 @@ CREATE TABLE `comentarios` (
   `comentario` text NOT NULL,
   `fecha` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id`, `id_juego`, `id_usuario`, `comentario`, `fecha`) VALUES
+(3, 9, 1, 'Me flipa este juego!!!!!!!!!!!!!!!!', '2026-05-06 16:48:05');
 
 -- --------------------------------------------------------
 
@@ -133,6 +140,13 @@ CREATE TABLE `favoritos` (
   `fecha` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `favoritos`
+--
+
+INSERT INTO `favoritos` (`id_usuario`, `id_juego`, `fecha`) VALUES
+(1, 9, '2026-05-06 16:46:19');
+
 -- --------------------------------------------------------
 
 --
@@ -165,9 +179,9 @@ CREATE TABLE `juegos` (
 
 INSERT INTO `juegos` (`id`, `titulo`, `desarrollador`, `distribuidora`, `fecha_lanzamiento`, `genero`, `descripcion`, `portada`, `mapa_imagen`, `enlace_compra`, `creador_id`, `fecha_creacion`, `tiene_items`, `nombre_items`, `tiene_personajes`, `tiene_mapa`, `en_desarrollo`) VALUES
 (9, 'Monster Hunter World', 'Capcom', 'Capcom', '2018-01-26', 'RPG de Acción', 'Embárcate en una épica cacería en el Nuevo Mundo. Enfréntate a monstruos colosales en ecosistemas vivos, forja equipo poderoso y colabora con otros cazadores en esta obra maestra de la saga Monster Hunter.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/582010/MONSTER_HUNTER_WORLD/', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 0, 0),
-(10, 'Hades', 'Supergiant Games', 'Supergiant Games', '2020-09-17', 'Roguelike', 'Escapa del inframundo en este aclamado roguelike de acción. Como Zagreo, hijo de Hades, lucharás a través de mazmorras generadas aleatoriamente con la ayuda de los dioses del Olimpo.', 'default_game.jpg', 'map_1777997211.jpg', 'https://store.steampowered.com/app/1145360/Hades/', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 1, 0),
+(10, 'Hades', 'Supergiant Games', 'Supergiant Games', '2020-09-17', 'Roguelike', 'Escapa del inframundo en este aclamado roguelike de acción. Como Zagreo, hijo de Hades, lucharás a través de mazmorras generadas aleatoriamente con la ayuda de los dioses del Olimpo.', 'game_1778072432.png', 'map_1777997211.jpg', '', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 1, 0),
 (11, 'Hollow Knight', 'Team Cherry', 'Team Cherry', '2017-02-24', 'Metroidvania', 'Forja tu propio camino en Hallownest, un reino antiguo lleno de insectos extraños y secretos ocultos. Un metroidvania dibujado a mano con una atmósfera inolvidable y una jugabilidad desafiante.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/367520/Hollow_Knight/', 2, '2026-05-05 17:50:24', 1, 'Habilidad', 1, 0, 0),
-(12, 'Balatro', 'LocalThunk', 'Playstack', '2024-02-20', 'Roguelike de Cartas', 'El póker se encuentra con el roguelike en este adictivo juego de construcción de mazos. Combina manos de póker con comodines especiales para superar ciegas cada vez más difíciles.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/2379780/Balatro/', 2, '2026-05-05 17:50:24', 1, 'Carta', 0, 0, 0),
+(12, 'Balatro', 'LocalThunk', 'Playstack', '2024-02-20', 'Roguelike de Cartas', 'El póker se encuentra con el roguelike en este adictivo juego de construcción de mazos. Combina manos de póker con comodines especiales para superar ciegas cada vez más difíciles.', 'game_1778078491.jpg', NULL, '', 2, '2026-05-05 17:50:24', 1, 'Carta', 0, 0, 0),
 (13, 'Hollow Knight: Silksong', 'Team Cherry', 'Team Cherry', '2026-12-31', 'Metroidvania', 'Juega como Hornet en esta esperada secuela de Hollow Knight. Explora un nuevo reino, domina nuevas habilidades y descubre los secretos de Pharloom en esta aventura independiente.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/1030300/Hollow_Knight_Silksong/', 2, '2026-05-05 17:50:24', 0, 'Armas', 0, 0, 1),
 (14, 'Celeste', 'Maddy Makes Games', 'Maddy Makes Games', '2018-01-25', 'Plataformas', 'Ayuda a Madeline a escalar la Montaña Celeste en este desafiante juego de plataformas pixel-art. Una historia emotiva sobre la superación personal, la ansiedad y la perseverancia.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/504230/Celeste/', 3, '2026-05-05 17:50:24', 1, 'Armas', 1, 0, 0);
 
@@ -221,7 +235,14 @@ INSERT INTO `logros_usuarios` (`id_usuario`, `id_logro`, `fecha_obtencion`) VALU
 (1, 1, '2026-05-05 17:43:31'),
 (1, 4, '2026-05-05 17:43:31'),
 (1, 6, '2026-05-05 17:43:32'),
-(1, 7, '2026-05-05 17:43:32');
+(1, 7, '2026-05-05 17:43:32'),
+(1, 8, '2026-05-06 17:04:10'),
+(1, 9, '2026-05-06 17:04:10'),
+(2, 1, '2026-05-06 16:58:24'),
+(2, 4, '2026-05-06 16:58:24'),
+(2, 6, '2026-05-06 16:58:24'),
+(3, 1, '2026-05-06 16:53:22'),
+(3, 4, '2026-05-06 16:53:22');
 
 -- --------------------------------------------------------
 
@@ -238,19 +259,22 @@ CREATE TABLE `mapas` (
   `tipo` varchar(50) DEFAULT NULL,
   `descripcion` text DEFAULT NULL,
   `pos_x` decimal(6,2) DEFAULT NULL COMMENT 'Posición X en % sobre la imagen del mapa',
-  `pos_y` decimal(6,2) DEFAULT NULL COMMENT 'Posición Y en % sobre la imagen del mapa'
+  `pos_y` decimal(6,2) DEFAULT NULL COMMENT 'Posición Y en % sobre la imagen del mapa',
+  `icono` varchar(10) DEFAULT '?' COMMENT 'Emoji o icono del punto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `mapas`
 --
 
-INSERT INTO `mapas` (`id`, `id_juego`, `nombre`, `latitud`, `longitud`, `tipo`, `descripcion`, `pos_x`, `pos_y`) VALUES
-(2, 10, 'Entrada al Inframundo', NULL, NULL, 'Inicio', 'Comienzo de cada partida.', 10.00, 90.00),
-(3, 10, 'Templo de Hades', NULL, NULL, 'Jefe Final', 'Sala del trono de Hades.', 85.00, 15.00),
-(4, 10, 'Jardín del Elíseo', NULL, NULL, 'Santuario', 'Zona de descanso con Patroclo y Aquiles.', 60.00, 50.00),
-(5, 10, 'Cámara del Tártaro', NULL, NULL, 'Mazmorra', 'Mazmorra intermedia con Megara.', 30.00, 70.00),
-(6, 10, 'Puerta del Caos', NULL, NULL, 'Transición', 'Portal al Caos primordial.', 75.00, 30.00);
+INSERT INTO `mapas` (`id`, `id_juego`, `nombre`, `latitud`, `longitud`, `tipo`, `descripcion`, `pos_x`, `pos_y`, `icono`) VALUES
+(18, 10, 'Tártaro', NULL, NULL, 'Primera Zona', 'Las Profundidades más oscuras del Inframundo. LLeno de trampas, brujas y almas perdidas. \n\nJefe de Zona: Primera Furia.\n\nHabitaciones aprox: 15', 48.24, 25.85, '⚔️'),
+(19, 10, 'Casa de', NULL, NULL, 'Hades', 'Zona Inicial', 48.54, 13.35, '🏠'),
+(20, 10, 'Asfódelo', NULL, NULL, 'Segunda Zona', 'Un mar de lava y ceniza, donde las almas navegan eternamente.\n\nJefe de Zona: Hidra Ósea de Lerna.\n\nHabitaciones aprox: 10', 48.24, 39.65, '⛩️'),
+(21, 10, 'Elíseo', NULL, NULL, 'Tercera Zona', 'Campos de descaso de héroes y castigo para los malvados. Enemigos poderosos te esperan.\n\nJefe de Zona:  Teseo y Asterio.\n\nHabitaciones Aprox: 11', 48.73, 55.86, '⚔️'),
+(22, 10, 'Templo de Estigia', NULL, NULL, 'Cuarta Zona', 'Un laberinto de veneno y secretos. Encuentra el Saco de Caronte para avanzar.', 48.34, 70.38, '⛩️'),
+(23, 10, 'Puerta del Tartaro', NULL, NULL, 'Ultima zona', 'Final del camino donde el temor y la sangre llegan hasta el final. Allí el tu padre Zagreo espera.\n\nJefe final: Dios del Inframundo, Zagreo', 48.83, 83.01, '💀'),
+(24, 10, 'Superficie', NULL, NULL, 'Fin de Juego', 'Por fin consigues salir del Tartataro, la pesadilla acabo.', 48.83, 95.77, '⭐');
 
 -- --------------------------------------------------------
 
@@ -291,7 +315,10 @@ INSERT INTO `mensajes_grupales` (`id`, `emisor`, `mensaje`, `fecha`) VALUES
 (19, 1, 'Bien', '2026-04-30 14:19:56'),
 (20, 3, 'ada', '2026-04-30 14:19:57'),
 (21, 2, 'adads', '2026-04-30 14:45:28'),
-(22, 1, 'daad', '2026-04-30 14:45:42');
+(22, 1, 'daad', '2026-04-30 14:45:42'),
+(23, 2, 'adasdas', '2026-05-06 17:09:25'),
+(24, 2, 'fsdff', '2026-05-06 17:09:47'),
+(25, 1, 'vsvcsad', '2026-05-06 17:09:52');
 
 -- --------------------------------------------------------
 
@@ -325,7 +352,10 @@ INSERT INTO `mensajes_privados` (`id`, `emisor`, `receptor`, `mensaje`, `fecha`,
 (10, 2, 1, 'fsdsdf', '2026-04-30 14:46:23', 1),
 (11, 2, 1, 'fsdsdf', '2026-04-30 14:46:23', 1),
 (12, 2, 1, 'dsfsf', '2026-04-30 14:46:50', 1),
-(13, 2, 1, 'dsfsf', '2026-04-30 14:46:50', 1);
+(13, 2, 1, 'dsfsf', '2026-04-30 14:46:50', 1),
+(14, 2, 1, 'Holaaaa', '2026-05-06 17:08:58', 1),
+(15, 2, 1, 'CONTESTA COÑO NFDNASLODNASLDFNS', '2026-05-06 17:11:00', 1),
+(16, 1, 2, 'QUE COÑO QUIERES???????????????', '2026-05-06 17:12:09', 1);
 
 -- --------------------------------------------------------
 
@@ -387,9 +417,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `user`, `email`, `pass`, `nombre`, `level`, `amigos`, `ultima_conexion`, `conectado`, `ban_hasta`, `avatar`, `bio`, `idioma`, `perfil_publico`) VALUES
-(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-05-05 16:39:35', 0, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
-(2, 'editor', 'editor@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Editor de Contenido', 1, '#1#', '2026-05-05 10:45:52', 0, NULL, 'default.jpg', 'Editor de Next Level Code, cuyo superior es el Admin.', 'es', 0),
-(3, 'user', 'user@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Dani', 1, NULL, '2026-05-05 16:38:48', 0, NULL, 'default.jpg', NULL, 'es', 0);
+(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-05-06 18:07:53', 0, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
+(2, 'editor', 'editor@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Editor de Contenido', 1, '#1#', '2026-05-06 17:05:55', 0, NULL, 'default.jpg', 'Editor de Next Level Code, cuyo superior es el Admin.', 'es', 0),
+(3, 'user', 'user@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Dani', 1, NULL, '2026-05-06 17:44:35', 0, NULL, 'default.jpg', NULL, 'es', 0);
 
 -- --------------------------------------------------------
 
@@ -448,7 +478,50 @@ INSERT INTO `visitas_juegos` (`id`, `id_juego`, `id_usuario`, `fecha`) VALUES
 (12, 10, 1, '2026-05-05 17:56:03'),
 (13, 9, 1, '2026-05-05 17:56:50'),
 (14, 10, 1, '2026-05-05 17:57:23'),
-(15, 10, 1, '2026-05-05 18:07:04');
+(15, 10, 1, '2026-05-05 18:07:04'),
+(16, 9, 1, '2026-05-06 09:44:02'),
+(17, 9, 1, '2026-05-06 09:44:13'),
+(18, 9, 1, '2026-05-06 09:45:11'),
+(19, 11, 1, '2026-05-06 09:47:34'),
+(20, 9, 1, '2026-05-06 09:58:37'),
+(21, 10, 1, '2026-05-06 10:14:59'),
+(22, 10, 1, '2026-05-06 10:26:04'),
+(23, 10, 1, '2026-05-06 10:29:21'),
+(24, 10, 1, '2026-05-06 10:30:06'),
+(25, 10, 1, '2026-05-06 10:32:28'),
+(26, 10, 1, '2026-05-06 10:35:57'),
+(27, 10, 1, '2026-05-06 14:20:38'),
+(28, 10, 1, '2026-05-06 14:52:35'),
+(29, 10, 1, '2026-05-06 14:59:41'),
+(30, 10, 1, '2026-05-06 15:00:36'),
+(31, 10, 1, '2026-05-06 16:15:42'),
+(32, 10, 1, '2026-05-06 16:22:30'),
+(33, 10, 1, '2026-05-06 16:23:17'),
+(34, 10, 1, '2026-05-06 16:24:54'),
+(35, 10, 1, '2026-05-06 16:25:02'),
+(36, 10, 1, '2026-05-06 16:27:24'),
+(37, 10, 1, '2026-05-06 16:27:31'),
+(38, 12, 1, '2026-05-06 16:41:09'),
+(39, 12, 1, '2026-05-06 16:41:37'),
+(40, 10, 1, '2026-05-06 16:44:43'),
+(41, 9, 1, '2026-05-06 16:46:18'),
+(42, 9, 1, '2026-05-06 16:47:45'),
+(43, 14, 3, '2026-05-06 16:54:10'),
+(44, 12, 3, '2026-05-06 16:54:16'),
+(45, 10, 3, '2026-05-06 16:54:24'),
+(46, 10, 2, '2026-05-06 16:54:37'),
+(47, 10, 2, '2026-05-06 16:54:41'),
+(48, 11, 2, '2026-05-06 16:55:50'),
+(49, 10, 2, '2026-05-06 16:57:33'),
+(50, 13, 2, '2026-05-06 16:57:43'),
+(51, 14, 2, '2026-05-06 16:58:01'),
+(52, 14, 2, '2026-05-06 16:58:34'),
+(53, 10, 1, '2026-05-06 17:05:12'),
+(54, 13, 1, '2026-05-06 17:30:46'),
+(55, 11, 1, '2026-05-06 17:37:26'),
+(56, 9, 3, '2026-05-06 18:07:19'),
+(57, 10, 3, '2026-05-06 18:07:40'),
+(58, 13, 1, '2026-05-06 18:08:50');
 
 --
 -- Índices para tablas volcadas
@@ -585,7 +658,7 @@ ALTER TABLE `armas`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `elementos`
@@ -609,19 +682,19 @@ ALTER TABLE `logros`
 -- AUTO_INCREMENT de la tabla `mapas`
 --
 ALTER TABLE `mapas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes_grupales`
 --
 ALTER TABLE `mensajes_grupales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes_privados`
 --
 ALTER TABLE `mensajes_privados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `personajes`
@@ -645,7 +718,7 @@ ALTER TABLE `valoraciones`
 -- AUTO_INCREMENT de la tabla `visitas_juegos`
 --
 ALTER TABLE `visitas_juegos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Restricciones para tablas volcadas
