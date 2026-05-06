@@ -1,0 +1,31 @@
+/* ===== PANEL DE ADMINISTRACIÓN ===== */
+.modal {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-group small {
+  display: block;
+  margin-top: var(--spacing-xs);
+}
+
+#tablaJuegos img {
+  border-radius: var(--border-radius);
+  object-fit: cover;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  margin: 0 2px;
+}

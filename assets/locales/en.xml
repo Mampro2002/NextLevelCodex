@@ -1,0 +1,138 @@
+<?xml version= "1.0" encoding ="UTF-8" standalone = "yes"?>
+
+<textos>
+
+    <palabras>
+
+        <log>Log out</log>
+        <bienve>Welcome</bienve>
+        <galeria>GAME LIBRARY</galeria>
+        <galeria2>Photo Gallery</galeria2>
+        <Cerrar>Close</Cerrar>
+        <elegir>Choose files</elegir>
+        <elegir2>No files selected</elegir2>
+        <elegir3>selected files</elegir3>
+        <baneo>Unban</baneo>
+        <baneo2>Ban</baneo2>
+
+        <nota1> COMPLETE CREDENTIAL VERIFICATION.</nota1>
+        <nota2> ACCESS GRANTED TO THE SHELTER SECTOR.</nota2>
+
+        <caption> List The Admins </caption>
+        <th1>Select</th1>
+        <th2>Id</th2>
+        <th3>User</th3>
+        <th4>Pass</th4>
+        <th5>Name</th5>
+        <th6>Level</th6>
+        <th7>Update</th7>
+        <th8>Favorite</th8>
+        <th9>Photo Description</th9>
+        <th10>Retrieve</th10>
+        <th11>Action</th11>
+        <th12>INCOMING APPLICATIONS</th12>
+
+        <boton1>Update</boton1>
+        <boton2>Delete</boton2>
+        <boton3>Add</boton3>
+        <boton4>Share</boton4>
+        <boton5>Unshare</boton5>
+        <boton6>ACCEPT</boton6>
+        <boton7>DECLINE</boton7>
+        <boton8>BLOCK</boton8>
+        <boton9>UNLOCK</boton9>
+
+        <fotos1>[01] MY PHOTOS</fotos1>
+        <fotos2>[02] MY FAVORITE PHOTOS</fotos2>
+        <fotos3>[03] PHOTOS THAT HAVE BEEN SHARED WITH ME</fotos3>
+        <fotos4>[04] TRASH CAN</fotos4>
+        <fotos5>Editar Foto</fotos5>
+        <fotos6>Shared by:</fotos6>
+
+        <mor>[ COLLABORATOR SEARCH ]</mor>
+        <mor2>MY INHABITANTS</mor2>
+        <mor3>EXPELLED FROM THE SHELTER</mor3>
+        <mor4>LIST OF RESIDENTS</mor4>
+
+        <amg1>[01] SEARCH COLLABORATORS</amg1>
+        <amg2>[02] PENDING REQUESTS</amg2>
+        <amg3>[03] MY COLLABORATORS</amg3>
+        <amg4>[04] BLOCKED USERS</amg4>
+        <amgM>MAIN MENU</amgM>
+        <amgB>SEARCH</amgB>
+        <amgS>NO PENDING APPLICATIONS</amgS>
+        <amgE>Remove Friend</amgE>
+        <amgN>THERE ARE NO RESIDENTS IN THE SHELTER</amgN>
+        <amgD>NO INHABITANTS EXPELLED TO THE WASTELAND</amgD>
+
+        <enviar>SUBMIT APPLICATION</enviar>
+        <enviar2>Cancel request</enviar2>
+        <enviada>APPLICATION SENT</enviada>
+        <enviada2>THE APPLICATION HAS BEEN ACCEPTED</enviada2>
+        <enviada3>THE APPLICATION HAS BEEN REJECTED</enviada3>
+        <enviada4>THE DWELLER HAS BEEN EXPELLED FROM THE WASTELAND</enviada4>
+        <enviada5>THE DWELLER HAS RETURNED TO THE SHELTER</enviada5>
+        <enviada6>THE DWELLER HAS BEEN REMOVED FROM THE WASTELAND</enviada6>
+        <enviada7>You can't share a photo that isn't yours</enviada7>
+        <enviada8>Shared on:</enviada8>
+
+        <introducir>ENTER SEARCH DATA</introducir>
+        <introducir2>ENTER NAME OR USERNAME...</introducir2>
+        <acceder>ACCESSING THE WASTELAND DATABASE...</acceder>
+        <noE>[ERROR] NO RECORDS FOUND.</noE>
+
+        <comp>SHARED PHOTO</comp>
+        <comp2>UNSHARED PHOTO</comp2>
+
+        <g1>Photo added to Trash successfully</g1>
+        <g2>Photo added to Favorites</g2>
+        <g3>Photo removed from Favorites</g3>
+        <g4>Photo recovered</g4>
+        <g5>Photo permanently deleted</g5>
+        <g6>Loading...</g6>
+        <g7>Tell me what name you want to give the photo:</g7>
+        <g8>Tell me what description you want to give it:</g8>
+        <g9>Photo updated successfully</g9>
+        <g10>Are you sure you want to delete this photo permanently?</g10>
+        <g11>Photo deleted successfully</g11>
+        <g12>Are you sure you want to empty the trash?</g12>
+        <g13>Trash emptied</g13>
+
+        <t1>Are you sure you want to delete the selected users?</t1>
+        <t2>Admin users cannot be deleted.</t2>
+        <t3>An admin cannot delete themselves.</t3>
+        <t4>User Deleted.</t4>
+        <t5>Admin users cannot update their level.</t5>
+        <t6>All fields must be filled in.</t6>
+        <t7>Only level 1 or level 0.</t7>
+        <t8>Maximum 20 characters per parameter.</t8>
+        <t9>Enter the username:</t9>
+        <t10>Enter the name to add:</t10>
+        <t11>Enter the password to add:</t11>
+        <t12>Enter the level to add:</t12>
+        <t13>Enter the email to add:</t13>
+        <t14>Username Added</t14>
+        <t15>This user already exists.</t15>
+        <t16>Maximum 10 characters per parameter.</t16>
+        <t17>The email is invalid, it must contain @</t17>
+        <t18>Empty Recycle Bin</t18>
+
+        <fecha1>Sent</fecha1>
+        <fecha2>seconds</fecha2>
+        <fecha3>minutes</fecha3>
+        <fecha4>hours</fecha4>
+        <fecha5>days</fecha5>
+        <fecha6>Date not available</fecha6>
+        <fecha7>Online now</fecha7>
+        <fecha8>Online</fecha8>
+        <fecha9>Never online</fecha9>
+        <fecha10>Last login</fecha10>
+        <fecha11>Application Date</fecha11>
+        <fecha12>Uploaded on:</fecha12>
+        <fecha13>at</fecha13>
+        
+
+    </palabras>
+
+
+</textos>

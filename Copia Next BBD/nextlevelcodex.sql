@@ -1,0 +1,748 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 05-05-2026 a las 18:18:14
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `nextlevelcodex`
+--
+CREATE DATABASE IF NOT EXISTS `nextlevelcodex` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `nextlevelcodex`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `armas`
+--
+
+CREATE TABLE `armas` (
+  `id` int(11) NOT NULL,
+  `id_juego` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `tipo` varchar(50) DEFAULT NULL,
+  `daño` int(11) DEFAULT 0,
+  `municion` varchar(50) DEFAULT NULL,
+  `rareza` varchar(50) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bloqueados`
+--
+
+CREATE TABLE `bloqueados` (
+  `id_recep` int(11) NOT NULL,
+  `id_block` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id` int(11) NOT NULL,
+  `id_juego` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `comentario` text NOT NULL,
+  `fecha` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `domingueros`
+--
+
+CREATE TABLE `domingueros` (
+  `id_sol` int(11) NOT NULL,
+  `id_rec` int(11) NOT NULL,
+  `fecha` int(11) NOT NULL,
+  `statu` int(11) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `elementos`
+--
+
+CREATE TABLE `elementos` (
+  `id` int(11) NOT NULL,
+  `id_juego` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `tipo` varchar(50) DEFAULT NULL COMMENT 'Subtipo libre (Espada, Joker, Hechizo...)',
+  `valor1` varchar(50) DEFAULT NULL COMMENT 'Primer stat (Daño, Puntos, Maná...)',
+  `valor2` varchar(50) DEFAULT NULL COMMENT 'Segundo stat (Munición, Coste...)',
+  `rareza` varchar(50) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `elementos`
+--
+
+INSERT INTO `elementos` (`id`, `id_juego`, `nombre`, `tipo`, `valor1`, `valor2`, `rareza`, `descripcion`) VALUES
+(9, 9, 'Espada de Hierro', 'Espada', '150', 'Ninguna', 'Común', NULL),
+(10, 9, 'Arco de Kadachi', 'Arco', '180', 'Electricidad', 'Raro', NULL),
+(11, 9, 'Martillo de Diablos', 'Martillo', '250', 'Ninguna', 'Épico', NULL),
+(12, 9, 'Hoz de Nergigante', 'Espada Larga', '300', 'Dragón', 'Legendario', NULL),
+(13, 9, 'Lanza de Rathalos', 'Lanza', '220', 'Fuego', 'Épico', NULL),
+(14, 10, 'Espada Estigia', 'Arma Infernal', '90', 'Golpe crítico +15%', 'Legendaria', NULL),
+(15, 10, 'Arco de Artemisa', 'Bendición', '70', 'Disparo rápido', 'Divina', NULL),
+(16, 10, 'Lanza de Ares', 'Bendición', '110', 'Maldición de ruina', 'Divina', NULL),
+(17, 10, 'Escudo de Zeus', 'Bendición', '60', 'Cadena de rayos', 'Divina', NULL),
+(18, 11, 'Filo del Sueño', 'Habilidad de Aguijón', '21', 'Almas', 'Legendaria', NULL),
+(19, 11, 'Garra de Mantis', 'Habilidad de Movimiento', '0', 'Agarrar paredes', 'Épica', NULL),
+(20, 11, 'Corazón de Sombra', 'Habilidad de Hechizo', '30', 'Almas', 'Rara', NULL),
+(21, 12, 'Joker Sonriente', 'Carta Joker', '+4 Mult', 'Común', 'Común', NULL),
+(22, 12, 'Joker de la Fortuna', 'Carta Joker', '+20 Fichas', 'Cada mano jugada', 'Raro', NULL),
+(23, 12, 'Joker Místico', 'Carta Joker', 'x2 Mult', 'Al descartar', 'Épico', NULL),
+(24, 12, 'Joker Invisible', 'Carta Joker', 'Copia Joker', 'Aleatorio', 'Legendario', NULL),
+(25, 12, 'Joker del Trueno', 'Carta Joker', '+50 Fichas', 'Al jugar corazón', 'Raro', NULL),
+(26, 14, 'Fresa Alada', 'Coleccionable', '1000', 'Puntos', 'Especial', NULL),
+(27, 14, 'Cristal Azul', 'Objeto de Historia', '0', 'Desbloquea final B', 'Único', NULL),
+(28, 14, 'Pluma Dorada', 'Objeto de Historia', '0', 'Desbloquea final C', 'Único', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `favoritos`
+--
+
+CREATE TABLE `favoritos` (
+  `id_usuario` int(11) NOT NULL,
+  `id_juego` int(11) NOT NULL,
+  `fecha` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `juegos`
+--
+
+CREATE TABLE `juegos` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(150) NOT NULL,
+  `desarrollador` varchar(100) DEFAULT NULL,
+  `distribuidora` varchar(100) DEFAULT NULL,
+  `fecha_lanzamiento` date DEFAULT NULL,
+  `genero` varchar(50) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL,
+  `portada` varchar(255) DEFAULT 'default_game.jpg',
+  `mapa_imagen` varchar(255) DEFAULT NULL,
+  `enlace_compra` varchar(500) DEFAULT NULL,
+  `creador_id` int(11) NOT NULL,
+  `fecha_creacion` datetime DEFAULT current_timestamp(),
+  `tiene_items` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 = tiene elementos (armas, cartas...)',
+  `nombre_items` varchar(50) DEFAULT 'Armas' COMMENT 'Nombre del tipo de elemento (Armas, Cartas, Hechizos...)',
+  `tiene_personajes` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 = tiene personajes / NPCs',
+  `tiene_mapa` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 = tiene mapa propio',
+  `en_desarrollo` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `juegos`
+--
+
+INSERT INTO `juegos` (`id`, `titulo`, `desarrollador`, `distribuidora`, `fecha_lanzamiento`, `genero`, `descripcion`, `portada`, `mapa_imagen`, `enlace_compra`, `creador_id`, `fecha_creacion`, `tiene_items`, `nombre_items`, `tiene_personajes`, `tiene_mapa`, `en_desarrollo`) VALUES
+(9, 'Monster Hunter World', 'Capcom', 'Capcom', '2018-01-26', 'RPG de Acción', 'Embárcate en una épica cacería en el Nuevo Mundo. Enfréntate a monstruos colosales en ecosistemas vivos, forja equipo poderoso y colabora con otros cazadores en esta obra maestra de la saga Monster Hunter.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/582010/MONSTER_HUNTER_WORLD/', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 0, 0),
+(10, 'Hades', 'Supergiant Games', 'Supergiant Games', '2020-09-17', 'Roguelike', 'Escapa del inframundo en este aclamado roguelike de acción. Como Zagreo, hijo de Hades, lucharás a través de mazmorras generadas aleatoriamente con la ayuda de los dioses del Olimpo.', 'default_game.jpg', 'map_1777997211.jpg', 'https://store.steampowered.com/app/1145360/Hades/', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 1, 0),
+(11, 'Hollow Knight', 'Team Cherry', 'Team Cherry', '2017-02-24', 'Metroidvania', 'Forja tu propio camino en Hallownest, un reino antiguo lleno de insectos extraños y secretos ocultos. Un metroidvania dibujado a mano con una atmósfera inolvidable y una jugabilidad desafiante.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/367520/Hollow_Knight/', 2, '2026-05-05 17:50:24', 1, 'Habilidad', 1, 0, 0),
+(12, 'Balatro', 'LocalThunk', 'Playstack', '2024-02-20', 'Roguelike de Cartas', 'El póker se encuentra con el roguelike en este adictivo juego de construcción de mazos. Combina manos de póker con comodines especiales para superar ciegas cada vez más difíciles.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/2379780/Balatro/', 2, '2026-05-05 17:50:24', 1, 'Carta', 0, 0, 0),
+(13, 'Hollow Knight: Silksong', 'Team Cherry', 'Team Cherry', '2026-12-31', 'Metroidvania', 'Juega como Hornet en esta esperada secuela de Hollow Knight. Explora un nuevo reino, domina nuevas habilidades y descubre los secretos de Pharloom en esta aventura independiente.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/1030300/Hollow_Knight_Silksong/', 2, '2026-05-05 17:50:24', 0, 'Armas', 0, 0, 1),
+(14, 'Celeste', 'Maddy Makes Games', 'Maddy Makes Games', '2018-01-25', 'Plataformas', 'Ayuda a Madeline a escalar la Montaña Celeste en este desafiante juego de plataformas pixel-art. Una historia emotiva sobre la superación personal, la ansiedad y la perseverancia.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/504230/Celeste/', 3, '2026-05-05 17:50:24', 1, 'Armas', 1, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logros`
+--
+
+CREATE TABLE `logros` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `icono` varchar(50) DEFAULT 'trophy',
+  `criterio` varchar(255) NOT NULL COMMENT 'Descripción del requisito'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `logros`
+--
+
+INSERT INTO `logros` (`id`, `nombre`, `descripcion`, `icono`, `criterio`) VALUES
+(1, 'Primer juego', 'Añade tu primer juego a la wiki', 'gamepad', 'juegos >= 1'),
+(2, 'Coleccionista', 'Añade 5 juegos a la wiki', 'layer-group', 'juegos >= 5'),
+(3, 'Crítico', 'Valora 10 juegos', 'star', 'valoraciones >= 10'),
+(4, 'Votante', 'Valora al menos un juego', 'star-half-alt', 'valoraciones >= 1'),
+(5, 'Social', 'Haz 5 colaboradores', 'users', 'amigos >= 5'),
+(6, 'Conversador', 'Envía 10 mensajes (chat global/privado)', 'comments', 'mensajes >= 10'),
+(7, 'Favorito', 'Marca un juego como favorito', 'heart', 'favoritos >= 1'),
+(8, 'Explorador', 'Visita 10 fichas de juegos diferentes', 'search', 'visitas >= 10'),
+(9, 'Popular', 'Recibe 5 valoraciones en tus juegos añadidos', 'thumbs-up', 'valoraciones_recibidas >= 5'),
+(10, 'Veterano', 'Mantén tu cuenta activa durante 30 días', 'calendar-check', 'antiguedad >= 30');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `logros_usuarios`
+--
+
+CREATE TABLE `logros_usuarios` (
+  `id_usuario` int(11) NOT NULL,
+  `id_logro` int(11) NOT NULL,
+  `fecha_obtencion` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `logros_usuarios`
+--
+
+INSERT INTO `logros_usuarios` (`id_usuario`, `id_logro`, `fecha_obtencion`) VALUES
+(1, 1, '2026-05-05 17:43:31'),
+(1, 4, '2026-05-05 17:43:31'),
+(1, 6, '2026-05-05 17:43:32'),
+(1, 7, '2026-05-05 17:43:32');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mapas`
+--
+
+CREATE TABLE `mapas` (
+  `id` int(11) NOT NULL,
+  `id_juego` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `latitud` decimal(10,8) DEFAULT NULL,
+  `longitud` decimal(11,8) DEFAULT NULL,
+  `tipo` varchar(50) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL,
+  `pos_x` decimal(6,2) DEFAULT NULL COMMENT 'Posición X en % sobre la imagen del mapa',
+  `pos_y` decimal(6,2) DEFAULT NULL COMMENT 'Posición Y en % sobre la imagen del mapa'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `mapas`
+--
+
+INSERT INTO `mapas` (`id`, `id_juego`, `nombre`, `latitud`, `longitud`, `tipo`, `descripcion`, `pos_x`, `pos_y`) VALUES
+(2, 10, 'Entrada al Inframundo', NULL, NULL, 'Inicio', 'Comienzo de cada partida.', 10.00, 90.00),
+(3, 10, 'Templo de Hades', NULL, NULL, 'Jefe Final', 'Sala del trono de Hades.', 85.00, 15.00),
+(4, 10, 'Jardín del Elíseo', NULL, NULL, 'Santuario', 'Zona de descanso con Patroclo y Aquiles.', 60.00, 50.00),
+(5, 10, 'Cámara del Tártaro', NULL, NULL, 'Mazmorra', 'Mazmorra intermedia con Megara.', 30.00, 70.00),
+(6, 10, 'Puerta del Caos', NULL, NULL, 'Transición', 'Portal al Caos primordial.', 75.00, 30.00);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensajes_grupales`
+--
+
+CREATE TABLE `mensajes_grupales` (
+  `id` int(11) NOT NULL,
+  `emisor` int(11) NOT NULL,
+  `mensaje` text NOT NULL,
+  `fecha` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `mensajes_grupales`
+--
+
+INSERT INTO `mensajes_grupales` (`id`, `emisor`, `mensaje`, `fecha`) VALUES
+(1, 2, 'Hola', '2026-04-22 16:44:28'),
+(2, 2, 'Como estas??', '2026-04-22 16:44:41'),
+(3, 1, 'Muy bien y tu??', '2026-04-22 16:44:57'),
+(4, 2, 'Q', '2026-04-22 16:45:10'),
+(5, 2, 'Kakaka', '2026-04-22 16:45:32'),
+(6, 2, 'hdhd', '2026-04-22 16:49:47'),
+(7, 1, 'ad', '2026-04-22 16:49:58'),
+(8, 2, 'dad', '2026-04-22 16:55:01'),
+(9, 1, 'asd', '2026-04-22 16:56:48'),
+(10, 1, 'Hoalaaa', '2026-04-27 10:10:20'),
+(11, 1, 'MADRE MIA', '2026-04-27 16:16:19'),
+(12, 2, 'DESDE LUEGO', '2026-04-27 16:16:45'),
+(13, 3, 'Jode', '2026-04-29 10:10:34'),
+(14, 3, 'Que conversancion mas CREEPE', '2026-04-29 10:10:47'),
+(15, 3, 'Holaaaa', '2026-04-30 14:17:04'),
+(16, 3, 'ddsfg', '2026-04-30 14:17:19'),
+(17, 1, 'Porbnafaf', '2026-04-30 14:19:28'),
+(18, 3, 'Que tal??', '2026-04-30 14:19:45'),
+(19, 1, 'Bien', '2026-04-30 14:19:56'),
+(20, 3, 'ada', '2026-04-30 14:19:57'),
+(21, 2, 'adads', '2026-04-30 14:45:28'),
+(22, 1, 'daad', '2026-04-30 14:45:42');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensajes_privados`
+--
+
+CREATE TABLE `mensajes_privados` (
+  `id` int(11) NOT NULL,
+  `emisor` int(11) NOT NULL,
+  `receptor` int(11) NOT NULL,
+  `mensaje` text NOT NULL,
+  `fecha` datetime DEFAULT current_timestamp(),
+  `leido` tinyint(4) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `mensajes_privados`
+--
+
+INSERT INTO `mensajes_privados` (`id`, `emisor`, `receptor`, `mensaje`, `fecha`, `leido`) VALUES
+(1, 2, 1, 'Hao', '2026-04-22 16:51:08', 1),
+(2, 1, 2, 'Que tal??', '2026-04-22 16:51:16', 1),
+(3, 2, 1, 'Bien y tu??', '2026-04-22 16:51:33', 1),
+(4, 1, 2, 'Bien tambien', '2026-04-22 16:51:44', 1),
+(5, 1, 2, 'hdhf', '2026-04-22 16:54:13', 1),
+(6, 1, 2, 'wetw', '2026-04-22 16:57:37', 1),
+(7, 2, 1, 'afaf', '2026-04-22 16:57:47', 1),
+(8, 2, 1, 'sfsf', '2026-04-30 14:46:03', 1),
+(9, 2, 1, 'sfsf', '2026-04-30 14:46:03', 1),
+(10, 2, 1, 'fsdsdf', '2026-04-30 14:46:23', 1),
+(11, 2, 1, 'fsdsdf', '2026-04-30 14:46:23', 1),
+(12, 2, 1, 'dsfsf', '2026-04-30 14:46:50', 1),
+(13, 2, 1, 'dsfsf', '2026-04-30 14:46:50', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `personajes`
+--
+
+CREATE TABLE `personajes` (
+  `id` int(11) NOT NULL,
+  `id_juego` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `rol` varchar(50) DEFAULT NULL,
+  `ubicacion` varchar(100) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL,
+  `imagen` varchar(255) DEFAULT NULL COMMENT 'Nombre del archivo de imagen del personaje'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `personajes`
+--
+
+INSERT INTO `personajes` (`id`, `id_juego`, `nombre`, `rol`, `ubicacion`, `descripcion`, `imagen`) VALUES
+(5, 9, 'El Cazador', 'Principal', 'Astera', NULL, NULL),
+(6, 9, 'Nergigante', 'Monstruo', 'Lecho de los Ancianos', NULL, NULL),
+(7, 9, 'Rathalos', 'Monstruo', 'Bosque Primigenio', NULL, NULL),
+(8, 10, 'Zagreo', 'Principal', 'Inframundo', NULL, NULL),
+(9, 10, 'Hades', 'Antagonista', 'Templo de Hades', NULL, NULL),
+(10, 10, 'Artemisa', 'Aliado', 'Olimpo', NULL, NULL),
+(11, 11, 'El Caballero', 'Principal', 'Dirtmouth', NULL, NULL),
+(12, 11, 'Hornet', 'Aliado', 'Nido Profundo', NULL, NULL),
+(13, 14, 'Madeline', 'Principal', 'Montaña Celeste', NULL, NULL),
+(14, 14, 'Badeline', 'Antagonista', 'Espejo del Templo', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `user` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `pass` varchar(255) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `level` int(11) NOT NULL DEFAULT 1 COMMENT '0=Admin, 1=Usuario normal',
+  `amigos` text DEFAULT NULL,
+  `ultima_conexion` datetime DEFAULT NULL,
+  `conectado` int(11) DEFAULT 0,
+  `ban_hasta` datetime DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT 'default.jpg' COMMENT 'Nombre del archivo de avatar',
+  `bio` text DEFAULT NULL COMMENT 'Descripción del perfil',
+  `idioma` varchar(5) DEFAULT 'es' COMMENT 'Idioma preferido (es / en)',
+  `perfil_publico` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 = perfil visible para otros usuarios'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `user`, `email`, `pass`, `nombre`, `level`, `amigos`, `ultima_conexion`, `conectado`, `ban_hasta`, `avatar`, `bio`, `idioma`, `perfil_publico`) VALUES
+(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-05-05 16:39:35', 0, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
+(2, 'editor', 'editor@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Editor de Contenido', 1, '#1#', '2026-05-05 10:45:52', 0, NULL, 'default.jpg', 'Editor de Next Level Code, cuyo superior es el Admin.', 'es', 0),
+(3, 'user', 'user@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Dani', 1, NULL, '2026-05-05 16:38:48', 0, NULL, 'default.jpg', NULL, 'es', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `valoraciones`
+--
+
+CREATE TABLE `valoraciones` (
+  `id` int(11) NOT NULL,
+  `id_juego` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `puntuacion` tinyint(4) NOT NULL CHECK (`puntuacion` between 1 and 5),
+  `fecha` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `valoraciones`
+--
+
+INSERT INTO `valoraciones` (`id`, `id_juego`, `id_usuario`, `puntuacion`, `fecha`) VALUES
+(10, 9, 1, 5, '2026-05-05 17:53:16'),
+(11, 9, 2, 4, '2026-05-05 17:53:16'),
+(12, 9, 3, 5, '2026-05-05 17:53:16'),
+(13, 10, 1, 5, '2026-05-05 17:53:16'),
+(14, 10, 2, 5, '2026-05-05 17:53:16'),
+(15, 11, 1, 5, '2026-05-05 17:53:16'),
+(16, 11, 3, 4, '2026-05-05 17:53:16'),
+(17, 12, 1, 4, '2026-05-05 17:53:16'),
+(18, 12, 3, 5, '2026-05-05 17:53:16'),
+(19, 14, 2, 5, '2026-05-05 17:53:16'),
+(20, 14, 3, 5, '2026-05-05 17:53:16');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `visitas_juegos`
+--
+
+CREATE TABLE `visitas_juegos` (
+  `id` int(11) NOT NULL,
+  `id_juego` int(11) NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `fecha` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `visitas_juegos`
+--
+
+INSERT INTO `visitas_juegos` (`id`, `id_juego`, `id_usuario`, `fecha`) VALUES
+(7, 9, 1, '2026-05-05 17:53:31'),
+(8, 10, 1, '2026-05-05 17:53:48'),
+(9, 10, 1, '2026-05-05 17:54:07'),
+(10, 10, 1, '2026-05-05 17:54:24'),
+(11, 9, 1, '2026-05-05 17:54:47'),
+(12, 10, 1, '2026-05-05 17:56:03'),
+(13, 9, 1, '2026-05-05 17:56:50'),
+(14, 10, 1, '2026-05-05 17:57:23'),
+(15, 10, 1, '2026-05-05 18:07:04');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `armas`
+--
+ALTER TABLE `armas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_juego` (`id_juego`);
+
+--
+-- Indices de la tabla `bloqueados`
+--
+ALTER TABLE `bloqueados`
+  ADD PRIMARY KEY (`id_recep`,`id_block`),
+  ADD KEY `id_block` (`id_block`);
+
+--
+-- Indices de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_juego` (`id_juego`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `domingueros`
+--
+ALTER TABLE `domingueros`
+  ADD PRIMARY KEY (`id_sol`,`id_rec`),
+  ADD KEY `id_rec` (`id_rec`);
+
+--
+-- Indices de la tabla `elementos`
+--
+ALTER TABLE `elementos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_elementos_juego` (`id_juego`);
+
+--
+-- Indices de la tabla `favoritos`
+--
+ALTER TABLE `favoritos`
+  ADD PRIMARY KEY (`id_usuario`,`id_juego`),
+  ADD KEY `id_juego` (`id_juego`);
+
+--
+-- Indices de la tabla `juegos`
+--
+ALTER TABLE `juegos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `creador_id` (`creador_id`);
+
+--
+-- Indices de la tabla `logros`
+--
+ALTER TABLE `logros`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `logros_usuarios`
+--
+ALTER TABLE `logros_usuarios`
+  ADD PRIMARY KEY (`id_usuario`,`id_logro`),
+  ADD KEY `id_logro` (`id_logro`);
+
+--
+-- Indices de la tabla `mapas`
+--
+ALTER TABLE `mapas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_juego` (`id_juego`);
+
+--
+-- Indices de la tabla `mensajes_grupales`
+--
+ALTER TABLE `mensajes_grupales`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `emisor` (`emisor`),
+  ADD KEY `idx_msg_grupales_id` (`id`);
+
+--
+-- Indices de la tabla `mensajes_privados`
+--
+ALTER TABLE `mensajes_privados`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `receptor` (`receptor`),
+  ADD KEY `idx_msg_privados_conv` (`emisor`,`receptor`,`id`);
+
+--
+-- Indices de la tabla `personajes`
+--
+ALTER TABLE `personajes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_juego` (`id_juego`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user` (`user`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indices de la tabla `valoraciones`
+--
+ALTER TABLE `valoraciones`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unica_valoracion` (`id_juego`,`id_usuario`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `visitas_juegos`
+--
+ALTER TABLE `visitas_juegos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_visitas_juego` (`id_juego`),
+  ADD KEY `idx_visitas_fecha` (`fecha`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `armas`
+--
+ALTER TABLE `armas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `elementos`
+--
+ALTER TABLE `elementos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT de la tabla `juegos`
+--
+ALTER TABLE `juegos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `logros`
+--
+ALTER TABLE `logros`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `mapas`
+--
+ALTER TABLE `mapas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `mensajes_grupales`
+--
+ALTER TABLE `mensajes_grupales`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `mensajes_privados`
+--
+ALTER TABLE `mensajes_privados`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de la tabla `personajes`
+--
+ALTER TABLE `personajes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `valoraciones`
+--
+ALTER TABLE `valoraciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `visitas_juegos`
+--
+ALTER TABLE `visitas_juegos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `armas`
+--
+ALTER TABLE `armas`
+  ADD CONSTRAINT `armas_ibfk_1` FOREIGN KEY (`id_juego`) REFERENCES `juegos` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `bloqueados`
+--
+ALTER TABLE `bloqueados`
+  ADD CONSTRAINT `bloqueados_ibfk_1` FOREIGN KEY (`id_recep`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `bloqueados_ibfk_2` FOREIGN KEY (`id_block`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`id_juego`) REFERENCES `juegos` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `domingueros`
+--
+ALTER TABLE `domingueros`
+  ADD CONSTRAINT `domingueros_ibfk_1` FOREIGN KEY (`id_sol`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `domingueros_ibfk_2` FOREIGN KEY (`id_rec`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `elementos`
+--
+ALTER TABLE `elementos`
+  ADD CONSTRAINT `elementos_ibfk_1` FOREIGN KEY (`id_juego`) REFERENCES `juegos` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `favoritos`
+--
+ALTER TABLE `favoritos`
+  ADD CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`id_juego`) REFERENCES `juegos` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `juegos`
+--
+ALTER TABLE `juegos`
+  ADD CONSTRAINT `juegos_ibfk_1` FOREIGN KEY (`creador_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `logros_usuarios`
+--
+ALTER TABLE `logros_usuarios`
+  ADD CONSTRAINT `logros_usuarios_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `logros_usuarios_ibfk_2` FOREIGN KEY (`id_logro`) REFERENCES `logros` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `mapas`
+--
+ALTER TABLE `mapas`
+  ADD CONSTRAINT `mapas_ibfk_1` FOREIGN KEY (`id_juego`) REFERENCES `juegos` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `mensajes_grupales`
+--
+ALTER TABLE `mensajes_grupales`
+  ADD CONSTRAINT `mensajes_grupales_ibfk_1` FOREIGN KEY (`emisor`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `mensajes_privados`
+--
+ALTER TABLE `mensajes_privados`
+  ADD CONSTRAINT `mensajes_privados_ibfk_1` FOREIGN KEY (`emisor`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `mensajes_privados_ibfk_2` FOREIGN KEY (`receptor`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `personajes`
+--
+ALTER TABLE `personajes`
+  ADD CONSTRAINT `personajes_ibfk_1` FOREIGN KEY (`id_juego`) REFERENCES `juegos` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `valoraciones`
+--
+ALTER TABLE `valoraciones`
+  ADD CONSTRAINT `valoraciones_ibfk_1` FOREIGN KEY (`id_juego`) REFERENCES `juegos` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `valoraciones_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `visitas_juegos`
+--
+ALTER TABLE `visitas_juegos`
+  ADD CONSTRAINT `visitas_ibfk_1` FOREIGN KEY (`id_juego`) REFERENCES `juegos` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

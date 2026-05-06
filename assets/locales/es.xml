@@ -1,0 +1,139 @@
+<?xml version= "1.0" encoding ="UTF-8" standalone = "yes"?>
+
+<textos>
+
+    <palabras>
+    
+        <log>Cerrar Sesion</log>
+        <bienve>Bienvenido</bienve>
+        <galeria>BIBLIOTECA DE JUEGOS</galeria>
+        <Cerrar>Cerrar</Cerrar>
+        <galeria2>Galería de Fotos</galeria2>
+        <elegir>Elegir archivos</elegir>
+        <elegir2>Ningún archivo seleccionado</elegir2>
+        <elegir3>archivos seleccionados</elegir3>
+        <baneo>Desbanear</baneo>
+        <baneo2>Banear</baneo2>
+
+        <nota1> VERIFICACIÓN DE CREDENCIALES COMPLETA. </nota1>
+        <nota2> ACCESO OTORGADO AL SECTOR DEL REFUGIO. </nota2>
+
+        <caption> Lista De Admins </caption>
+        <th1>Seleccionar</th1>
+        <th2>Id</th2>
+        <th3>Usuario</th3>
+        <th4>Contraseña</th4>
+        <th5>Nombre</th5>
+        <th6>Nivel</th6>
+        <th7>Actualizar</th7>
+        <th8>Favorita</th8>
+        <th9>Descripcion de la foto</th9>
+        <th10>Recuperar</th10>
+        <th11>Acción</th11>
+        <th12>SOLICITUDES ENTRANTES</th12>
+
+        <boton1>Actualizar</boton1>
+        <boton2>Borrar</boton2>
+        <boton3>Añadir</boton3>
+        <boton4>Compartir</boton4>
+        <boton5>DesCompartir</boton5>
+        <boton6>ACEPTAR</boton6>
+        <boton7>RECHAZAR</boton7>
+        <boton8>BLOQUEAR</boton8>
+        <boton9>DESBLOQUEAR</boton9>
+
+        <fotos1>[01] MIS FOTOS</fotos1>
+        <fotos2>[02] MIS FOTOS FAVORITAS</fotos2>
+        <fotos3>[03] FOTOS QUE ME HAN COMPARTIDO</fotos3>
+        <fotos4>[04] PAPELERA</fotos4>
+        <fotos5>Editar Foto</fotos5>
+        <fotos6>Compartida por:</fotos6>
+
+        <mor>[ BUSCADOR DE COLABORADORES ]</mor>
+        <mor2>MIS MORADORES</mor2>
+        <mor3>EXPULSADOS DEL REFUGIO</mor3>
+        <mor4>LISTADO DE MORADORES</mor4>
+
+        <amg1>[01] BUSCAR COLABORADORES</amg1>
+        <amg2>[02] SOLICITUDES PENDIENTES</amg2>
+        <amg3>[03] MIS COLABORADORES</amg3>
+        <amg4>[04] USUARIOS BLOQUEADOS</amg4>
+        <amgM>MENU PRINCIPAL</amgM>
+        <amgB>BUSCAR</amgB>
+        <amgS>NO HAY SOLICITUDES PENDIENTES</amgS>
+        <amgE>Eliminar Amigo</amgE>
+        <amgN>NO HAY MORADORES EN EL REFUGIO</amgN>
+        <amgD>NO HAY MORADORES EXPULSADOS AL YERMO</amgD>
+
+        <enviar>ENVIAR SOLICITUD</enviar>
+        <enviar2>Cancelar solicitud</enviar2>
+        <enviada>SOLICITUD ENVIADA</enviada>
+        <enviada2>LA SOLICITUD HA SIDO ACEPTADA</enviada2>
+        <enviada3>LA SOLICITUD HA SIDO RECHAZADA</enviada3>
+        <enviada4>EL MORADOR HA SIDO EXPULSADO DEL YERMO</enviada4>
+        <enviada5>EL MORADOR HA VUELTO AL REFUGIO</enviada5>
+        <enviada6>EL MORADOR HA SIDO ELIMINADO DEL YERMO</enviada6>
+        <enviada7>No puedes compartir una foto que no es tuya</enviada7>
+        <enviada8>Compartida el:</enviada8>
+
+        <introducir>INTRODUZCA DATOS PARA LA BUSQUEDA</introducir>
+        <introducir2>INTRODUCIR NOMBRE O USUARIO...</introducir2>
+        <acceder>ACCEDIENDO A LA BASE DE DATOS DEL YERMO...</acceder>
+        <noE>[ERROR] NO SE ENCONTRARON REGISTROS.</noE>
+
+        <comp>FOTO COMPARTIDA</comp>
+        <comp2>FOTO DESCOMPARTIDA</comp2>
+
+        <g1>Foto Añadida a Papelera correctamente</g1>
+        <g2>Foto añadida a favoritos</g2>
+        <g3>Foto quitada de favoritos</g3>
+        <g4>Foto Recuperada</g4>
+        <g5>Foto Borrada Definitivamente</g5>
+        <g6>Cargando...</g6>
+        <g7>Dime que nombre le quieres poner a la foto:</g7>
+        <g8>Dime que descripcion le quieres poner:</g8>
+        <g9>Foto actualizada correctamente</g9>
+        <g10>¿Seguro que quieres eliminar esta foto definitivamente?</g10>
+        <g11>Foto eliminada correctamente</g11>
+        <g12>¿Seguro que quieres vaciar la papelera?</g12>
+        <g13>Papelera vaciada</g13>
+
+        <t1>¿Seguro que deseas borrar los usuarios seleccionados?</t1>
+        <t2>Los usuarios admin no se puededn borrar</t2>
+        <t3>Un admin no se puede borrar ha si mismo.</t3>
+        <t4>Usuario Borrado.</t4>
+        <t5>El usuario admin no puede actualizar su nivel</t5>
+        <t6>Todos los datos deben estar rellenos</t6>
+        <t7>Solo level 1 o level 0.</t7>
+        <t8>Maximo 20 carateres por parametro.</t8>
+        <t9>Dimer el user:</t9>
+        <t10>Dime el nombre ha añadir:</t10>
+        <t11>Dime la contraseña ha añadir:</t11>
+        <t12>Dime el level ha añadir:</t12>
+        <t13>Dime el email ha añadir:</t13>
+        <t14>Usuario Añadido</t14>
+        <t15>Este usuario ya existe.</t15>
+        <t16>Maximo 10 carateres por parametro.</t16>
+        <t17>El email no es válido, debe contener @</t17>
+        <t18>Vaciar Papelera</t18>
+
+        <fecha1>Enviada hace</fecha1>
+        <fecha2>segundos</fecha2>
+        <fecha3>minutos</fecha3>
+        <fecha4>horas</fecha4>
+        <fecha5>dias</fecha5>
+        <fecha6>Fecha no disponible</fecha6>
+        <fecha7>Conectado ahora</fecha7>
+        <fecha8>Conectado hace</fecha8>
+        <fecha9>Nunca conectado</fecha9>
+        <fecha10>Última conexión</fecha10>
+        <fecha11>Fecha solicitud</fecha11>
+        <fecha12>Subida el:</fecha12>
+        <fecha13>a las</fecha13>
+
+
+
+    </palabras>
+
+
+</textos>
