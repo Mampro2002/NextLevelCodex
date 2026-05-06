@@ -27,7 +27,7 @@ include "../sec/header.php";
                 </div>
                 <div>
                     <i class="fab fa-github"></i> <strong>GitHub:</strong>
-                    <a href="https://github.com/manuelacevedo" target="_blank">manuelacevedo</a>
+                    <a href="https://github.com/Mampro2002" target="_blank">Mampro2002</a>
                 </div>
                 <div>
                     <i class="fas fa-graduation-cap"></i> <strong>Proyecto:</strong>
