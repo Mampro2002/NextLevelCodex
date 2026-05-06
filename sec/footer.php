@@ -17,7 +17,7 @@ if (!isset($base)) {
     <div class="footer-content">
         <p>&copy; <?php echo date('Y'); ?> Next Level Codex - Proyecto de Empresa DAW</p>
         <p class="footer-links">
-            <a href="https://github.com/manuelacevedo" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Mampro2002/NextLevelCodex.git" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-github"></i> GitHub
             </a>
             <a href="#">
