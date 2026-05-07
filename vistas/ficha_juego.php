@@ -162,6 +162,11 @@ include "../sec/header.php";
         <button class="tab-button" data-tab="tab-comentarios">
             <i class="fas fa-comments"></i> Comentarios
         </button>
+        <?php if (!empty($juego['trailer'])): ?>
+            <button class="tab-button" data-tab="tab-trailer">
+                <i class="fab fa-youtube"></i> Tráiler
+            </button>
+        <?php endif; ?>
     </div>
 
     <div class="tab-content">
@@ -296,6 +301,30 @@ include "../sec/header.php";
             </div>
             <div id="listaComentarios"></div>
         </div>
+
+        <?php if (!empty($juego['trailer'])): ?>
+            <div id="tab-trailer" class="tab-pane" style="display:none;">
+                <h3>Tráiler</h3>
+                <?php
+                $trailer_url = $juego['trailer'];
+                $video_id = '';
+                if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $trailer_url, $match)) {
+                    $video_id = $match[1];
+                }
+                ?>
+                <?php if ($video_id): ?>
+                    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;">
+                        <iframe src="https://www.youtube.com/embed/<?= $video_id ?>"
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+                            allowfullscreen></iframe>
+                    </div>
+                <?php else: ?>
+                    <a href="<?= htmlspecialchars($trailer_url) ?>" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i> Ver tráiler
+                    </a>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
 
     </div>
 </div>

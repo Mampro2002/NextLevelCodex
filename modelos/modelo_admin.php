@@ -23,24 +23,24 @@ class ModeloAdmin
         return $res->fetch_assoc();
     }
 
-    public function insertarJuego($titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $creador_id, $enlace_compra, $en_desarrollo)
+    public function insertarJuego($titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $creador_id, $enlace_compra, $trailer, $en_desarrollo)
     {
         include "../sec/bdd.php";
-        $filt = $db->prepare("INSERT INTO juegos (titulo, desarrollador, distribuidora, fecha_lanzamiento, genero, descripcion, portada, creador_id, enlace_compra, en_desarrollo) 
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $filt->bind_param("sssssssisi", $titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $creador_id, $enlace_compra, $en_desarrollo);
+        $filt = $db->prepare("INSERT INTO juegos (titulo, desarrollador, distribuidora, fecha_lanzamiento, genero, descripcion, portada, creador_id, enlace_compra, trailer, en_desarrollo) 
+                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $filt->bind_param("sssssssissi", $titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $creador_id, $enlace_compra, $trailer, $en_desarrollo);
         return $filt->execute();
     }
 
-    public function actualizarJuego($id, $titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $enlace_compra, $en_desarrollo)
+    public function actualizarJuego($id, $titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $enlace_compra, $trailer, $en_desarrollo)
     {
         include "../sec/bdd.php";
         if ($portada) {
-            $filt = $db->prepare("UPDATE juegos SET titulo=?, desarrollador=?, distribuidora=?, fecha_lanzamiento=?, genero=?, descripcion=?, portada=?, enlace_compra=?, en_desarrollo=? WHERE id=?");
-            $filt->bind_param("ssssssssii", $titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $enlace_compra, $en_desarrollo, $id);
+            $filt = $db->prepare("UPDATE juegos SET titulo=?, desarrollador=?, distribuidora=?, fecha_lanzamiento=?, genero=?, descripcion=?, portada=?, enlace_compra=?, trailer=?, en_desarrollo=? WHERE id=?");
+            $filt->bind_param("sssssssssii", $titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $enlace_compra, $trailer, $en_desarrollo, $id);
         } else {
-            $filt = $db->prepare("UPDATE juegos SET titulo=?, desarrollador=?, distribuidora=?, fecha_lanzamiento=?, genero=?, descripcion=?, enlace_compra=?, en_desarrollo=? WHERE id=?");
-            $filt->bind_param("sssssssii", $titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $enlace_compra, $en_desarrollo, $id);
+            $filt = $db->prepare("UPDATE juegos SET titulo=?, desarrollador=?, distribuidora=?, fecha_lanzamiento=?, genero=?, descripcion=?, enlace_compra=?, trailer=?, en_desarrollo=? WHERE id=?");
+            $filt->bind_param("ssssssssii", $titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $enlace_compra, $trailer, $en_desarrollo, $id);
         }
         return $filt->execute();
     }

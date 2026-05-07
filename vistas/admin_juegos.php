@@ -117,11 +117,16 @@ include "../sec/header.php";
                         Marcar como "En desarrollo" (próximo lanzamiento)
                     </label>
                 </div>
+                <div class="form-group">
+                    <label>Tráiler (YouTube)</label>
+                    <input type="url" id="juegoTrailer" name="trailer" class="input"
+                        placeholder="https://www.youtube.com/watch?v=...">
+                </div>
             </form>
         </div>
         <div class="modal-footer">
             <button class="btn" onclick="$('#modalJuego').hide()">Cancelar</button>
-            <button class="btn btn-primary" onclick="guardarJuego()">Guardar</button>
+            <button class="btn btn-primary" id="btnGuardarJuego" onclick="guardarJuego()">Guardar</button>
         </div>
     </div>
 </div>
@@ -148,6 +153,7 @@ include "../sec/header.php";
             $("#juegoDescripcion").val(j.descripcion);
             $("#modalJuego").show();
             $("#juegoEnDesarrollo").prop("checked", j.en_desarrollo == 1);
+            $("#juegoTrailer").val(j.trailer || "");
         }, "json");
     }
 
@@ -157,6 +163,9 @@ include "../sec/header.php";
         formData.append("opt", id ? 4 : 3);
         formData.append("en_desarrollo", $("#juegoEnDesarrollo").is(":checked") ? 1 : 0);
         if (id) formData.append("id", id);
+
+        // ✅ Deshabilitar botón al enviar
+        $("#btnGuardarJuego").prop("disabled", true).text("Guardando...");
 
         $.ajax({
             type: "post",
@@ -170,8 +179,16 @@ include "../sec/header.php";
                     $("#modalJuego").hide();
                     location.reload();
                 } else {
-                    alert("Error al guardar");
+                    // ✅ Mostrar error sin ocultar el modal
+                    alert("Error al guardar: " + (res.error || ""));
                 }
+            },
+            error: function () {
+                alert("Error de conexión al guardar.");
+            },
+            // ✅ Siempre se ejecuta — rehabilita el botón tanto si hay éxito como si hay error
+            complete: function () {
+                $("#btnGuardarJuego").prop("disabled", false).text("Guardar");
             }
         });
     }

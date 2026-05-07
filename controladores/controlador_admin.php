@@ -69,6 +69,7 @@ switch ($opt) {
         $descripcion = trim(filter_input(INPUT_POST, 'descripcion', FILTER_DEFAULT) ?? '');
         $enlace_compra = trim(filter_input(INPUT_POST, 'enlace_compra', FILTER_SANITIZE_URL) ?? '');
         $en_desarrollo = filter_input(INPUT_POST, 'en_desarrollo', FILTER_VALIDATE_INT) ? 1 : 0;
+        $trailer = trim(filter_input(INPUT_POST, 'trailer', FILTER_SANITIZE_URL) ?? '');
 
         $portada = null;
         if (isset($_FILES['portada']) && $_FILES['portada']['error'] === 0) {
@@ -81,7 +82,7 @@ switch ($opt) {
             move_uploaded_file($_FILES['portada']['tmp_name'], "../assets/img/games/" . $portada);
         }
 
-        $admin->insertarJuego($titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $_SESSION['id'], $enlace_compra, $en_desarrollo);
+        $admin->insertarJuego($titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $_SESSION['id'], $enlace_compra, $trailer, $en_desarrollo);
         echo json_encode(["success" => true]);
         break;
 
@@ -116,6 +117,7 @@ switch ($opt) {
         $descripcion = trim(filter_input(INPUT_POST, 'descripcion', FILTER_DEFAULT) ?? '');
         $enlace_compra = trim(filter_input(INPUT_POST, 'enlace_compra', FILTER_SANITIZE_URL) ?? '');
         $en_desarrollo = filter_input(INPUT_POST, 'en_desarrollo', FILTER_VALIDATE_INT) ? 1 : 0;
+        $trailer = trim(filter_input(INPUT_POST, 'trailer', FILTER_SANITIZE_URL) ?? '');
 
         $portada = null;
         if (isset($_FILES['portada']) && $_FILES['portada']['error'] === 0) {
@@ -128,7 +130,7 @@ switch ($opt) {
             move_uploaded_file($_FILES['portada']['tmp_name'], "../assets/img/games/" . $portada);
         }
 
-        $admin->actualizarJuego($id, $titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $enlace_compra, $en_desarrollo);
+        $admin->actualizarJuego($id, $titulo, $desarrollador, $distribuidora, $fecha, $genero, $descripcion, $portada, $enlace_compra, $trailer, $en_desarrollo);
         echo json_encode(["success" => true]);
         break;
 
