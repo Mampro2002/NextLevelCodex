@@ -206,9 +206,20 @@ include "../sec/header.php";
                 <div class="elementos-grid" id="gridElementos">
                     <?php foreach ($juego['elementos'] as $elem):
                         $rareza = strtolower($elem['rareza'] ?? '');
-                        $rareza_norm = iconv('UTF-8', 'ASCII//TRANSLIT', $rareza);
+                        $rareza_norm = strtolower(str_replace(
+                            ['á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú'],
+                            ['a', 'e', 'i', 'o', 'u', 'a', 'e', 'i', 'o', 'u'],
+                            $elem['rareza'] ?? ''
+                        ));
                         $clase_rareza = in_array($rareza_norm, ['comun', 'raro', 'epico', 'legendario']) ? 'rareza-' . $rareza_norm : '';
-                        $iconos = ['Arma' => '⚔️', 'Carta' => '🃏', 'Hechizo' => '✨', 'Objeto' => '🎒'];
+                        $iconos = [
+                            'Arma' => '⚔️',
+                            'Carta' => '🃏',
+                            'Hechizo' => '✨',
+                            'Objeto' => '🎒',
+                            'Armadura/Traje' => '🛡️',
+                            'Otro' => '📦'
+                        ];
                         $icono = $iconos[$elem['tipo']] ?? '📦';
                         $colores = ['comun' => '#888', 'raro' => '#4a9eff', 'epico' => '#a855f7', 'legendario' => '#f59e0b'];
                         $color = $colores[$rareza_norm] ?? 'var(--text-secondary)';
@@ -392,9 +403,11 @@ include "../sec/header.php";
             'Arma': { v1: 'Daño', v2: 'Munición' },
             'Carta': { v1: 'Puntos', v2: 'Coste' },
             'Hechizo': { v1: 'Poder', v2: 'Maná' },
-            'Objeto': { v1: 'Efecto', v2: 'Duración' }
+            'Objeto': { v1: 'Efecto', v2: 'Duración' },
+            'Armadura/Traje': { v1: 'Defensa', v2: 'Resistencia' },
+            'Otro': { v1: 'Valor 1', v2: 'Valor 2' }
         };
-        var iconos = { 'Arma': '⚔️', 'Carta': '🃏', 'Hechizo': '✨', 'Objeto': '🎒' };
+        var iconos = { 'Arma': '⚔️', 'Carta': '🃏', 'Hechizo': '✨', 'Objeto': '🎒', 'Armadura/Traje': '🛡️' };
         var colores = { 'comun': '#888', 'raro': '#4a9eff', 'epico': '#a855f7', 'legendario': '#f59e0b' };
         var lbl = labels[e.tipo] || { v1: 'Valor 1', v2: 'Valor 2' };
         var rareza_norm = e.rareza ? e.rareza.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '';

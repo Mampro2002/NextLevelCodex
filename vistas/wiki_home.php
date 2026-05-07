@@ -62,7 +62,6 @@ include "../sec/header.php";
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Título</th>
                     <th>Desarrollador</th>
                     <th>Lanzamiento</th>
@@ -123,7 +122,6 @@ include "../sec/header.php";
                         }
 
                         html += `<tr>
-                            <td>${juego.id}</td>
                             <td><strong>${juego.titulo}</strong></td>
                             <td>${juego.desarrollador || '-'}</td>
                             <td>${(juego.en_desarrollo == 1)

@@ -217,8 +217,11 @@ include "../sec/header.php";
                         <option value="Carta">Carta</option>
                         <option value="Hechizo">Hechizo</option>
                         <option value="Objeto">Objeto</option>
+                        <option value="Armadura/Traje">Armadura/Traje</option>
                         <option value="Otro">Otro</option>
                     </select>
+                    <input type="text" id="elemTipoCustom" name="tipo_custom" class="input"
+                        placeholder="Especifica el tipo..." style="display:none; margin-top:5px;">
                 </div>
                 <div class="form-group">
                     <label id="labelValor1">Valor 1</label>
@@ -275,6 +278,7 @@ include "../sec/header.php";
             'Carta': '🃏',
             'Hechizo': '✨',
             'Objeto': '🎒',
+            'Armadura/Traje': '🛡️',
             'Otro': '📦'
         };
         return iconos[tipo] || '📦';
@@ -298,16 +302,27 @@ include "../sec/header.php";
 
     function cambiarLabels() {
         var tipo = $("#elemTipo").val();
-        var labels = {
-            'Arma': { v1: 'Daño', v2: 'Munición' },
-            'Carta': { v1: 'Puntos', v2: 'Coste' },
-            'Hechizo': { v1: 'Poder', v2: 'Maná' },
-            'Objeto': { v1: 'Efecto', v2: 'Duración' },
-            'Otro': { v1: 'Valor 1', v2: 'Valor 2' }
-        };
-        var lbl = labels[tipo] || labels['Otro'];
-        $("#labelValor1").text(lbl.v1);
-        $("#labelValor2").text(lbl.v2);
+        if (tipo === 'Otro') {
+            // Mostrar campo de texto para tipo personalizado
+            $("#elemTipoCustom").show().focus();
+            // Etiquetas genéricas
+            $("#labelValor1").text('Valor 1');
+            $("#labelValor2").text('Valor 2');
+        } else {
+            $("#elemTipoCustom").hide().val('');
+            // Lógica normal
+            var labels = {
+                'Arma': { v1: 'Daño', v2: 'Munición' },
+                'Carta': { v1: 'Puntos', v2: 'Coste' },
+                'Hechizo': { v1: 'Poder', v2: 'Maná' },
+                'Objeto': { v1: 'Efecto', v2: 'Duración' },
+                'Armadura/Traje': { v1: 'Defensa', v2: 'Resistencia' },
+                'Otro': { v1: 'Valor 1', v2: 'Valor 2' }
+            };
+            var lbl = labels[tipo] || labels['Otro'];
+            $("#labelValor1").text(lbl.v1);
+            $("#labelValor2").text(lbl.v2);
+        }
     }
 
     function cargarElementos() {
@@ -393,6 +408,7 @@ include "../sec/header.php";
         $("#modalElementoTitulo").text("Nuevo " + nombreItems);
         $("#formElemento")[0].reset();
         $("#elementoId").val("");
+        $("#elemTipoCustom").hide().val(''); // Reset
         cambiarLabels();
         $("#modalElemento").show();
     }
@@ -402,11 +418,22 @@ include "../sec/header.php";
             $("#modalElementoTitulo").text("Editar " + nombreItems);
             $("#elementoId").val(e.id);
             $("#elemNombre").val(e.nombre);
-            $("#elemTipo").val(e.tipo);
-            $("#elemValor1").val(e.valor1);
-            $("#elemValor2").val(e.valor2);
-            $("#elemRareza").val(e.rareza);
-            $("#elemDescripcion").val(e.descripcion);
+
+            // Lógica de tipo
+            var tiposFijos = ["Arma", "Carta", "Hechizo", "Objeto", "Armadura/Traje", ""];
+            if (tiposFijos.includes(e.tipo)) {
+                $("#elemTipo").val(e.tipo);
+                $("#elemTipoCustom").hide().val('');
+            } else {
+                $("#elemTipo").val('Otro');
+                $("#elemTipoCustom").show().val(e.tipo);
+            }
+
+            $("#elemSubtipo").val(e.subtipo || '');
+            $("#elemValor1").val(e.valor1 || '');
+            $("#elemValor2").val(e.valor2 || '');
+            $("#elemRareza").val(e.rareza || '');
+            $("#elemDescripcion").val(e.descripcion || '');
             cambiarLabels();
             $("#modalElemento").show();
         }, "json");
@@ -418,6 +445,17 @@ include "../sec/header.php";
         formData.append("opt", id ? 13 : 12);
         formData.append("id_juego", idJuego);
         if (id) formData.append("id", id);
+
+        // Gestionar tipo
+        var tipo = $("#elemTipo").val();
+        if (tipo === 'Otro') {
+            tipo = $("#elemTipoCustom").val().trim();
+            if (!tipo) {
+                alert("Por favor, especifica el tipo personalizado.");
+                return;
+            }
+        }
+        formData.set("tipo", tipo);
 
         $.ajax({
             type: "post",

@@ -34,7 +34,6 @@ include "../sec/header.php";
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Título</th>
                     <th>Desarrollador</th>
                     <th>Lanzamiento</th>
@@ -44,7 +43,6 @@ include "../sec/header.php";
             <tbody>
                 <?php foreach ($juegos as $j): ?>
                     <tr>
-                        <td><?= $j['id'] ?></td>
                         <td><?= htmlspecialchars($j['titulo']) ?></td>
                         <td><?= htmlspecialchars($j['desarrollador'] ?? '-') ?></td>
                         <td><?= $j['fecha_lanzamiento'] ? date('d/m/Y', strtotime($j['fecha_lanzamiento'])) : '-' ?></td>
