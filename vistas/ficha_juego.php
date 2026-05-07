@@ -210,7 +210,13 @@ include "../sec/header.php";
                         ?>
                         <div class="elemento-card <?= $clase_rareza ?>"
                             onclick="verDetalleElemento(<?= htmlspecialchars(json_encode($elem)) ?>)">
-                            <div class="elemento-card-icon"><?= $icono ?></div>
+                            <?php if (!empty($elem['imagen'])): ?>
+                                <img src="../assets/img/elementos/<?= htmlspecialchars($elem['imagen']) ?>"
+                                    style="width:100%;height:120px;object-fit:cover;"
+                                    alt="<?= htmlspecialchars($elem['nombre']) ?>">
+                            <?php else: ?>
+                                <div class="elemento-card-icon"><?= $icono ?></div>
+                            <?php endif; ?>
                             <div class="elemento-card-info">
                                 <div class="elemento-card-nombre"><?= htmlspecialchars($elem['nombre']) ?></div>
                                 <div class="elemento-card-tipo"><?= htmlspecialchars($elem['tipo'] ?: 'Sin tipo') ?></div>
@@ -364,8 +370,14 @@ include "../sec/header.php";
         var lbl = labels[e.tipo] || { v1: 'Valor 1', v2: 'Valor 2' };
         var rareza_norm = e.rareza ? e.rareza.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "") : '';
         var color = colores[rareza_norm] || 'var(--text-secondary)';
+        var $iconoContainer = $('#elemDetalleIcono');
+        $iconoContainer.empty();
 
-        $('#elemDetalleIcono').text(iconos[e.tipo] || '📦');
+        if (e.imagen) {
+            $iconoContainer.html('<img src="../assets/img/elementos/' + e.imagen + '" style="width:120px;height:120px;object-fit:contain;border-radius:8px;" onerror="this.style.display=\'none\';$(\'#elemDetalleIcono\').text(\'' + (iconos[e.tipo] || '📦') + '\')">');
+        } else {
+            $iconoContainer.text(iconos[e.tipo] || '📦');
+        }
         $('#elemDetalleNombre').text(e.nombre);
         $('#elemDetalleTipo').text(e.tipo || '-');
         $('#elemDetalleLabel1').text(lbl.v1);

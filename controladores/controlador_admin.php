@@ -189,8 +189,18 @@ switch ($opt) {
         $valor2 = trim(filter_input(INPUT_POST, 'valor2', FILTER_DEFAULT) ?? '');
         $rareza = trim(filter_input(INPUT_POST, 'rareza', FILTER_DEFAULT) ?? '');
         $descripcion = trim(filter_input(INPUT_POST, 'descripcion', FILTER_DEFAULT) ?? '');
+        $imagen = null;
+        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
+            $ext = validarImagen('imagen');
+            if ($ext === false) {
+                echo json_encode(["success" => false, "error" => "Formato de imagen no permitido."]);
+                exit;
+            }
+            $imagen = 'elem_' . time() . '.' . $ext;
+            move_uploaded_file($_FILES['imagen']['tmp_name'], "../assets/img/elementos/" . $imagen);
+        }
 
-        $resultado = $admin->insertarElemento($id_juego, $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion);
+        $resultado = $admin->insertarElemento($id_juego, $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion, $imagen);
         echo json_encode($resultado
             ? ["success" => true]
             : ["success" => false, "error" => "No se pudo guardar el elemento."]);
@@ -214,8 +224,18 @@ switch ($opt) {
         $valor2 = trim(filter_input(INPUT_POST, 'valor2', FILTER_DEFAULT) ?? '');
         $rareza = trim(filter_input(INPUT_POST, 'rareza', FILTER_DEFAULT) ?? '');
         $descripcion = trim(filter_input(INPUT_POST, 'descripcion', FILTER_DEFAULT) ?? '');
+        $imagen = null;
+        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
+            $ext = validarImagen('imagen');
+            if ($ext === false) {
+                echo json_encode(["success" => false, "error" => "Formato de imagen no permitido."]);
+                exit;
+            }
+            $imagen = 'elem_' . time() . '.' . $ext;
+            move_uploaded_file($_FILES['imagen']['tmp_name'], "../assets/img/elementos/" . $imagen);
+        }
 
-        $resultado = $admin->actualizarElemento($id, $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion);
+        $resultado = $admin->actualizarElemento($id, $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion, $imagen);
         echo json_encode($resultado
             ? ["success" => true]
             : ["success" => false, "error" => "No se pudo actualizar el elemento."]);

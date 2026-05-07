@@ -86,28 +86,30 @@ class ModeloAdmin
         return $filt->get_result()->fetch_assoc();
     }
 
-    public function insertarElemento($id_juego, $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion)
+    public function insertarElemento($id_juego, $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion, $imagen)
     {
         include "../sec/bdd.php";
-        $filt = $db->prepare("INSERT INTO elementos (id_juego, nombre, tipo, valor1, valor2, rareza, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $filt->bind_param("issssss", $id_juego, $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion);
+        $filt = $db->prepare("INSERT INTO elementos (id_juego, nombre, tipo, valor1, valor2, rareza, descripcion, imagen) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $filt->bind_param("isssssss", $id_juego, $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion, $imagen);
         $resultado = $filt->execute();
-
-        // Activar el flag tiene_items en el juego
         if ($resultado) {
             $filt2 = $db->prepare("UPDATE juegos SET tiene_items = 1 WHERE id = ?");
             $filt2->bind_param("i", $id_juego);
             $filt2->execute();
         }
-
         return $resultado;
     }
 
-    public function actualizarElemento($id, $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion)
+    public function actualizarElemento($id, $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion, $imagen)
     {
         include "../sec/bdd.php";
-        $filt = $db->prepare("UPDATE elementos SET nombre=?, tipo=?, valor1=?, valor2=?, rareza=?, descripcion=? WHERE id=?");
-        $filt->bind_param("ssssssi", $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion, $id);
+        if ($imagen) {
+            $filt = $db->prepare("UPDATE elementos SET nombre=?, tipo=?, valor1=?, valor2=?, rareza=?, descripcion=?, imagen=? WHERE id=?");
+            $filt->bind_param("sssssssi", $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion, $imagen, $id);
+        } else {
+            $filt = $db->prepare("UPDATE elementos SET nombre=?, tipo=?, valor1=?, valor2=?, rareza=?, descripcion=? WHERE id=?");
+            $filt->bind_param("ssssssi", $nombre, $tipo, $valor1, $valor2, $rareza, $descripcion, $id);
+        }
         return $filt->execute();
     }
 

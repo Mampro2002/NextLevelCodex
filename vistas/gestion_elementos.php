@@ -242,6 +242,11 @@ include "../sec/header.php";
                     <label>Descripción</label>
                     <textarea id="elemDescripcion" name="descripcion" class="input" rows="3"></textarea>
                 </div>
+                <div class="form-group">
+                    <label>Imagen</label>
+                    <input type="file" id="elemImagen" name="imagen" class="input" accept="image/*">
+                    <small class="text-muted">Dejar vacío para mantener la actual.</small>
+                </div>
             </form>
         </div>
         <div class="modal-footer">
@@ -356,7 +361,17 @@ include "../sec/header.php";
         var lbl = labels[e.tipo] || labels['Otro'];
         var color = colorPorRareza(e.rareza);
 
-        $("#detalleIcono").text(iconoPorTipo(e.tipo));
+        // Mostrar imagen o icono
+        var $iconoContainer = $("#detalleIcono");
+        $iconoContainer.empty(); // Limpiar contenido anterior
+
+        if (e.imagen) {
+            // Si tiene imagen, mostrarla
+            $iconoContainer.html('<img src="../assets/img/elementos/' + e.imagen + '" style="width:120px;height:120px;object-fit:contain;border-radius:8px;" onerror="this.style.display=\'none\';$iconoContainer.text(\'' + iconoPorTipo(e.tipo) + '\')">');
+        } else {
+            // Si no tiene imagen, mostrar el icono por defecto
+            $iconoContainer.text(iconoPorTipo(e.tipo));
+        }
         $("#detalleNombre").text(e.nombre);
         $("#detalleTipo").text(e.tipo || '-');
         $("#detalleLabel1").text(lbl.v1);
@@ -399,26 +414,27 @@ include "../sec/header.php";
 
     function guardarElemento() {
         var id = $("#elementoId").val();
-        var datos = {
-            opt: id ? 13 : 12,
-            id_juego: idJuego,
-            nombre: $("#elemNombre").val(),
-            tipo: $("#elemTipo").val(),
-            valor1: $("#elemValor1").val(),
-            valor2: $("#elemValor2").val(),
-            rareza: $("#elemRareza").val(),
-            descripcion: $("#elemDescripcion").val()
-        };
-        if (id) datos.id = id;
+        var formData = new FormData($("#formElemento")[0]);
+        formData.append("opt", id ? 13 : 12);
+        formData.append("id_juego", idJuego);
+        if (id) formData.append("id", id);
 
-        $.post("../controladores/controlador_admin.php", datos, function (res) {
-            if (res.success) {
-                $("#modalElemento").hide();
-                cargarElementos();
-            } else {
-                alert("Error: " + (res.error || "No se pudo guardar"));
+        $.ajax({
+            type: "post",
+            url: "../controladores/controlador_admin.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function (res) {
+                if (res.success) {
+                    $("#modalElemento").hide();
+                    cargarElementos();
+                } else {
+                    alert("Error: " + (res.error || "No se pudo guardar"));
+                }
             }
-        }, "json");
+        });
     }
 
     function eliminarElemento(id) {
