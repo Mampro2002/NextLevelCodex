@@ -34,6 +34,44 @@ if (isset($db)) {
     $stmtSol->execute();
     $solicitudesPendientes = (int) $stmtSol->get_result()->fetch_assoc()['total'];
 }
+
+// ── NOTIFICACIONES MEJORADAS (NOMBRES PARA TOOLTIPS) ──────────────
+
+// Obtener quién envió los últimos mensajes no leídos
+$ultimosMensajes = [];
+$tooltipMensajes = '';
+if ($noLeidos > 0) {
+    $stmtUM = $db->prepare("SELECT DISTINCT u.nombre FROM mensajes_privados m JOIN usuarios u ON m.emisor = u.id WHERE m.receptor = ? AND m.leido = 0 ORDER BY m.fecha DESC LIMIT 3");
+    $stmtUM->bind_param("i", $_SESSION["id"]);
+    $stmtUM->execute();
+    $ultimosMensajes = $stmtUM->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    if (!empty($ultimosMensajes)) {
+        $nombres = array_map(function ($u) {
+            return $u['nombre']; }, $ultimosMensajes);
+        $tooltipMensajes = 'Mensajes de: ' . implode(', ', $nombres);
+        if ($noLeidos > 3)
+            $tooltipMensajes .= " y " . ($noLeidos - 3) . " más";
+    }
+}
+
+// Obtener quién envió las solicitudes pendientes
+$ultimasSolicitudes = [];
+$tooltipSolicitudes = '';
+if ($solicitudesPendientes > 0) {
+    $stmtUS = $db->prepare("SELECT u.nombre FROM domingueros d JOIN usuarios u ON d.id_sol = u.id WHERE d.id_rec = ? AND d.statu = 1 ORDER BY d.fecha DESC LIMIT 3");
+    $stmtUS->bind_param("i", $_SESSION["id"]);
+    $stmtUS->execute();
+    $ultimasSolicitudes = $stmtUS->get_result()->fetch_all(MYSQLI_ASSOC);
+
+    if (!empty($ultimasSolicitudes)) {
+        $nombres = array_map(function ($u) {
+            return $u['nombre']; }, $ultimasSolicitudes);
+        $tooltipSolicitudes = 'Solicitudes de: ' . implode(', ', $nombres);
+        if ($solicitudesPendientes > 3)
+            $tooltipSolicitudes .= " y " . ($solicitudesPendientes - 3) . " más";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -74,11 +112,13 @@ if (isset($db)) {
             <a href="<?= $base ?>vistas/wiki_home.php"
                 class="nav-item <?= $paginaActiva === 'biblioteca' ? 'active' : '' ?>">Biblioteca</a>
             <a href="<?= $base ?>vistas/centro_colaboradores.php"
-                class="nav-item <?= $paginaActiva === 'colaboradores' ? 'active' : '' ?>">
+                class="nav-item <?= $paginaActiva === 'colaboradores' ? 'active' : '' ?>"
+                title="<?= htmlspecialchars($tooltipSolicitudes) ?>">
                 <?= 'Colaboradores' . ($solicitudesPendientes > 0 ? ' <span class="badge">' . $solicitudesPendientes . '</span>' : '') ?>
             </a>
             <a href="<?= $base ?>vistas/chat_global.php"
-                class="nav-item <?= $paginaActiva === 'chat' ? 'active' : '' ?>">
+                class="nav-item <?= $paginaActiva === 'chat' ? 'active' : '' ?>"
+                title="<?= htmlspecialchars($tooltipMensajes) ?>">
                 <?= 'Chat' . ($noLeidos > 0 ? ' <span class="badge">' . $noLeidos . '</span>' : '') ?>
             </a>
         </nav>

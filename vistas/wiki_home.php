@@ -14,14 +14,39 @@ include "../sec/header.php";
         style="display: flex; gap: var(--spacing-sm); margin-bottom: var(--spacing-sm); flex-wrap: wrap;">
         <input type="text" id="queryBusqueda" class="input" placeholder="Buscar por título o desarrollador..."
             style="flex: 1; min-width: 200px;">
-        <select id="filtroGenero" class="input" style="max-width: 150px;">
+        <select id="filtroGenero" class="input" style="max-width: 200px;">
             <option value="">Todos los géneros</option>
-            <option value="Aventura">Aventura</option>
-            <option value="RPG">RPG</option>
             <option value="Acción">Acción</option>
+            <option value="Acción/Aventura">Acción/Aventura</option>
+            <option value="Aventura">Aventura</option>
+            <option value="Aventura Gráfica">Aventura Gráfica</option>
+            <option value="Battle Royale">Battle Royale</option>
+            <option value="Cartas">Cartas</option>
+            <option value="Carreras">Carreras</option>
+            <option value="Deportes">Deportes</option>
             <option value="Estrategia">Estrategia</option>
+            <option value="Estrategia por Turnos">Estrategia por Turnos</option>
+            <option value="Gestión/Simulación">Gestión/Simulación</option>
+            <option value="Horror">Horror</option>
+            <option value="Lucha">Lucha</option>
+            <option value="Metroidvania">Metroidvania</option>
+            <option value="MMO">MMO</option>
+            <option value="Mundo Abierto">Mundo Abierto</option>
+            <option value="Musical/Ritmo">Musical/Ritmo</option>
+            <option value="Novela Visual">Novela Visual</option>
+            <option value="Plataformas">Plataformas</option>
+            <option value="Puzles">Puzles</option>
+            <option value="Roguelike/Roguelite">Roguelike/Roguelite</option>
+            <option value="RPG">RPG</option>
+            <option value="RPG de Acción">RPG de Acción</option>
+            <option value="Sandbox">Sandbox</option>
+            <option value="Shooter">Shooter</option>
+            <option value="Sigilo">Sigilo</option>
             <option value="Simulación">Simulación</option>
-            <option value="Deporte">Deporte</option>
+            <option value="Soulslike">Soulslike</option>
+            <option value="Supervivencia">Supervivencia</option>
+            <option value="Terror Psicológico">Terror Psicológico</option>
+            <option value="Visual Novel">Visual Novel</option>
         </select>
         <input type="text" id="filtroDesarrollador" class="input" placeholder="Desarrollador" style="max-width: 200px;">
         <input type="number" id="filtroAnyo" class="input" placeholder="Año" style="max-width: 110px;" min="1970"

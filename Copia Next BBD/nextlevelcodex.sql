@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2026 a las 18:11:12
+-- Tiempo de generación: 07-05-2026 a las 12:01:01
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -99,34 +99,54 @@ CREATE TABLE `elementos` (
   `valor1` varchar(50) DEFAULT NULL COMMENT 'Primer stat (Daño, Puntos, Maná...)',
   `valor2` varchar(50) DEFAULT NULL COMMENT 'Segundo stat (Munición, Coste...)',
   `rareza` varchar(50) DEFAULT NULL,
-  `descripcion` text DEFAULT NULL
+  `descripcion` text DEFAULT NULL,
+  `imagen` varchar(255) DEFAULT NULL COMMENT 'Nombre del archivo de imagen del elemento'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `elementos`
 --
 
-INSERT INTO `elementos` (`id`, `id_juego`, `nombre`, `tipo`, `valor1`, `valor2`, `rareza`, `descripcion`) VALUES
-(9, 9, 'Espada de Hierro', 'Espada', '150', 'Ninguna', 'Común', NULL),
-(10, 9, 'Arco de Kadachi', 'Arco', '180', 'Electricidad', 'Raro', NULL),
-(11, 9, 'Martillo de Diablos', 'Martillo', '250', 'Ninguna', 'Épico', NULL),
-(12, 9, 'Hoz de Nergigante', 'Espada Larga', '300', 'Dragón', 'Legendario', NULL),
-(13, 9, 'Lanza de Rathalos', 'Lanza', '220', 'Fuego', 'Épico', NULL),
-(14, 10, 'Espada Estigia', 'Arma Infernal', '90', 'Golpe crítico +15%', 'Legendaria', NULL),
-(15, 10, 'Arco de Artemisa', 'Bendición', '70', 'Disparo rápido', 'Divina', NULL),
-(16, 10, 'Lanza de Ares', 'Bendición', '110', 'Maldición de ruina', 'Divina', NULL),
-(17, 10, 'Escudo de Zeus', 'Bendición', '60', 'Cadena de rayos', 'Divina', NULL),
-(18, 11, 'Filo del Sueño', 'Habilidad de Aguijón', '21', 'Almas', 'Legendaria', NULL),
-(19, 11, 'Garra de Mantis', 'Habilidad de Movimiento', '0', 'Agarrar paredes', 'Épica', NULL),
-(20, 11, 'Corazón de Sombra', 'Habilidad de Hechizo', '30', 'Almas', 'Rara', NULL),
-(21, 12, 'Joker Sonriente', 'Carta Joker', '+4 Mult', 'Común', 'Común', NULL),
-(22, 12, 'Joker de la Fortuna', 'Carta Joker', '+20 Fichas', 'Cada mano jugada', 'Raro', NULL),
-(23, 12, 'Joker Místico', 'Carta Joker', 'x2 Mult', 'Al descartar', 'Épico', NULL),
-(24, 12, 'Joker Invisible', 'Carta Joker', 'Copia Joker', 'Aleatorio', 'Legendario', NULL),
-(25, 12, 'Joker del Trueno', 'Carta Joker', '+50 Fichas', 'Al jugar corazón', 'Raro', NULL),
-(26, 14, 'Fresa Alada', 'Coleccionable', '1000', 'Puntos', 'Especial', NULL),
-(27, 14, 'Cristal Azul', 'Objeto de Historia', '0', 'Desbloquea final B', 'Único', NULL),
-(28, 14, 'Pluma Dorada', 'Objeto de Historia', '0', 'Desbloquea final C', 'Único', NULL);
+INSERT INTO `elementos` (`id`, `id_juego`, `nombre`, `tipo`, `valor1`, `valor2`, `rareza`, `descripcion`, `imagen`) VALUES
+(9, 9, 'Espada de Hierro', 'Espada', '150', 'Ninguna', 'Común', NULL, NULL),
+(10, 9, 'Arco de Kadachi', 'Arco', '180', 'Electricidad', 'Raro', NULL, NULL),
+(11, 9, 'Martillo de Diablos', 'Martillo', '250', 'Ninguna', 'Épico', NULL, NULL),
+(12, 9, 'Hoz de Nergigante', 'Espada Larga', '300', 'Dragón', 'Legendario', NULL, NULL),
+(13, 9, 'Lanza de Rathalos', 'Lanza', '220', 'Fuego', 'Épico', NULL, NULL),
+(14, 10, 'Espada Estigia', 'Arma Infernal', '90', 'Golpe crítico +15%', 'Legendaria', NULL, NULL),
+(15, 10, 'Arco de Artemisa', 'Bendición', '70', 'Disparo rápido', 'Divina', NULL, NULL),
+(16, 10, 'Lanza de Ares', 'Bendición', '110', 'Maldición de ruina', 'Divina', NULL, NULL),
+(17, 10, 'Escudo de Zeus', 'Bendición', '60', 'Cadena de rayos', 'Divina', NULL, NULL),
+(18, 11, 'Filo del Sueño', 'Habilidad de Aguijón', '21', 'Almas', 'Legendaria', NULL, NULL),
+(19, 11, 'Garra de Mantis', 'Habilidad de Movimiento', '0', 'Agarrar paredes', 'Épica', NULL, NULL),
+(20, 11, 'Corazón de Sombra', 'Habilidad de Hechizo', '30', 'Almas', 'Rara', NULL, NULL),
+(21, 12, 'Joker Sonriente', 'Carta Joker', '+4 Mult', 'Común', 'Común', NULL, NULL),
+(22, 12, 'Excursionista', 'Carta', '+5 Fichas', 'Por cada Carta Jugada', 'Raro', '', 'elem_1778140174.png'),
+(23, 12, 'Joker Místico', 'Carta Joker', 'x2 Mult', 'Al descartar', 'Épico', NULL, NULL),
+(24, 12, 'Joker Invisible', 'Carta Joker', 'Copia Joker', 'Aleatorio', 'Legendario', NULL, NULL),
+(25, 12, 'Joker del Trueno', 'Carta Joker', '+50 Fichas', 'Al jugar corazón', 'Raro', NULL, NULL),
+(26, 14, 'Fresa Alada', 'Coleccionable', '1000', 'Puntos', 'Especial', NULL, NULL),
+(27, 14, 'Cristal Azul', 'Objeto de Historia', '0', 'Desbloquea final B', 'Único', NULL, NULL),
+(28, 14, 'Pluma Dorada', 'Objeto de Historia', '0', 'Desbloquea final C', 'Único', NULL, NULL),
+(29, 15, 'Río de Sangre', 'Katana', '76', 'Sangrado (50)', 'Legendario', 'Katana maldita del espadachín Okina, infunde pérdida de sangre.', NULL),
+(30, 15, 'Espada de la Noche y la Llama', 'Arma', '115', 'Escalado de Fe e Inteligencia', 'Legendario', 'Espada mitológica y tesoro de la mansión de los Caria.\r\nEs una de las armas legendarias.\r\n\r\nLos astrólogos que precedieron a los hechiceros se establecieron en lo alto de las montañas más elevadas, las que casi tocaban el cielo, y consideraban a los gigantes de fuego como sus vecinos.\r\n\r\nHabilidad: Combate igneocturno\r\nNo alces ni bajes la espada y prepárate para lanzar un hechizo. Acompáñala con un ataque normal para lanzar el hechizo del dardo nocturno, o bien con un ataque potente para incendiar la zona situada frente a ti en un movimiento de barrido.', 'elem_1778145674.png'),
+(31, 15, 'Hoja Blasfema', 'Arma', '145', 'Robo de vida', 'Legendario', 'Es el arma sagrada de Rykard, Señor de la Blasfemia. Se trata de un espadón cuya superficie está cubierta por los restos de los innumerables héroes que el señor devoró, los cuales se retuercen sobre el metal compartiendo ahora la misma sangre como una \"familia\".\r\n\r\nAl activar su ceniza de guerra única, el jugador alza la espada para envolverla en llamas blasfemas y luego la baja para lanzar una ráfaga de fuego frontal. Esta ráfaga no solo inflige daño masivo, sino que absorbe PS de los enemigos alcanzados, lo que permite recuperar vida rápidamente durante el combate.', 'elem_1778146190.png'),
+(33, 15, 'Espadón de la luna negra', 'Arma', '130', 'Magia de hielo', 'Legendario', 'Espadón de la luna otorgado por las reinas carianas a sus cónyuges según una longeva tradición.\r\nUna de las armas legendarias.\r\n\r\nEl sello de Ranni es una luna llena, fría y plúmbea, y esta espada es un haz de su luz.\r\n\r\nHabilidad única: Espadón de luz lunar\r\nAlza la espada por encima de tu cabeza para bañarla en la luz de la luna negra.\r\nAumenta temporalmente la potencia de ataque mágico e imbuye la hoja en congelación.\r\nLos ataques cargados liberan ráfagas de luz lunar.', 'elem_1778145456.png'),
+(34, 15, 'Lanza Sagrada de Mohgwyn', 'Gran lanza', '120', 'Sangrado (70)', 'Legendario', 'Lanza del Señor de la Sangre. Realiza un ritual que inflige pérdida de sangre masiva.', NULL),
+(35, 15, 'Espadón de Hoja Injertada', 'Arma', '150', 'Atributos +5', 'Legendario', 'La famosa espada del Castillo de Morne. Arma de vengador que carga con océanos de ira y arrepentimiento.\r\nUna de la armas legendarias.\r\n\r\nUn solitario campeón, superviviente de un país desaparecido, mostró tal determinación a la hora de seguir luchando que reclamó las espadas de todo un clan de guerreros.\r\n\r\nHabilidad: Juramento de venganza\r\nHaz un juramento sobre el espadón para vengar al clan, lo que aumentará todos tus atributos de forma temporal. Mientras los efectos del juramento estén activos, tu aplomo también aumentará.', 'elem_1778145690.png'),
+(36, 15, 'Espadón de Ruinas', 'Arma', '160', 'Gravedad', 'Legendario', 'Aunque originalmente era un escombro de una ruina que cayó del cielo, este fragmento acabaría convirtiéndose en un arma.\r\nEs una de las armas legendarias.\r\n\r\nLa ruina de la que provenía se vino abajo al impactar un meteorito contra ella. Por tanto, este arma posee su poder destructivo.\r\n\r\nHabilidad única: Ola de destrucción\r\nLevanta la espada en lo alto y luego golpea el suelo con ella para lanzar una onda de choque gravitatoria.', 'elem_1778145712.png'),
+(37, 15, 'Cetro del Devorador', 'Arma', '140', 'Devastación', 'Legendario', 'Cetro con forma de serpiente devorando el mundo. Esta arma se convertirá, algún día, en el símbolo del señor de la Blasfemia.\r\nEs una de las armas legendarias.\r\n\r\nDicen que su diseño es una breve visión del futuro que tuvo Rykard en sus últimos momentos de vida, tras ser devorado por la gran serpiente.\r\n\r\nHabilidad: Devorador de mundos\r\nCarga el cetro con magia y golpea el suelo con él para robar los PS de todos los enemigos cercanos.', 'elem_1778145512.png'),
+(38, 15, 'Shotel del eclipse', 'Arma', '100', 'Fuego de la muerte', 'Legendario', 'La famosa espada atesorada en el Castillo de Sól, representa un sol eclipsado y carente de color.\r\nEs una de las armas legendarias.\r\n\r\nEn Sól, el eclipse infunde un gran temor, pero no es posible apartar la mirada ante tal fenómeno.\r\n\r\nHabilidad única: Llamarada mortal\r\nHaz arder el sol desprovisto de brillo con las llamas del Príncipe de la Muerte. Este encantamiento inflige muerte a los enemigos. Vuelve a pulsar el botón para bajar el arma y desencadenar una explosión.', 'elem_1778146279.png'),
+(39, 17, 'Aerondight', 'Espada de Plata', '522-638', 'Carga de energía', 'Legendario', 'La espada de plata más poderosa del juego. Genera cargas que aumentan el daño un 10% por golpe.', NULL),
+(40, 17, 'Espada de Acero de la Escuela del Gato', 'Espada de Acero', '140', '+10% Prob. Crítico', 'Reliquia', 'Parte del equipo de la Escuela del Gato. Bonifica la probabilidad de golpe crítico.', NULL),
+(41, 17, 'Iris', 'Espada de Acero', '130', 'Carga de poder', 'Reliquia', 'Espada única del DLC Hearts of Stone. Acumula energía para liberar un ataque devastador.', NULL),
+(42, 17, 'Espada de Plata de la Escuela del Lobo', 'Espada de Plata', '130', '+20% Daño vs. Monstruos', 'Reliquia', 'Espada de plata de la Escuela del Lobo. Ideal para cazadores de bestias.', NULL),
+(43, 17, 'Ballesta de la Escuela del Oso', 'Ballesta', '50', 'Daño adicional a bestias', 'Reliquia', 'Ballesta pesada eficaz contra bestias grandes.', NULL),
+(44, 17, 'Armadura de la Escuela del Grifo', 'Armadura Media', '120', '+25% Intensidad de Señal', 'Reliquia', 'Aumenta la intensidad de las señales de brujo. Perfecta para builds de magia.', NULL),
+(45, 17, 'Armadura de la Escuela del Oso', 'Armadura Pesada', '150', '+30% Defensa', 'Reliquia', 'Proporciona una defensa excepcional para builds de tanque.', NULL),
+(46, 17, 'Espada de Plata de la Escuela de la Víbora', 'Espada de Plata', '125', '+10% Prob. Envenenar', 'Reliquia', 'Disponible en Hearts of Stone. Aplica veneno con cada golpe.', NULL),
+(47, 17, 'Gran Armadura de la Escuela del Grifo', 'Armadura', '150', '+25% Intensidad de Señal', 'Reliquia', 'Versión superior de la armadura del Grifo con mayor protección.', NULL),
+(48, 17, 'Ballesta de la Escuela del Gato', 'Ballesta', '45', '+5% Prob. Crítico', 'Reliquia', 'Ballesta ligera para builds rápidos. Aumenta la probabilidad de crítico.', NULL);
 
 -- --------------------------------------------------------
 
@@ -170,20 +190,23 @@ CREATE TABLE `juegos` (
   `nombre_items` varchar(50) DEFAULT 'Armas' COMMENT 'Nombre del tipo de elemento (Armas, Cartas, Hechizos...)',
   `tiene_personajes` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 = tiene personajes / NPCs',
   `tiene_mapa` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 = tiene mapa propio',
-  `en_desarrollo` tinyint(1) NOT NULL DEFAULT 0
+  `en_desarrollo` tinyint(1) NOT NULL DEFAULT 0,
+  `trailer` varchar(500) DEFAULT NULL COMMENT 'Enlace al tráiler (YouTube, etc.)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `juegos`
 --
 
-INSERT INTO `juegos` (`id`, `titulo`, `desarrollador`, `distribuidora`, `fecha_lanzamiento`, `genero`, `descripcion`, `portada`, `mapa_imagen`, `enlace_compra`, `creador_id`, `fecha_creacion`, `tiene_items`, `nombre_items`, `tiene_personajes`, `tiene_mapa`, `en_desarrollo`) VALUES
-(9, 'Monster Hunter World', 'Capcom', 'Capcom', '2018-01-26', 'RPG de Acción', 'Embárcate en una épica cacería en el Nuevo Mundo. Enfréntate a monstruos colosales en ecosistemas vivos, forja equipo poderoso y colabora con otros cazadores en esta obra maestra de la saga Monster Hunter.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/582010/MONSTER_HUNTER_WORLD/', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 0, 0),
-(10, 'Hades', 'Supergiant Games', 'Supergiant Games', '2020-09-17', 'Roguelike', 'Escapa del inframundo en este aclamado roguelike de acción. Como Zagreo, hijo de Hades, lucharás a través de mazmorras generadas aleatoriamente con la ayuda de los dioses del Olimpo.', 'game_1778072432.png', 'map_1777997211.jpg', '', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 1, 0),
-(11, 'Hollow Knight', 'Team Cherry', 'Team Cherry', '2017-02-24', 'Metroidvania', 'Forja tu propio camino en Hallownest, un reino antiguo lleno de insectos extraños y secretos ocultos. Un metroidvania dibujado a mano con una atmósfera inolvidable y una jugabilidad desafiante.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/367520/Hollow_Knight/', 2, '2026-05-05 17:50:24', 1, 'Habilidad', 1, 0, 0),
-(12, 'Balatro', 'LocalThunk', 'Playstack', '2024-02-20', 'Roguelike de Cartas', 'El póker se encuentra con el roguelike en este adictivo juego de construcción de mazos. Combina manos de póker con comodines especiales para superar ciegas cada vez más difíciles.', 'game_1778078491.jpg', NULL, '', 2, '2026-05-05 17:50:24', 1, 'Carta', 0, 0, 0),
-(13, 'Hollow Knight: Silksong', 'Team Cherry', 'Team Cherry', '2026-12-31', 'Metroidvania', 'Juega como Hornet en esta esperada secuela de Hollow Knight. Explora un nuevo reino, domina nuevas habilidades y descubre los secretos de Pharloom en esta aventura independiente.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/1030300/Hollow_Knight_Silksong/', 2, '2026-05-05 17:50:24', 0, 'Armas', 0, 0, 1),
-(14, 'Celeste', 'Maddy Makes Games', 'Maddy Makes Games', '2018-01-25', 'Plataformas', 'Ayuda a Madeline a escalar la Montaña Celeste en este desafiante juego de plataformas pixel-art. Una historia emotiva sobre la superación personal, la ansiedad y la perseverancia.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/504230/Celeste/', 3, '2026-05-05 17:50:24', 1, 'Armas', 1, 0, 0);
+INSERT INTO `juegos` (`id`, `titulo`, `desarrollador`, `distribuidora`, `fecha_lanzamiento`, `genero`, `descripcion`, `portada`, `mapa_imagen`, `enlace_compra`, `creador_id`, `fecha_creacion`, `tiene_items`, `nombre_items`, `tiene_personajes`, `tiene_mapa`, `en_desarrollo`, `trailer`) VALUES
+(9, 'Monster Hunter World', 'Capcom', 'Capcom', '2018-01-26', 'RPG de Acción', 'Embárcate en una épica cacería en el Nuevo Mundo. Enfréntate a monstruos colosales en ecosistemas vivos, forja equipo poderoso y colabora con otros cazadores en esta obra maestra de la saga Monster Hunter.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/582010/MONSTER_HUNTER_WORLD/', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 0, 0, NULL),
+(10, 'Hades', 'Supergiant Games', 'Supergiant Games', '2020-09-17', 'Roguelike', 'Escapa del inframundo en este aclamado roguelike de acción. Como Zagreo, hijo de Hades, lucharás a través de mazmorras generadas aleatoriamente con la ayuda de los dioses del Olimpo.', 'game_1778072432.png', 'map_1777997211.jpg', '', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 1, 0, NULL),
+(11, 'Hollow Knight', 'Team Cherry', 'Team Cherry', '2017-02-24', 'Metroidvania', 'Forja tu propio camino en Hallownest, un reino antiguo lleno de insectos extraños y secretos ocultos. Un metroidvania dibujado a mano con una atmósfera inolvidable y una jugabilidad desafiante.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/367520/Hollow_Knight/', 2, '2026-05-05 17:50:24', 1, 'Habilidad', 1, 0, 0, NULL),
+(12, 'Balatro', 'LocalThunk', 'Playstack', '2024-02-20', 'Roguelike de Cartas', 'El póker se encuentra con el roguelike en este adictivo juego de construcción de mazos. Combina manos de póker con comodines especiales para superar ciegas cada vez más difíciles.', 'game_1778078491.jpg', NULL, '', 2, '2026-05-05 17:50:24', 1, 'Carta', 0, 0, 0, 'https://youtu.be/VUyP21iQ_-g?si=IW3SrkMv8NaMHeQ9'),
+(13, 'Hollow Knight: Silksong', 'Team Cherry', 'Team Cherry', '2026-12-31', 'Metroidvania', 'Juega como Hornet en esta esperada secuela de Hollow Knight. Explora un nuevo reino, domina nuevas habilidades y descubre los secretos de Pharloom en esta aventura independiente.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/1030300/Hollow_Knight_Silksong/', 2, '2026-05-05 17:50:24', 0, 'Armas', 0, 0, 1, NULL),
+(14, 'Celeste', 'Maddy Makes Games', 'Maddy Makes Games', '2018-01-25', 'Plataformas', 'Ayuda a Madeline a escalar la Montaña Celeste en este desafiante juego de plataformas pixel-art. Una historia emotiva sobre la superación personal, la ansiedad y la perseverancia.', 'default_game.jpg', NULL, '', 3, '2026-05-05 17:50:24', 1, 'Armas', 1, 0, 0, ''),
+(15, 'Elden Ring', 'FromSoftware', 'Bandai Namco Entertainment', '2022-02-25', 'RPG de Acción', 'Levántate, Sinluz, y recorre las imponentes Tierras Intermedias para restaurar el Círculo de Elden y convertirte en el Señor del Círculo. Una aventura épica de fantasía oscura creada por Hidetaka Miyazaki y George R.R. Martin.', 'game_1778144555.png', NULL, 'https://store.steampowered.com/app/1245620/ELDEN_RING/', 5, '2026-05-07 10:57:02', 1, 'Armas', 1, 0, 0, 'https://youtu.be/CptaXqVY6-E?si=-oKFKYwWprTgTgTj'),
+(17, 'The Witcher 3: Wild Hunt', 'CD Projekt Red', 'CD Projekt', '2015-05-19', 'RPG', 'Encarna a Geralt de Rivia, un cazador de monstruos a sueldo, en un mundo de fantasía oscura. Persigue a la Niña de la Profecía, Ciri, y enfréntate a la Cacería Salvaje en una aventura épica que define el destino del Continente.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/', 5, '2026-05-07 12:00:11', 1, 'Armas', 1, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -355,7 +378,8 @@ INSERT INTO `mensajes_privados` (`id`, `emisor`, `receptor`, `mensaje`, `fecha`,
 (13, 2, 1, 'dsfsf', '2026-04-30 14:46:50', 1),
 (14, 2, 1, 'Holaaaa', '2026-05-06 17:08:58', 1),
 (15, 2, 1, 'CONTESTA COÑO NFDNASLODNASLDFNS', '2026-05-06 17:11:00', 1),
-(16, 1, 2, 'QUE COÑO QUIERES???????????????', '2026-05-06 17:12:09', 1);
+(16, 1, 2, 'QUE COÑO QUIERES???????????????', '2026-05-06 17:12:09', 1),
+(17, 2, 1, 'YA NAAAAA', '2026-05-07 10:33:27', 1);
 
 -- --------------------------------------------------------
 
@@ -387,7 +411,27 @@ INSERT INTO `personajes` (`id`, `id_juego`, `nombre`, `rol`, `ubicacion`, `descr
 (11, 11, 'El Caballero', 'Principal', 'Dirtmouth', NULL, NULL),
 (12, 11, 'Hornet', 'Aliado', 'Nido Profundo', NULL, NULL),
 (13, 14, 'Madeline', 'Principal', 'Montaña Celeste', NULL, NULL),
-(14, 14, 'Badeline', 'Antagonista', 'Espejo del Templo', NULL, NULL);
+(14, 14, 'Badeline', 'Antagonista', 'Espejo del Templo', NULL, NULL),
+(15, 15, 'Melina', 'Doncella', 'Necrolimbo', 'Guía del Sin Luz. Permite invocar a Torrente y transformar runas en poder.', NULL),
+(16, 15, 'Ranni la Bruja', 'Princesa Lunar', 'Liurnia de los Lagos', 'Princesa Caria que busca un nuevo orden bajo la luna y las estrellas.', NULL),
+(17, 15, 'Blaidd el Medio Lobo', 'Guerrero', 'Necrolimbo', 'Sombra y guardaespaldas de Ranni, creado para protegerla.', NULL),
+(18, 15, 'Malenia, la Espada de Miquella', 'Semidiós', 'Árbol Hierático', 'Guerrera invicta. Ha sucumbido a la putrefacción roja.', NULL),
+(19, 15, 'General Radahn', 'Semidiós', 'Caelid', 'Semidiós que detuvo las estrellas con magia gravitatoria.', NULL),
+(20, 15, 'Rykard, Señor de la Blasfemia', 'Semidiós', 'Monte Gelmir', 'Semidiós fusionado con la gran serpiente Eiglay.', NULL),
+(21, 15, 'Sir Gideon Ofnir', 'Jefe', 'Mesa Redonda', 'Hechicero que buscaba ser el Señor del Círculo.', NULL),
+(22, 15, 'Godfrey, Primer Señor del Círculo', 'Jefe', 'Leyndell', 'Guerrero ancestral, primer marido de la Reina Marika.', NULL),
+(23, 15, 'Morgott, Rey de los Augurios', 'Semidiós', 'Castillo de Velo Tormentoso', 'Semidiós rechazado. Gobernante de Leyndell.', NULL),
+(24, 15, 'Radagon de la Orden Dorada', 'Dios', 'Dentro del Erdtree', 'Otra mitad de la Reina Marika. Jefe final que encarna el Círculo de Elden.', NULL),
+(25, 17, 'Geralt de Rivia', 'Protagonista / Brujo', 'Kaer Morhen', 'El brujo protagonista, conocido como el Lobo Blanco. Maestro espadachín y cazador de monstruos profesional.', NULL),
+(26, 17, 'Ciri', 'Bruja / Hija Adoptiva', 'Kaer Morhen', 'Heredera al trono de Cintra e hija adoptiva de Geralt. Posee poderes de viaje interdimensional.', NULL),
+(27, 17, 'Yennefer de Vengerberg', 'Hechicera', 'Novigrado / Skellige', 'Una de las hechiceras más poderosas del Norte. Antigua amante de Geralt y figura materna para Ciri.', NULL),
+(28, 17, 'Triss Merigold', 'Hechicera', 'Novigrado', 'Hechicera pelirroja, amiga íntima de Geralt y miembro de la Logia de Hechiceras.', NULL),
+(29, 17, 'Vesemir', 'Brujo / Mentor', 'Kaer Morhen', 'El brujo más anciano de la Escuela del Lobo. Mentor y figura paterna de Geralt y Ciri.', NULL),
+(30, 17, 'Emhyr var Emreis', 'Emperador de Nilfgaard', 'Vizima', 'Emperador de Nilfgaard y padre biológico de Ciri. Conocido como \"La Llama Blanca\".', NULL),
+(31, 17, 'Eredin Bréacc Glas', 'Rey de la Cacería Salvaje', 'Varias', 'Líder de la Cacería Salvaje que persigue a Ciri para obtener su poder interdimensional.', NULL),
+(32, 17, 'El Barón Sanguinario', 'Señor de la Guerra', 'Arboleda de los Susurros', 'Antiguo soldado convertido en barón de Velen. Su historia personal es una de las tramas más memorables.', NULL),
+(33, 17, 'Dandelion (Jaskier)', 'Bardo', 'Novigrado', 'El bardo más famoso del mundo, amigo íntimo de Geralt. Conocido por sus baladas.', NULL),
+(34, 17, 'Zoltan Chivay', 'Herrero / Enano', 'Novigrado', 'Herrero enano y amigo leal de Geralt. Veterano de guerra y miembro de la resistencia.', NULL);
 
 -- --------------------------------------------------------
 
@@ -417,9 +461,12 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `user`, `email`, `pass`, `nombre`, `level`, `amigos`, `ultima_conexion`, `conectado`, `ban_hasta`, `avatar`, `bio`, `idioma`, `perfil_publico`) VALUES
-(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-05-06 18:07:53', 0, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
-(2, 'editor', 'editor@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Editor de Contenido', 1, '#1#', '2026-05-06 17:05:55', 0, NULL, 'default.jpg', 'Editor de Next Level Code, cuyo superior es el Admin.', 'es', 0),
-(3, 'user', 'user@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Dani', 1, NULL, '2026-05-06 17:44:35', 0, NULL, 'default.jpg', NULL, 'es', 0);
+(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-05-07 10:57:10', 0, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
+(2, 'editor', 'editor@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Editor de Contenido', 1, '#1#', '2026-05-07 10:33:13', 1, NULL, 'default.jpg', 'Editor de Next Level Code, cuyo superior es el Admin.', 'es', 0),
+(3, 'user', 'user@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Dani', 1, NULL, '2026-05-06 17:44:35', 0, NULL, 'default.jpg', NULL, 'es', 0),
+(5, 'nora', 'nora@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Nora', 1, NULL, NULL, 0, NULL, 'default.jpg', 'Exploradora de mundos abiertos y amante de los RPG.', 'es', 0),
+(6, 'ivan', 'ivan@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Iván', 1, NULL, NULL, 0, NULL, 'default.jpg', 'Fan de los juegos de estrategia y los combates tácticos.', 'es', 0),
+(7, 'pedro', 'pedro@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Pedro', 1, NULL, NULL, 0, NULL, 'default.jpg', 'Coleccionista de logros y cazador de secretos en videojuegos.', 'es', 0);
 
 -- --------------------------------------------------------
 
@@ -521,7 +568,20 @@ INSERT INTO `visitas_juegos` (`id`, `id_juego`, `id_usuario`, `fecha`) VALUES
 (55, 11, 1, '2026-05-06 17:37:26'),
 (56, 9, 3, '2026-05-06 18:07:19'),
 (57, 10, 3, '2026-05-06 18:07:40'),
-(58, 13, 1, '2026-05-06 18:08:50');
+(58, 13, 1, '2026-05-06 18:08:50'),
+(59, 13, 1, '2026-05-07 09:13:51'),
+(60, 12, 1, '2026-05-07 09:15:55'),
+(61, 9, 1, '2026-05-07 09:43:37'),
+(62, 12, 1, '2026-05-07 09:49:46'),
+(63, 12, 1, '2026-05-07 09:55:41'),
+(64, 12, 1, '2026-05-07 10:11:09'),
+(65, 12, 1, '2026-05-07 10:13:12'),
+(66, 12, 1, '2026-05-07 10:31:41'),
+(67, 13, 1, '2026-05-07 10:32:02'),
+(68, 15, 1, '2026-05-07 10:57:13'),
+(69, 15, 1, '2026-05-07 10:58:49'),
+(70, 15, 1, '2026-05-07 11:02:40'),
+(71, 15, 1, '2026-05-07 11:22:00');
 
 --
 -- Índices para tablas volcadas
@@ -664,13 +724,13 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT de la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `logros`
@@ -694,19 +754,19 @@ ALTER TABLE `mensajes_grupales`
 -- AUTO_INCREMENT de la tabla `mensajes_privados`
 --
 ALTER TABLE `mensajes_privados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `personajes`
 --
 ALTER TABLE `personajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones`
@@ -718,7 +778,7 @@ ALTER TABLE `valoraciones`
 -- AUTO_INCREMENT de la tabla `visitas_juegos`
 --
 ALTER TABLE `visitas_juegos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Restricciones para tablas volcadas
