@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2026 a las 13:37:46
+-- Tiempo de generación: 07-05-2026 a las 15:12:17
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -67,6 +67,13 @@ CREATE TABLE `domingueros` (
   `fecha` int(11) NOT NULL,
   `statu` int(11) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `domingueros`
+--
+
+INSERT INTO `domingueros` (`id_sol`, `id_rec`, `fecha`, `statu`) VALUES
+(7, 2, 1778159126, 0);
 
 -- --------------------------------------------------------
 
@@ -181,7 +188,27 @@ INSERT INTO `elementos` (`id`, `id_juego`, `nombre`, `tipo`, `valor1`, `valor2`,
 (97, 22, 'Servoarmadura X-01', 'Armadura/Traje', '1390 Defensa', 'Alta resistencia a la energía', 'Legendario', 'La mejor servoarmadura del juego. Se encuentra en la Corte 35.', NULL),
 (98, 22, 'Servoarmadura T-60', 'Armadura/Traje', '1220 Defensa', 'Resistencia equilibrada', 'Épico', 'Utilizada por la Hermandad del Acero.', NULL),
 (99, 22, 'Marine Armor', 'Armadura/Traje', '250+ Defensa', 'Resistencia al agua y a la radiación', 'Épico', 'Equipo de asalto marino del DLC Far Harbor.', NULL),
-(100, 22, 'Silver Shroud Armor', 'Armadura/Traje', '150 Defensa', 'Carisma +1, Percepción +1', 'Raro', 'Traje icónico del superhéroe de la radio. Se obtiene completando sus misiones.', NULL);
+(100, 22, 'Silver Shroud Armor', 'Armadura/Traje', '150 Defensa', 'Carisma +1, Percepción +1', 'Raro', 'Traje icónico del superhéroe de la radio. Se obtiene completando sus misiones.', NULL),
+(101, 23, 'Espada de Plasma', 'Arma', 'Corte energético', 'Daño por calor', 'Épico', 'Espada de energía roja utilizada por Jordan para combate cuerpo a cuerpo. Capaz de desmembrar robots y criaturas hostiles.', NULL),
+(102, 23, 'Pistola de Plasma', 'Arma', 'Daño de energía', 'Munición de plasma', 'Raro', 'Arma de fuego estándar que dispara proyectiles de plasma. Precisa y letal a media distancia.', NULL),
+(103, 23, 'Nave Espacial Porsche', 'Objeto', 'Velocidad de salto', 'Escudo de plasma', 'Legendario', 'La nave personal de Jordan, un Porsche modificado para viajes interestelares.', NULL),
+(104, 23, 'Traje de Bounty Hunter', 'Armadura/Traje', 'Protección balística', 'Resistencia al vacío', 'Épico', 'Traje especializado para cazarrecompensas con sistemas de soporte vital integrados.', NULL),
+(105, 23, 'Botas de Gravedad', 'Objeto', 'Salto aumentado', 'Estabilidad en superficies', 'Raro', 'Permiten a Jordan saltar grandes distancias y adherirse a superficies en gravedad cero.', NULL),
+(106, 23, 'Dispositivo de Hackeo', 'Objeto', 'Acceso a sistemas', 'Desactivación de robots', 'Épico', 'Herramienta esencial para infiltrarse en sistemas enemigos y desactivar defensas robóticas.', NULL),
+(107, 23, 'Granada de Plasma', 'Arma', 'Daño en área', 'Efecto de calor residual', 'Común', 'Granada que libera una explosión de plasma al detonar, dañando todo a su alrededor.', NULL),
+(108, 23, 'Visor de Rastreo', 'Objeto', 'Detección de calor', 'Marcado de objetivos', 'Raro', 'Permite a Jordan rastrear enemigos a través de paredes y en la oscuridad.', NULL),
+(109, 23, 'Kit Médico Avanzado', 'Objeto', 'Regeneración de salud', 'Curación de heridas', 'Común', 'Kit de campo para curar heridas y restaurar la salud durante las misiones.', NULL),
+(110, 23, 'Propulsores de Muñeca', 'Objeto', 'Dash lateral', 'Esquiva rápida', 'Épico', 'Pequeños propulsores que permiten a Jordan realizar movimientos evasivos rápidos.', NULL),
+(111, 24, 'Pistola (Beretta 92FS)', 'Arma', '35', 'Precisión alta', 'Común', 'Pistola semiautomática estándar, fiable y precisa. Arma de mano básica para cualquier situación.', NULL),
+(112, 24, 'Mustang .357', 'Arma', '70', 'Alto poder de parada', 'Raro', 'Revólver de gran calibre con un retroceso considerable. Capaz de abatir enemigos con un solo disparo bien colocado.', NULL),
+(113, 24, 'Escopeta de Doble Cañón', 'Arma', '85', 'Dispersión amplia', 'Común', 'Escopeta recortada ideal para combates a corta distancia. Su dispersión la hace letal en espacios cerrados.', NULL),
+(114, 24, 'SMG (Heckler & Koch MP5)', 'Arma', '30', 'Cadencia de fuego alta', 'Raro', 'Subfusil compacto con alta cadencia de disparo. Perfecto para combates de media distancia y drive-by.', NULL),
+(115, 24, 'Fusil de Asalto Duke', 'Arma', '45', 'Precisión en ráfagas', 'Épico', 'Fusil de asalto versátil con selector de disparo. Combina potencia y control en distancias medias y largas.', NULL),
+(116, 24, 'Fusil de Francotirador de Cerrojo', 'Arma', '120', 'Mira telescópica', 'Épico', 'Fusil de precisión con acción de cerrojo. Ideal para eliminaciones silenciosas a larga distancia.', NULL),
+(117, 24, 'Bate de Béisbol', 'Arma', '25', 'Aturdimiento', 'Común', 'Arma cuerpo a cuerpo contundente que puede dejar fuera de combate a un oponente de un solo golpe.', NULL),
+(118, 24, 'Martillo', 'Arma', '30', 'Daño estructural', 'Común', 'Herramienta pesada que sirve como arma improvisada. Eficaz para romper cerraduras y defensas.', NULL),
+(119, 24, 'Lanzagranadas', 'Arma', '150', 'Daño en área', 'Épico', 'Dispara granadas explosivas que detonan al impactar. Capaz de destruir vehículos y eliminar grupos enteros.', NULL),
+(120, 24, 'Cóctel Molotov', 'Arma', '60', 'Incendia área', 'Común', 'Bomba incendiaria casera. Al impactar, crea un charco de fuego que causa daño continuo en una zona.', NULL);
 
 -- --------------------------------------------------------
 
@@ -235,7 +262,7 @@ CREATE TABLE `juegos` (
 
 INSERT INTO `juegos` (`id`, `titulo`, `desarrollador`, `distribuidora`, `fecha_lanzamiento`, `genero`, `descripcion`, `portada`, `mapa_imagen`, `enlace_compra`, `creador_id`, `fecha_creacion`, `tiene_items`, `nombre_items`, `tiene_personajes`, `tiene_mapa`, `en_desarrollo`, `trailer`) VALUES
 (9, 'Monster Hunter World', 'Capcom', 'Capcom', '2018-01-26', 'RPG de Acción', 'Embárcate en una épica cacería en el Nuevo Mundo. Enfréntate a monstruos colosales en ecosistemas vivos, forja equipo poderoso y colabora con otros cazadores en esta obra maestra de la saga Monster Hunter.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/582010/MONSTER_HUNTER_WORLD/', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 0, 0, NULL),
-(10, 'Hades', 'Supergiant Games', 'Supergiant Games', '2020-09-17', 'Roguelike', 'Escapa del inframundo en este aclamado roguelike de acción. Como Zagreo, hijo de Hades, lucharás a través de mazmorras generadas aleatoriamente con la ayuda de los dioses del Olimpo.', 'game_1778072432.png', 'map_1777997211.jpg', '', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 1, 0, NULL),
+(10, 'Hades', 'Supergiant Games', 'Supergiant Games', '2020-09-17', 'Roguelike/Roguelite', 'Escapa del inframundo en este aclamado roguelike de acción. Como Zagreo, hijo de Hades, lucharás a través de mazmorras generadas aleatoriamente con la ayuda de los dioses del Olimpo.', 'game_1778072432.png', 'map_1777997211.jpg', '', 1, '2026-05-05 17:50:24', 1, 'Armas', 1, 1, 0, ''),
 (11, 'Hollow Knight', 'Team Cherry', 'Team Cherry', '2017-02-24', 'Metroidvania', 'Forja tu propio camino en Hallownest, un reino antiguo lleno de insectos extraños y secretos ocultos. Un metroidvania dibujado a mano con una atmósfera inolvidable y una jugabilidad desafiante.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/367520/Hollow_Knight/', 2, '2026-05-05 17:50:24', 1, 'Habilidad', 1, 0, 0, NULL),
 (12, 'Balatro', 'LocalThunk', 'Playstack', '2024-02-20', 'Roguelike de Cartas', 'El póker se encuentra con el roguelike en este adictivo juego de construcción de mazos. Combina manos de póker con comodines especiales para superar ciegas cada vez más difíciles.', 'game_1778078491.jpg', NULL, '', 2, '2026-05-05 17:50:24', 1, 'Carta', 0, 0, 0, 'https://youtu.be/VUyP21iQ_-g?si=IW3SrkMv8NaMHeQ9'),
 (13, 'Hollow Knight: Silksong', 'Team Cherry', 'Team Cherry', '2026-12-31', 'Metroidvania', 'Juega como Hornet en esta esperada secuela de Hollow Knight. Explora un nuevo reino, domina nuevas habilidades y descubre los secretos de Pharloom en esta aventura independiente.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/1030300/Hollow_Knight_Silksong/', 2, '2026-05-05 17:50:24', 0, 'Armas', 0, 0, 1, NULL),
@@ -245,7 +272,9 @@ INSERT INTO `juegos` (`id`, `titulo`, `desarrollador`, `distribuidora`, `fecha_l
 (19, 'Baldur\'s Gate 3', 'Larian Studios', 'Larian Studios', '2023-08-03', 'RPG de Rol', 'Reúne a tus compañeros, arma a tu grupo y explora los vastos mundos de Dungeons & Dragons en la siguiente gran aventura de la saga Baldur\'s Gate. Una magia oscura y antigua amenaza con corromper todo a su paso. Atrapados en su interior, debes dominar tu poder o ser destruido por él. La elección es tuya.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/1086940/Baldurs_Gate_3/', 7, '2026-05-07 12:12:03', 1, 'Armas', 1, 0, 0, 'https://youtu.be/s8bFzSXpDsA?si=wVNXcJJY9n6EX8pS'),
 (20, 'God of War: Ragnarök', 'Santa Monica Studio', 'Sony Interactive Entertainment', '2022-11-09', 'Acción/Aventura', 'Kratos y Atreus se embarcan en un viaje a los Nueve Reinos para encontrar respuestas y detener el Ragnarök, el fin del mundo. Una épica historia de destino, guerra y redención familiar.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/2000950/God_of_War_Ragnarok/', 3, '2026-05-07 12:18:14', 1, 'Armas', 1, 0, 0, NULL),
 (21, 'Cyberpunk 2077', 'CD Projekt Red', 'Bandai Namco Entertainment', '2020-12-10', 'RPG', 'Entra en la piel de V, un mercenario en busca de un implante único que ofrece la llave de la inmortalidad, en la megalópolis de Night City. Un futuro oscuro donde las megacorporaciones dictan las reglas y la línea entre la humanidad y la máquina se desdibuja.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/1091500/Cyberpunk_2077/', 6, '2026-05-07 12:26:33', 1, 'Armas', 1, 0, 0, NULL),
-(22, 'Fallout 4', 'Bethesda Game Studios', 'Bethesda Softworks', '2015-11-10', 'RPG de Acción/Mundo Abierto', 'Emerge del Refugio 111 como el Único Superviviente, en un mundo post-apocalíptico asolado por la guerra nuclear. Recorre la Commonwealth de Boston, forja alianzas con facciones enfrentadas, construye asentamientos y busca a tu hijo secuestrado en una tierra yerma llena de secretos, peligros y moralidad difusa.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/377160/Fallout_4/', 1, '2026-05-07 13:04:46', 1, 'Armas', 1, 0, 0, NULL);
+(22, 'Fallout 4', 'Bethesda Game Studios', 'Bethesda Softworks', '2015-11-10', 'RPG de Acción/Mundo Abierto', 'Emerge del Refugio 111 como el Único Superviviente, en un mundo post-apocalíptico asolado por la guerra nuclear. Recorre la Commonwealth de Boston, forja alianzas con facciones enfrentadas, construye asentamientos y busca a tu hijo secuestrado en una tierra yerma llena de secretos, peligros y moralidad difusa.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/377160/Fallout_4/', 1, '2026-05-07 13:04:46', 1, 'Armas', 1, 0, 0, NULL),
+(23, 'Intergalactic: The Heretic Prophet', 'Naughty Dog', 'PlayStation Studios', '2027-06-15', 'Acción/Aventura', 'Ponte en la piel de Jordan A. Mun, una peligrosa cazarrecompensas interestelar, que queda varada en el remoto planeta Sempiria mientras persigue al sindicato criminal de los Cinco Ases. Un planeta aislado durante más de 600 años, lleno de robots hostiles y secretos ancestrales. La aventura espacial más ambiciosa de Naughty Dog.', 'default_game.jpg', NULL, '', 1, '2026-05-07 14:05:56', 1, 'Armas', 1, 0, 1, 'https://www.youtube.com/watch?v=Yr0J8r3x8zQ'),
+(24, 'Grand Theft Auto VI', 'Rockstar Games', 'Rockstar Games', '2026-11-19', 'Acción/Aventura', 'Vuelve a Vice City y al estado de Leonida en la entrega más ambiciosa de la saga. Sigue la historia de Lucía Caminos y Jason Duval, dos criminales que buscan su lugar en el mundo mientras navegan por un submundo de drogas, poder y traiciones. La sexta entrega de la saga más vendida de todos los tiempos redefine el sandbox con un mapa masivo, multitud de personajes excéntricos y una historia oscura sobre el sueño americano.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/271590/Grand_Theft_Auto_VI/', 5, '2026-05-07 14:11:34', 1, 'Armas', 1, 0, 1, 'https://youtu.be/QdBZY2fk6bU');
 
 -- --------------------------------------------------------
 
@@ -520,7 +549,27 @@ INSERT INTO `personajes` (`id`, `id_juego`, `nombre`, `rol`, `ubicacion`, `descr
 (81, 22, 'Desdemona', 'Líder del Ferrocarril', 'Old North Church', 'La líder de la facción Ferrocarril, dedicada a liberar a los sintéticos conscientes.', NULL),
 (82, 22, 'Padre (Father)', 'Líder del Instituto', 'El Instituto', 'El líder del Instituto, una organización científica secreta que controla tecnología avanzada.', NULL),
 (83, 22, 'Kellogg', 'Antagonista / Mercenario del Instituto', 'Fuerte Hagen', 'Un cazarrecompensas cibernético responsable del secuestro de Shaun.', NULL),
-(84, 22, 'Alcalde McDonough', 'Alcalde de Diamond City', 'Diamond City', 'El alcalde sintético de Diamond City, un infiltrado del Instituto.', NULL);
+(84, 22, 'Alcalde McDonough', 'Alcalde de Diamond City', 'Diamond City', 'El alcalde sintético de Diamond City, un infiltrado del Instituto.', NULL),
+(85, 23, 'Jordan A. Mun', 'Protagonista / Cazarrecompensas', 'Planeta Sempiria', 'Una peligrosa cazarrecompensas interestelar, experta en combate y rastreo. Interpretada por Tati Gabrielle.', NULL),
+(86, 23, 'Colin Graves', 'Antagonista / Miembro de los Cinco Ases', 'Planeta Sempiria', 'Un despiadado criminal, líder de una facción de los Cinco Ases. Interpretado por Kumail Nanjiani.', NULL),
+(87, 23, 'AJ', 'Aliada / Consejera', 'Comunicaciones orbitales', 'La consejera y apoyo técnico de Jordan, que le guía desde la nave en órbita. Interpretada por Halley Gross.', NULL),
+(88, 23, 'El Herrero', 'Antagonista / Líder de la secta', 'Templo del Profeta', 'El misterioso líder de la secta The Heretic Prophet que controla Sempiria.', NULL),
+(89, 23, 'Comandante Robótico', 'Enemigo / Jefe', 'Base Central de Sempiria', 'Un robot de tres brazos con una enorme espada láser que protege el núcleo del planeta.', NULL),
+(90, 23, 'Teniente de los Cinco Ases', 'Antagonista / Criminal', 'Base de operaciones', 'Mano derecha de Colin Graves, un experto en combate táctico y estrategia.', NULL),
+(91, 23, 'Dra. Eva Sempir', 'Aliada / Científica', 'Laboratorio de investigación', 'Una científica que lleva siglos atrapada en Sempiria, conoce los secretos del planeta.', NULL),
+(92, 23, 'Bounty Hunter Rival', 'Antagonista / Rival', 'Múltiples ubicaciones', 'Otro cazarrecompensas que compite con Jordan por los mismos objetivos.', NULL),
+(93, 23, 'Superviviente de Sempiria', 'PNJ / Aliado', 'Asentamiento oculto', 'Uno de los pocos humanos que quedan en Sempiria, ofrece información y refugio a Jordan.', NULL),
+(94, 23, 'Piloto de los Cinco Ases', 'Enemigo / Secuaz', 'Base de los Cinco Ases', 'Un hábil piloto de combate que protege las rutas de escape de los Cinco Ases.', NULL),
+(95, 24, 'Lucia Caminos', 'Protagonista', 'Penitenciaría de Leonida', 'Una de las dos protagonistas del juego. Criada en Liberty City, aprendió a defenderse desde pequeña y pasó por prisión. Ahora busca tomar el control de su destino, sin que nada ni nadie la vuelva a arrastrar.', NULL),
+(96, 24, 'Jason Duval', 'Protagonista', 'Cayos de Leonida', 'El otro protagonista. Criado entre criminales, intentó escapar alistándose en el ejército, pero regresó a Leonida y cayó en el tráfico de drogas. Ve en Lucía una posible redención.', NULL),
+(97, 24, 'Cal Hampton', 'Aliado / Secundario', 'Cayos de Leonida', 'Amigo de Jason, obsesionado con teorías conspirativas. Vive retirado espiando comunicaciones de la Guardia Costera, convencido de que fuerzas ocultas gobiernan el mundo.', NULL),
+(98, 24, 'Boobie Ike', 'Figura de Poder', 'Vice City', 'Un antiguo callejero convertido en magnate. Ha construido un imperio legal basado en bienes raíces y un estudio de grabación. Encantador en la superficie, letal en los negocios.', NULL),
+(99, 24, 'Dre\'Quan Priest', 'Empresario / Aliado', 'Vice City', 'Protegido de Boobie, pasó de vender droga a fundar Only Raw Records. Ambicioso y con una visión marcada por la cultura callejera y el sueño del estrellato musical.', NULL),
+(100, 24, 'Bae-Luxe', 'Estrella Emergente (Real Dimez)', 'Vice City', 'Mitad del dúo viral Real Dimez. Con su carisma en redes y estilo agresivo en el rap, pasó de estafar a ser una estrella en ascenso en la escena musical de Vice City.', NULL),
+(101, 24, 'Roxy', 'Estrella Emergente (Real Dimez)', 'Vice City', 'La otra mitad del dúo Real Dimez. Junto a Bae-Luxe, representa la nueva cara cultural de Vice City, firmada por el sello de Dre\'Quan.', NULL),
+(102, 24, 'Raul Bautista', 'Criminal Veterano', 'Leonida', 'Un experto en robos de bancos, elegante y calculador. Busca jóvenes con agallas para formar el golpe perfecto. Su experiencia es tan valiosa como peligrosa.', NULL),
+(103, 24, 'Brian Heder', 'Contrabandista', 'Cayos de Leonida', 'Un viejo contrabandista, figura legendaria en el tráfico marítimo. Vive como un jubilado despreocupado, pero sigue moviendo producto desde su astillero.', NULL),
+(104, 24, 'Jefe de Policía de Vice City', 'Antagonista', 'Vice City', 'La máxima autoridad policial, encargada de perseguir y desmantelar las redes criminales de la ciudad. Su implacable persecución pondrá a prueba a Lucía y Jason.', NULL);
 
 -- --------------------------------------------------------
 
@@ -550,12 +599,12 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `user`, `email`, `pass`, `nombre`, `level`, `amigos`, `ultima_conexion`, `conectado`, `ban_hasta`, `avatar`, `bio`, `idioma`, `perfil_publico`) VALUES
-(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-05-07 12:36:17', 1, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
-(2, 'editor', 'editor@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Editor de Contenido', 1, '#1#', '2026-05-07 10:33:13', 1, NULL, 'default.jpg', 'Editor de Next Level Code, cuyo superior es el Admin.', 'es', 0),
+(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-05-07 14:06:26', 0, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
+(2, 'editor', 'editor@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Editor de Contenido', 1, '#1#', '2026-05-07 15:05:18', 1, NULL, 'default.jpg', 'Editor de Next Level Code, cuyo superior es el Admin.', 'es', 0),
 (3, 'user', 'user@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Dani', 1, NULL, '2026-05-06 17:44:35', 0, NULL, 'default.jpg', NULL, 'es', 0),
 (5, 'nora', 'nora@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Nora', 1, NULL, NULL, 0, NULL, 'default.jpg', 'Exploradora de mundos abiertos y amante de los RPG.', 'es', 0),
 (6, 'ivan', 'ivan@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Iván', 1, NULL, NULL, 0, NULL, 'default.jpg', 'Fan de los juegos de estrategia y los combates tácticos.', 'es', 0),
-(7, 'pedro', 'pedro@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Pedro', 1, NULL, NULL, 0, NULL, 'default.jpg', 'Coleccionista de logros y cazador de secretos en videojuegos.', 'es', 0);
+(7, 'pedro', 'pedro@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Pedro', 1, NULL, '2026-05-07 15:05:03', 1, NULL, 'default.jpg', 'Coleccionista de logros y cazador de secretos en videojuegos.', 'es', 0);
 
 -- --------------------------------------------------------
 
@@ -586,7 +635,8 @@ INSERT INTO `valoraciones` (`id`, `id_juego`, `id_usuario`, `puntuacion`, `fecha
 (17, 12, 1, 4, '2026-05-05 17:53:16'),
 (18, 12, 3, 5, '2026-05-05 17:53:16'),
 (19, 14, 2, 5, '2026-05-05 17:53:16'),
-(20, 14, 3, 5, '2026-05-05 17:53:16');
+(20, 14, 3, 5, '2026-05-05 17:53:16'),
+(21, 22, 1, 5, '2026-05-07 14:16:18');
 
 -- --------------------------------------------------------
 
@@ -683,7 +733,21 @@ INSERT INTO `visitas_juegos` (`id`, `id_juego`, `id_usuario`, `fecha`) VALUES
 (81, 22, 1, '2026-05-07 13:27:02'),
 (82, 22, 1, '2026-05-07 13:30:41'),
 (83, 15, 1, '2026-05-07 13:32:50'),
-(84, 15, 1, '2026-05-07 13:33:22');
+(84, 15, 1, '2026-05-07 13:33:22'),
+(85, 23, 1, '2026-05-07 14:06:29'),
+(86, 23, 1, '2026-05-07 14:11:41'),
+(87, 24, 1, '2026-05-07 14:11:44'),
+(88, 22, 1, '2026-05-07 14:14:55'),
+(89, 22, 7, '2026-05-07 14:19:05'),
+(90, 24, 7, '2026-05-07 14:19:09'),
+(91, 22, 7, '2026-05-07 15:06:25'),
+(92, 24, 7, '2026-05-07 15:06:30'),
+(93, 21, 7, '2026-05-07 15:06:33'),
+(94, 20, 7, '2026-05-07 15:06:37'),
+(95, 19, 7, '2026-05-07 15:06:40'),
+(96, 17, 7, '2026-05-07 15:06:46'),
+(97, 9, 7, '2026-05-07 15:06:53'),
+(98, 12, 7, '2026-05-07 15:07:23');
 
 --
 -- Índices para tablas volcadas
@@ -813,13 +877,13 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT de la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `logros`
@@ -849,7 +913,7 @@ ALTER TABLE `mensajes_privados`
 -- AUTO_INCREMENT de la tabla `personajes`
 --
 ALTER TABLE `personajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -861,13 +925,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `valoraciones`
 --
 ALTER TABLE `valoraciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `visitas_juegos`
 --
 ALTER TABLE `visitas_juegos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- Restricciones para tablas volcadas
