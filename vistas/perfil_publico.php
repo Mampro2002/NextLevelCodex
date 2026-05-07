@@ -27,16 +27,10 @@ if (!$usuario) {
     exit;
 }
 
-
 // ✅ Determinar relación entre el visitante y el perfil
 $esAdmin = ($_SESSION['level'] == 0);
 
-// ¿Son colaboradores?
-$misAmigos = !empty($_SESSION['amigos'] ?? '')
-    ? array_filter(explode('#', $_SESSION['amigos']))
-    : [];
-
-// Obtener amigos actualizados desde BD por si acaso
+// Obtener amigos actualizados desde BD
 $stmtAmigos = $db->prepare("SELECT amigos FROM usuarios WHERE id = ?");
 $stmtAmigos->bind_param("i", $_SESSION['id']);
 $stmtAmigos->execute();
@@ -49,11 +43,14 @@ if ($usuario['level'] == 0 && !$esColaborador) {
     exit;
 }
 
-// ¿Hay solicitud enviada por mí?
-$stmtSolEnviada = $db->prepare("SELECT COUNT(*) AS total FROM domingueros WHERE id_sol = ? AND id_rec = ? AND statu = 1");
+// ✅ Consulta de solicitud enviada (con estado y fecha)
+$stmtSolEnviada = $db->prepare("SELECT statu, fecha FROM domingueros WHERE id_sol = ? AND id_rec = ?");
 $stmtSolEnviada->bind_param("ii", $_SESSION['id'], $id_visto);
 $stmtSolEnviada->execute();
-$solicitudEnviada = $stmtSolEnviada->get_result()->fetch_assoc()['total'] > 0;
+$solicitudResult = $stmtSolEnviada->get_result();
+$solicitudData = $solicitudResult->fetch_assoc();
+$solicitudEnviada = ($solicitudResult->num_rows > 0 && $solicitudData['statu'] == 1);
+$solicitudRechazada = ($solicitudResult->num_rows > 0 && $solicitudData['statu'] == 0);
 
 // ¿Hay solicitud pendiente de él hacia mí?
 $stmtSolRecibida = $db->prepare("SELECT COUNT(*) AS total FROM domingueros WHERE id_sol = ? AND id_rec = ? AND statu = 1");
@@ -150,6 +147,24 @@ include "../sec/header.php";
                     <button class="btn btn-danger" onclick="rechazarSolicitud(<?php echo $id_visto; ?>)">
                         <i class="fas fa-times"></i> Rechazar
                     </button>
+                <?php elseif ($solicitudRechazada): ?>
+                    <?php
+                    $diff = time() - $solicitudData['fecha'];
+                    $segundos_15_dias = 15 * 24 * 60 * 60;
+                    if ($diff <= $segundos_15_dias) {
+                        $tiempo_restante = $segundos_15_dias - $diff;
+                        $dias = floor($tiempo_restante / (24 * 60 * 60));
+                        $horas = floor(($tiempo_restante % (24 * 60 * 60)) / 3600);
+                        ?>
+                        <span class="text-muted" style="font-size: 14px;">
+                            <i class="fas fa-clock"></i> Solicitud rechazada<br>
+                            Disponible en <?= $dias ?>d <?= $horas ?>h
+                        </span>
+                    <?php } else { ?>
+                        <button class="btn btn-primary" id="btnSolicitud" onclick="enviarSolicitud(<?php echo $id_visto; ?>)">
+                            <i class="fas fa-user-plus"></i> Enviar solicitud
+                        </button>
+                    <?php } ?>
                 <?php elseif ($solicitudEnviada): ?>
                     <button class="btn btn-warning" id="btnSolicitud" onclick="cancelarSolicitud(<?php echo $id_visto; ?>)">
                         <i class="fas fa-clock"></i> Solicitud enviada (cancelar)
@@ -241,56 +256,73 @@ include "../sec/header.php";
         var miId = <?php echo (int) $_SESSION['id']; ?>;
 
         function enviarSolicitud(id_rec) {
-            $.post("../controladores/amigos_solicitudes.php",
-                { id_sol: miId, id_rec: id_rec, options: 2 },
-                function (data) {
-                    console.log("Respuesta enviar:", JSON.stringify(data));
-                    if (data.trim() === "enviada" || data.trim() === "ya_enviada") {
-                        $('#btnSolicitud')
-                            .removeClass('btn-primary')
-                            .addClass('btn-warning')
-                            .attr('onclick', 'cancelarSolicitud(' + id_rec + ')')
-                            .html('<i class="fas fa-clock"></i> Solicitud enviada (cancelar)');
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_sol: miId, id_rec: id_rec, options: 2 },
+                dataType: "text",
+                success: function (data) {
+                    if (data.trim() === "enviada") {
+                        location.reload();
                     } else {
-                        alert("Error: " + data);
+                        alert("Error al enviar la solicitud.");
                     }
-                });
+                }
+            });
         }
 
         function cancelarSolicitud(id_rec) {
-            $.post("../controladores/amigos_solicitudes.php",
-                { id_sol: miId, id_rec: id_rec, options: 8 },
-                function (data) {
-                    console.log("Respuesta cancelar:", JSON.stringify(data));
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_sol: miId, id_rec: id_rec, options: 8 },
+                dataType: "text",
+                success: function (data) {
                     if (data.trim() === "cancelada") {
                         $('#btnSolicitud')
                             .removeClass('btn-warning')
                             .addClass('btn-primary')
                             .attr('onclick', 'enviarSolicitud(' + id_rec + ')')
                             .html('<i class="fas fa-user-plus"></i> Enviar solicitud');
+                    } else if (data.trim() === "bloqueada") {
+                        alert("No puedes cancelar una solicitud rechazada hasta pasados 15 días.");
+                        location.reload();
                     } else {
-                        alert("Error: " + data);
+                        alert("Error al cancelar la solicitud.");
                     }
-                });
+                }
+            });
         }
 
         function aceptarSolicitud(id_sol) {
-            $.post("../controladores/amigos_solicitudes.php",
-                { id_sol: id_sol, id_rec: miId, options: 3 },
-                function () { location.reload(); });
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_sol: id_sol, id_rec: miId, options: 3 },
+                dataType: "text",
+                success: function () { location.reload(); }
+            });
         }
 
         function rechazarSolicitud(id_sol) {
-            $.post("../controladores/amigos_solicitudes.php",
-                { id_sol: id_sol, id_rec: miId, options: 4 },
-                function () { location.reload(); });
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_sol: id_sol, id_rec: miId, options: 4 },
+                dataType: "text",
+                success: function () { location.reload(); }
+            });
         }
 
         function eliminarColaborador(id_sol) {
             if (!confirm('¿Eliminar a este colaborador?')) return;
-            $.post("../controladores/amigos_solicitudes.php",
-                { id_sol: id_sol, id_rec: miId, options: 6 },
-                function () { location.reload(); });
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_sol: id_sol, id_rec: miId, options: 6 },
+                dataType: "text",
+                success: function () { location.reload(); }
+            });
         }
 
         // Exponer funciones globalmente para los onclick del HTML

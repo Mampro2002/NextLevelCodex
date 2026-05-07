@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2026 a las 12:01:01
+-- Tiempo de generación: 07-05-2026 a las 13:37:46
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -22,23 +22,6 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `nextlevelcodex` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `nextlevelcodex`;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `armas`
---
-
-CREATE TABLE `armas` (
-  `id` int(11) NOT NULL,
-  `id_juego` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `tipo` varchar(50) DEFAULT NULL,
-  `daño` int(11) DEFAULT 0,
-  `municion` varchar(50) DEFAULT NULL,
-  `rareza` varchar(50) DEFAULT NULL,
-  `descripcion` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -125,9 +108,9 @@ INSERT INTO `elementos` (`id`, `id_juego`, `nombre`, `tipo`, `valor1`, `valor2`,
 (23, 12, 'Joker Místico', 'Carta Joker', 'x2 Mult', 'Al descartar', 'Épico', NULL, NULL),
 (24, 12, 'Joker Invisible', 'Carta Joker', 'Copia Joker', 'Aleatorio', 'Legendario', NULL, NULL),
 (25, 12, 'Joker del Trueno', 'Carta Joker', '+50 Fichas', 'Al jugar corazón', 'Raro', NULL, NULL),
-(26, 14, 'Fresa Alada', 'Coleccionable', '1000', 'Puntos', 'Especial', NULL, NULL),
-(27, 14, 'Cristal Azul', 'Objeto de Historia', '0', 'Desbloquea final B', 'Único', NULL, NULL),
-(28, 14, 'Pluma Dorada', 'Objeto de Historia', '0', 'Desbloquea final C', 'Único', NULL, NULL),
+(26, 14, 'Fresa Alada', 'Coleccionable', '1000', 'Puntos', 'Raro', '', NULL),
+(27, 14, 'Cristal Azul', 'Objeto de Historia', '0', 'Desbloquea final B', 'Raro', '', NULL),
+(28, 14, 'Pluma Dorada', 'Objeto de Historia', '0', 'Desbloquea final C', 'Épico', '', NULL),
 (29, 15, 'Río de Sangre', 'Katana', '76', 'Sangrado (50)', 'Legendario', 'Katana maldita del espadachín Okina, infunde pérdida de sangre.', NULL),
 (30, 15, 'Espada de la Noche y la Llama', 'Arma', '115', 'Escalado de Fe e Inteligencia', 'Legendario', 'Espada mitológica y tesoro de la mansión de los Caria.\r\nEs una de las armas legendarias.\r\n\r\nLos astrólogos que precedieron a los hechiceros se establecieron en lo alto de las montañas más elevadas, las que casi tocaban el cielo, y consideraban a los gigantes de fuego como sus vecinos.\r\n\r\nHabilidad: Combate igneocturno\r\nNo alces ni bajes la espada y prepárate para lanzar un hechizo. Acompáñala con un ataque normal para lanzar el hechizo del dardo nocturno, o bien con un ataque potente para incendiar la zona situada frente a ti en un movimiento de barrido.', 'elem_1778145674.png'),
 (31, 15, 'Hoja Blasfema', 'Arma', '145', 'Robo de vida', 'Legendario', 'Es el arma sagrada de Rykard, Señor de la Blasfemia. Se trata de un espadón cuya superficie está cubierta por los restos de los innumerables héroes que el señor devoró, los cuales se retuercen sobre el metal compartiendo ahora la misma sangre como una \"familia\".\r\n\r\nAl activar su ceniza de guerra única, el jugador alza la espada para envolverla en llamas blasfemas y luego la baja para lanzar una ráfaga de fuego frontal. Esta ráfaga no solo inflige daño masivo, sino que absorbe PS de los enemigos alcanzados, lo que permite recuperar vida rápidamente durante el combate.', 'elem_1778146190.png'),
@@ -135,7 +118,7 @@ INSERT INTO `elementos` (`id`, `id_juego`, `nombre`, `tipo`, `valor1`, `valor2`,
 (34, 15, 'Lanza Sagrada de Mohgwyn', 'Gran lanza', '120', 'Sangrado (70)', 'Legendario', 'Lanza del Señor de la Sangre. Realiza un ritual que inflige pérdida de sangre masiva.', NULL),
 (35, 15, 'Espadón de Hoja Injertada', 'Arma', '150', 'Atributos +5', 'Legendario', 'La famosa espada del Castillo de Morne. Arma de vengador que carga con océanos de ira y arrepentimiento.\r\nUna de la armas legendarias.\r\n\r\nUn solitario campeón, superviviente de un país desaparecido, mostró tal determinación a la hora de seguir luchando que reclamó las espadas de todo un clan de guerreros.\r\n\r\nHabilidad: Juramento de venganza\r\nHaz un juramento sobre el espadón para vengar al clan, lo que aumentará todos tus atributos de forma temporal. Mientras los efectos del juramento estén activos, tu aplomo también aumentará.', 'elem_1778145690.png'),
 (36, 15, 'Espadón de Ruinas', 'Arma', '160', 'Gravedad', 'Legendario', 'Aunque originalmente era un escombro de una ruina que cayó del cielo, este fragmento acabaría convirtiéndose en un arma.\r\nEs una de las armas legendarias.\r\n\r\nLa ruina de la que provenía se vino abajo al impactar un meteorito contra ella. Por tanto, este arma posee su poder destructivo.\r\n\r\nHabilidad única: Ola de destrucción\r\nLevanta la espada en lo alto y luego golpea el suelo con ella para lanzar una onda de choque gravitatoria.', 'elem_1778145712.png'),
-(37, 15, 'Cetro del Devorador', 'Arma', '140', 'Devastación', 'Legendario', 'Cetro con forma de serpiente devorando el mundo. Esta arma se convertirá, algún día, en el símbolo del señor de la Blasfemia.\r\nEs una de las armas legendarias.\r\n\r\nDicen que su diseño es una breve visión del futuro que tuvo Rykard en sus últimos momentos de vida, tras ser devorado por la gran serpiente.\r\n\r\nHabilidad: Devorador de mundos\r\nCarga el cetro con magia y golpea el suelo con él para robar los PS de todos los enemigos cercanos.', 'elem_1778145512.png'),
+(37, 15, 'Cetro del Devorador', 'Cetro', 'Daño: 140', 'Ceniza: Devastación', 'Legendario', 'Cetro con forma de serpiente devorando el mundo. Esta arma se convertirá, algún día, en el símbolo del señor de la Blasfemia.\r\nEs una de las armas legendarias.\r\n\r\nDicen que su diseño es una breve visión del futuro que tuvo Rykard en sus últimos momentos de vida, tras ser devorado por la gran serpiente.\r\n\r\nHabilidad: Devorador de mundos\r\nCarga el cetro con magia y golpea el suelo con él para robar los PS de todos los enemigos cercanos.', 'elem_1778153553.png'),
 (38, 15, 'Shotel del eclipse', 'Arma', '100', 'Fuego de la muerte', 'Legendario', 'La famosa espada atesorada en el Castillo de Sól, representa un sol eclipsado y carente de color.\r\nEs una de las armas legendarias.\r\n\r\nEn Sól, el eclipse infunde un gran temor, pero no es posible apartar la mirada ante tal fenómeno.\r\n\r\nHabilidad única: Llamarada mortal\r\nHaz arder el sol desprovisto de brillo con las llamas del Príncipe de la Muerte. Este encantamiento inflige muerte a los enemigos. Vuelve a pulsar el botón para bajar el arma y desencadenar una explosión.', 'elem_1778146279.png'),
 (39, 17, 'Aerondight', 'Espada de Plata', '522-638', 'Carga de energía', 'Legendario', 'La espada de plata más poderosa del juego. Genera cargas que aumentan el daño un 10% por golpe.', NULL),
 (40, 17, 'Espada de Acero de la Escuela del Gato', 'Espada de Acero', '140', '+10% Prob. Crítico', 'Reliquia', 'Parte del equipo de la Escuela del Gato. Bonifica la probabilidad de golpe crítico.', NULL),
@@ -146,7 +129,59 @@ INSERT INTO `elementos` (`id`, `id_juego`, `nombre`, `tipo`, `valor1`, `valor2`,
 (45, 17, 'Armadura de la Escuela del Oso', 'Armadura Pesada', '150', '+30% Defensa', 'Reliquia', 'Proporciona una defensa excepcional para builds de tanque.', NULL),
 (46, 17, 'Espada de Plata de la Escuela de la Víbora', 'Espada de Plata', '125', '+10% Prob. Envenenar', 'Reliquia', 'Disponible en Hearts of Stone. Aplica veneno con cada golpe.', NULL),
 (47, 17, 'Gran Armadura de la Escuela del Grifo', 'Armadura', '150', '+25% Intensidad de Señal', 'Reliquia', 'Versión superior de la armadura del Grifo con mayor protección.', NULL),
-(48, 17, 'Ballesta de la Escuela del Gato', 'Ballesta', '45', '+5% Prob. Crítico', 'Reliquia', 'Ballesta ligera para builds rápidos. Aumenta la probabilidad de crítico.', NULL);
+(48, 17, 'Ballesta de la Escuela del Gato', 'Ballesta', '45', '+5% Prob. Crítico', 'Reliquia', 'Ballesta ligera para builds rápidos. Aumenta la probabilidad de crítico.', NULL),
+(49, 19, 'Espada Mano de Cazadora', 'Espada Larga', '2d6+3', 'Velocidad de Ataque +1', 'Muy Rara', 'Forjada en los talleres de los Cazadores Élite de Baldur\'s Gate, esta hoja plateada lleva grabada la marca de cien bestias abatidas. Otorga ventaja en tiradas de ataque contra enemigos de tipo monstruo y permite lanzar «Marca del Cazador» sin gastar espacio de hechizo una vez por descanso largo.', NULL),
+(50, 19, 'Espadón del Señor del Caos', 'Espadón', '2d6+2', 'Daño de fuego 1d6', 'Rara', 'Un espadón de dos manos impregnado de la esencia caótica de los planos exteriores. Cada golpe tiene un 10 % de probabilidad de liberar una descarga de energía aleatoria —hielo, ácido, trueno o fuego— que sacude al objetivo en un radio de 1,5 metros.', NULL),
+(51, 19, 'Vara de los Semidioses', 'Bastón Mágico', '1d6+4', 'Concentración de hechizos +2', 'Legendaria', 'Un bastón que perteneció a un semidiós olvidado de Faerûn. Amplifica todos los hechizos de conjuración: los hechizos lanzados con este bastón ignoran la resistencia al daño de criatura una vez por turno, y su portador puede lanzar «Deseo» como acción de bonificación una vez por descanso largo.', NULL),
+(52, 19, 'Arco de la Noche Eterna', 'Arco Largo', '1d8+3', 'Daño psíquico 1d4', 'Muy Rara', 'Tallado en madera de árbol umbral regada con sangre de ilusionista drow. Las flechas disparadas con este arco atraviesan la oscuridad sin penalización y aplican «Aterrorizado» al objetivo si falla una tirada de salvación de Sabiduría CD 15. Perfecto para los rangers que prefieren las sombras a la luz.', NULL),
+(53, 19, 'Escudo de los Tres Juramentos', 'Escudo', '+3 CA', 'Resistencia al daño necrótico', 'Muy Rara', 'Escudo de mithral grabado con los tres juramentos de los Paladines de Tyr. Mientras el portador mantenga al menos un Juramento activo, obtiene resistencia al daño necrótico y puede reaccionar una vez por turno para reducir a cero el daño de un ataque crítico recibido.', NULL),
+(54, 19, 'Daga de la Tejedora de Sombras', 'Daga', '1d4+4', 'Veneno (Cegado) 1d6', 'Muy Rara', 'Una daga de obsidiana que emana una neblina de sombras al ser desenvainada. Los ataques con ella desde posición de ocultamiento infligen 2d6 adicionales de daño psíquico y no rompen la invisibilidad del portador si el objetivo muere. Arma favorita de los Asesinos del Culto de la Araña.', NULL),
+(55, 19, 'Amuleto de Salud del Gran Druida', 'Amuleto', 'Constitución 19', 'Regeneración 2 PG/turno', 'Rara', 'Tallado en madera de roble por el Gran Druida del Bosque de Silvanus. Fija la Constitución del portador en 19 sin importar su valor base, y al inicio de cada turno en combate regenera 2 puntos de golpe siempre que el portador esté en contacto con suelo natural.', NULL),
+(56, 19, 'Cetro del Intelecto de Volo', 'Cetro Mágico', '1d6+3', 'Inteligencia 18', 'Rara', 'Volo —el famoso bardo y viajero— dejó olvidado este cetro en la posada de la Aldea Devastada tras una noche de excesos. Fija la Inteligencia del portador en 18 y permite lanzar «Identificar» y «Detectar Magia» sin gastar ningún espacio de hechizo, un número ilimitado de veces.', NULL),
+(57, 19, 'Hachas Gemelas del Berserker Gnoll', 'Hacha de Mano (par)', '1d6+2 c/u', 'Frenesí: +1d6 de daño cortante', 'Rara', 'Estas hachas mellizas fueron arrebatadas a un gnoll berserker en los túneles bajos del Mapa de la Costa de la Espada. Al luchar con ambas, el portador puede activar «Frenesí Gnoll» como acción de bonificación, obteniendo un ataque extra de 1d6 de daño y un nivel de Agotamiento al terminar el combate.', NULL),
+(58, 19, 'Grimorio de las Tormentas Imperiales', 'Tomo / Hechizos', 'Rayo 8d6', 'Tormenta de Hielo 2d8+2d6', 'Legendaria', 'Un pesado grimorio encuadernado en piel de dragón de tormenta. Contiene los hechizos «Rayo» de nivel 8 y «Tormenta de Hielo» mejorada. Además, cuando el mago portador lanza cualquier hechizo de tormenta, puede elegir que el área de efecto sea el doble de lo normal sin gastar un espacio adicional, una vez por descanso largo.', NULL),
+(59, 19, 'Armadura de Placas del Juicio Absoluto', 'Armadura Pesada', 'CA 20', 'Inmunidad al daño de veneno', 'Muy Rara', 'Armadura forjada en los hornos del Templo de Bane y bendecida por el propio Absoluto. Además de proporcionar una CA de 20, su portador no puede ser envenenado ni paralizado. Sin embargo, llevarla durante más de un descanso largo seguido inflige 1d4 de daño psíquico al inicio de cada día, pues la voluntad del Absoluto se filtra en la mente del guerrero.', NULL),
+(60, 19, 'Botas del Teletransportador Fugaz', 'Botas Mágicas', 'Velocidad +3 m', 'Paso Brumoso (3/descanso)', 'Rara', 'Unas ligeras botas de cuero encontradas en el equipaje de un mago githyanki. Aumentan el movimiento base 3 metros y permiten lanzar «Paso Brumoso» hasta 3 veces por descanso corto sin usar ningún espacio de hechizo. Populares entre los pícaros de la Costa de la Espada.', NULL),
+(61, 20, 'Hacha Leviatán', 'Arma principal', 'Daño de hielo', 'Furia de la tormenta de hielo', 'Legendario', 'La poderosa hacha que perteneció a Laufey, la esposa de Kratos. Puede congelar enemigos y ser arrojada para volver a la mano.', NULL),
+(62, 20, 'Espadas del Caos', 'Espadas dobles', 'Daño de fuego', 'Llamarada ígnea', 'Legendario', 'Armas inseparables de Kratos desde su época en Grecia, perfectas para combates contra grupos de enemigos.', NULL),
+(63, 20, 'Lanza Draupnir', 'Arma principal', 'Daño de viento', 'Multiplicación explosiva', 'Legendario', 'Una nueva arma forjada por los Hermanos Huldra. Absorbe enemigos a distancia, se multiplica y detona.', NULL),
+(64, 20, 'Escudo Guardián', 'Escudo', 'Defensa equilibrada', 'Contragolpe potente', 'Raro', 'El escudo que le regaló su esposa Faye a Kratos, un equilibrio perfecto entre defensa y contraataque.', NULL),
+(65, 20, 'Arco de Garra', 'Arco (Atreus)', 'Disparo simple', 'Aumento de aturdimiento', 'Común', 'El arco principal de Atreus, fabricado por su madre. Útil para atacar a distancia y resolver puzzles.', NULL),
+(66, 20, 'Armadura de placas del Juicio Absoluto', 'Armadura de pecho', 'Defensa excepcional', 'Inmunidad al aturdimiento', 'Muy Rara', 'Una imponente armadura forjada en los hornos de Svartalfheim que otorga una defensa inigualable.', NULL),
+(67, 20, 'Faja de la Perdición de Lúnda', 'Armadura de cintura', 'Suerte moderada', 'Activación de golpe crítico', 'Rara', 'Armadura ligera de cuero flexible que otorga una gran suerte, permitiendo activar golpes críticos.', NULL),
+(68, 20, 'Reliquia del Talismán de Meign', 'Reliquia', 'Aumento de daño cuerpo a cuerpo', '89s de recarga', 'Épica', 'Un artefacto antiguo que, al activarse, imbuye los ataques cuerpo a cuerpo de Kratos con una fuerza devastadora.', NULL),
+(69, 20, 'Encantamiento de Niflheim', 'Encantamiento', 'Defensa alta', 'Regeneración de vida', 'Raro', 'Una gema de hielo extraída de la niebla de Niflheim que acelera la curación de las heridas.', NULL),
+(70, 20, 'Puño de los Cuatro Vientos', 'Accesorio de Lanza', 'Fuerza aumentada', 'Onda de choque al rematar', 'Raro', 'Un estabilizador aerodinámico que se acopla a la Lanza Draupnir para crear una onda de choque al final de los combos.', NULL),
+(71, 21, 'Malorian Arms 3516', 'Pistola de potencia', 'Recarga rápida', 'Daño de fuego', 'Legendario', 'La pistola personalizada de Johnny Silverhand. Tiene una cadencia de fuego excepcional y una animación de desenfundado única.', NULL),
+(72, 21, 'Satori', 'Katana', '80', 'Prob. Crítico +15%', 'Legendario', 'La katana personal de Saburo Arasaka. Su daño base es menor, pero tiene una probabilidad de golpe crítico muy superior.', NULL),
+(73, 21, 'Fénix', 'Fusil de asalto', '90', 'Cadencia y recarga mejoradas', 'Legendario', 'Un fusil de asalto fiable y potente, ideal para combates a corta y media distancia.', NULL),
+(74, 21, 'Justiciero', 'Fusil de francotirador', '115', 'Silenciador y recarga rápida', 'Legendario', 'Un fusil de precisión ideal para eliminaciones sigilosas. Viene con mira de alta potencia y silenciador.', NULL),
+(75, 21, 'Solucionadora', 'Subfusil', '75', 'Cargador ampliado', 'Legendario', 'Un subfusil de gran calibre con una capacidad de cargador enorme y una cadencia de fuego muy alta.', NULL),
+(76, 21, 'Enviudador', 'Fusil de precisión', '125', 'Daño químico', 'Legendario', 'Un fusil tecnológico que dispara dos proyectiles e inflige daño químico, lo que envenena a los enemigos.', NULL),
+(77, 21, 'Yinglong', 'Subfusil inteligente', '80', 'Daño eléctrico', 'Legendario', 'Un subfusil inteligente muy poco común. Sus balas autoguiadas infligen un potente daño eléctrico adicional.', NULL),
+(78, 21, 'Doom Doom', 'Revólver', '110', '4 perdigones por disparo', 'Legendario', 'Un revólver modificado por Dum Dum. Dispara cuatro perdigones por cada bala, con alta probabilidad de desmembrar.', NULL),
+(79, 21, 'Bastón de Cóctel', 'Arma', '70', 'Daño crítico aumentado', 'Legendario', 'Una katana reservada para los clientes VIP de \"Nubes\". El daño que inflige con golpes críticos es devastador.', 'elem_1778150338.png'),
+(80, 21, 'Prueba de Fuego', 'Fusil de precisión', '130', 'Efecto de quemadura', 'Legendario', 'Una variante del fusil \"Enviudador\" que dispara munición incendiaria, aplicando un efecto de quemadura a los enemigos.', NULL),
+(81, 22, 'Repartidor (Deliverer)', 'Arma', '55', 'Mejor precisión y 25% menos PA en V.A.T.S.', 'Legendario', 'Pistola única del Ferrocarril, ágil y precisa en combate.', NULL),
+(82, 22, 'Justicia (Justice)', 'Arma', '85', 'Probabilidad de tambalear al impactar', 'Legendario', 'Vendida en Covenant. Eficaz para controlar grupos de enemigos.', NULL),
+(83, 22, 'Pistola de Kellogg', 'Arma', '48', 'Los golpes críticos rellenan los Puntos de Acción', 'Legendario', 'Recuperada de Kellogg en Fuerte Hagen.', NULL),
+(84, 22, 'Cryolator', 'Arma', '50 (Hielo)', 'Congela a los enemigos', 'Legendario', 'Arma criogénica única del Refugio 111.', NULL),
+(85, 22, 'Ashmaker', 'Arma', '25', '15 puntos de daño por fuego', 'Legendario', 'Recompensa de Fahrenheit en Goodneighbor. Prende fuego a los objetivos.', NULL),
+(86, 22, 'Le Fusil Terribles', 'Arma', '140', '+25% daño y daño a extremidades', 'Legendario', 'Encontrada en Libertalia. Devastadora a corta distancia.', NULL),
+(87, 22, 'Big Boy', 'Arma', '468', 'Dispara un proyectil adicional', 'Legendario', 'Vendida por Arturo en Diamond City. Lanza 2 mini-nukes.', NULL),
+(88, 22, 'Último Minuto (The Last Minute)', 'Arma', '180', '+50% daño a extremidades', 'Legendario', 'Vendido por Ronnie Shaw en El Castillo.', NULL),
+(89, 22, 'Hacha de Grognak', 'Arma', '55', 'Daño cuerpo a cuerpo aumentado', 'Legendario', 'Encontrada en Hubris Comics. Arma del bárbaro de cómic.', NULL),
+(90, 22, 'Rifle Ferroviario (Railway Rifle)', 'Arma', '130', 'Alta penetración', 'Legendario', 'Recompensa del Ferrocarril. Dispara púas de ferrocarril.', NULL),
+(91, 22, 'Protector del Vigilante', 'Arma', '95', 'Dispara un proyectil adicional', 'Legendario', 'Vendido por Alexis Combes en el Refugio 81. Ideal para largas distancias.', NULL),
+(92, 22, 'Amigo del Yermo', 'Arma', '24/24 (Bal./Energ.)', '+50% daño a extremidades', 'Legendario', 'Vendida por Deb en Bunker Hill.', NULL),
+(93, 22, 'Arma de Lorenzo', 'Arma', '50 (Bal.)', 'Empuja a los enemigos con telequinesis', 'Legendario', 'Recompensa de \"El Secreto de la Casa Cabot\". Efecto único.', NULL),
+(94, 22, 'Salvavidas del Superviviente', 'Arma', '26 (Energía)', '+150% daño con salud baja', 'Legendario', 'Obtenida del Paladín Brandis.', NULL),
+(95, 22, 'Aniquiladora de Ghouls', 'Arma', '15 (Radiación)', '+50% daño contra necrófagos', 'Legendario', 'De la misión \"La patrulla perdida\".', NULL),
+(96, 22, 'Armadura de Combate Pesada', 'Armadura/Traje', '200+ Defensa', 'Resistencia al daño balístico y de energía', 'Épico', 'De las mejores armaduras no-asistidas. Usada por la Hermandad del Acero.', NULL),
+(97, 22, 'Servoarmadura X-01', 'Armadura/Traje', '1390 Defensa', 'Alta resistencia a la energía', 'Legendario', 'La mejor servoarmadura del juego. Se encuentra en la Corte 35.', NULL),
+(98, 22, 'Servoarmadura T-60', 'Armadura/Traje', '1220 Defensa', 'Resistencia equilibrada', 'Épico', 'Utilizada por la Hermandad del Acero.', NULL),
+(99, 22, 'Marine Armor', 'Armadura/Traje', '250+ Defensa', 'Resistencia al agua y a la radiación', 'Épico', 'Equipo de asalto marino del DLC Far Harbor.', NULL),
+(100, 22, 'Silver Shroud Armor', 'Armadura/Traje', '150 Defensa', 'Carisma +1, Percepción +1', 'Raro', 'Traje icónico del superhéroe de la radio. Se obtiene completando sus misiones.', NULL);
 
 -- --------------------------------------------------------
 
@@ -206,7 +241,11 @@ INSERT INTO `juegos` (`id`, `titulo`, `desarrollador`, `distribuidora`, `fecha_l
 (13, 'Hollow Knight: Silksong', 'Team Cherry', 'Team Cherry', '2026-12-31', 'Metroidvania', 'Juega como Hornet en esta esperada secuela de Hollow Knight. Explora un nuevo reino, domina nuevas habilidades y descubre los secretos de Pharloom en esta aventura independiente.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/1030300/Hollow_Knight_Silksong/', 2, '2026-05-05 17:50:24', 0, 'Armas', 0, 0, 1, NULL),
 (14, 'Celeste', 'Maddy Makes Games', 'Maddy Makes Games', '2018-01-25', 'Plataformas', 'Ayuda a Madeline a escalar la Montaña Celeste en este desafiante juego de plataformas pixel-art. Una historia emotiva sobre la superación personal, la ansiedad y la perseverancia.', 'default_game.jpg', NULL, '', 3, '2026-05-05 17:50:24', 1, 'Armas', 1, 0, 0, ''),
 (15, 'Elden Ring', 'FromSoftware', 'Bandai Namco Entertainment', '2022-02-25', 'RPG de Acción', 'Levántate, Sinluz, y recorre las imponentes Tierras Intermedias para restaurar el Círculo de Elden y convertirte en el Señor del Círculo. Una aventura épica de fantasía oscura creada por Hidetaka Miyazaki y George R.R. Martin.', 'game_1778144555.png', NULL, 'https://store.steampowered.com/app/1245620/ELDEN_RING/', 5, '2026-05-07 10:57:02', 1, 'Armas', 1, 0, 0, 'https://youtu.be/CptaXqVY6-E?si=-oKFKYwWprTgTgTj'),
-(17, 'The Witcher 3: Wild Hunt', 'CD Projekt Red', 'CD Projekt', '2015-05-19', 'RPG', 'Encarna a Geralt de Rivia, un cazador de monstruos a sueldo, en un mundo de fantasía oscura. Persigue a la Niña de la Profecía, Ciri, y enfréntate a la Cacería Salvaje en una aventura épica que define el destino del Continente.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/', 5, '2026-05-07 12:00:11', 1, 'Armas', 1, 0, 0, NULL);
+(17, 'The Witcher 3: Wild Hunt', 'CD Projekt Red', 'CD Projekt', '2015-05-19', 'RPG', 'Encarna a Geralt de Rivia, un cazador de monstruos a sueldo, en un mundo de fantasía oscura. Persigue a la Niña de la Profecía, Ciri, y enfréntate a la Cacería Salvaje en una aventura épica que define el destino del Continente.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/', 5, '2026-05-07 12:00:11', 1, 'Armas', 1, 0, 0, NULL),
+(19, 'Baldur\'s Gate 3', 'Larian Studios', 'Larian Studios', '2023-08-03', 'RPG de Rol', 'Reúne a tus compañeros, arma a tu grupo y explora los vastos mundos de Dungeons & Dragons en la siguiente gran aventura de la saga Baldur\'s Gate. Una magia oscura y antigua amenaza con corromper todo a su paso. Atrapados en su interior, debes dominar tu poder o ser destruido por él. La elección es tuya.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/1086940/Baldurs_Gate_3/', 7, '2026-05-07 12:12:03', 1, 'Armas', 1, 0, 0, 'https://youtu.be/s8bFzSXpDsA?si=wVNXcJJY9n6EX8pS'),
+(20, 'God of War: Ragnarök', 'Santa Monica Studio', 'Sony Interactive Entertainment', '2022-11-09', 'Acción/Aventura', 'Kratos y Atreus se embarcan en un viaje a los Nueve Reinos para encontrar respuestas y detener el Ragnarök, el fin del mundo. Una épica historia de destino, guerra y redención familiar.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/2000950/God_of_War_Ragnarok/', 3, '2026-05-07 12:18:14', 1, 'Armas', 1, 0, 0, NULL),
+(21, 'Cyberpunk 2077', 'CD Projekt Red', 'Bandai Namco Entertainment', '2020-12-10', 'RPG', 'Entra en la piel de V, un mercenario en busca de un implante único que ofrece la llave de la inmortalidad, en la megalópolis de Night City. Un futuro oscuro donde las megacorporaciones dictan las reglas y la línea entre la humanidad y la máquina se desdibuja.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/1091500/Cyberpunk_2077/', 6, '2026-05-07 12:26:33', 1, 'Armas', 1, 0, 0, NULL),
+(22, 'Fallout 4', 'Bethesda Game Studios', 'Bethesda Softworks', '2015-11-10', 'RPG de Acción/Mundo Abierto', 'Emerge del Refugio 111 como el Único Superviviente, en un mundo post-apocalíptico asolado por la guerra nuclear. Recorre la Commonwealth de Boston, forja alianzas con facciones enfrentadas, construye asentamientos y busca a tu hijo secuestrado en una tierra yerma llena de secretos, peligros y moralidad difusa.', 'default_game.jpg', NULL, 'https://store.steampowered.com/app/377160/Fallout_4/', 1, '2026-05-07 13:04:46', 1, 'Armas', 1, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -431,7 +470,57 @@ INSERT INTO `personajes` (`id`, `id_juego`, `nombre`, `rol`, `ubicacion`, `descr
 (31, 17, 'Eredin Bréacc Glas', 'Rey de la Cacería Salvaje', 'Varias', 'Líder de la Cacería Salvaje que persigue a Ciri para obtener su poder interdimensional.', NULL),
 (32, 17, 'El Barón Sanguinario', 'Señor de la Guerra', 'Arboleda de los Susurros', 'Antiguo soldado convertido en barón de Velen. Su historia personal es una de las tramas más memorables.', NULL),
 (33, 17, 'Dandelion (Jaskier)', 'Bardo', 'Novigrado', 'El bardo más famoso del mundo, amigo íntimo de Geralt. Conocido por sus baladas.', NULL),
-(34, 17, 'Zoltan Chivay', 'Herrero / Enano', 'Novigrado', 'Herrero enano y amigo leal de Geralt. Veterano de guerra y miembro de la resistencia.', NULL);
+(34, 17, 'Zoltan Chivay', 'Herrero / Enano', 'Novigrado', 'Herrero enano y amigo leal de Geralt. Veterano de guerra y miembro de la resistencia.', NULL),
+(35, 19, 'Shadowheart', 'Compañera', 'Barco Náutiloide / Monasterio de la Dualidad', 'Clérigo medio-elfo de Shar, diosa de la oscuridad y los secretos. Fría y reservada, oculta un pasado traumático que ella misma ha suprimido de su memoria. Es la única del grupo capaz de retirar el parásito cerebral y su arco personal es uno de los más emocionalmente profundos del juego.', NULL),
+(36, 19, 'Astarion', 'Compañero', 'Playa del Náutiloide / Vilhon Reach', 'Pícaro vampiro alto-elfo. Fue esclavo del archivampiro Cazador durante doscientos años, obligado a seducir víctimas. Ahora, con el parásito que suprime la maldición vampírica, experimenta una libertad que nunca conoció. Cáustico, encantador y profundamente roto.', NULL),
+(37, 19, 'Gale', 'Compañero', 'Portal de Magia / Torre de Waterdeep', 'Mago humano de Waterdeep y antiguo favorito de Mystra, diosa de la magia. Cometió el error de intentar robar un fragmento de la Corona de Karsus, absorbiendo una «singularidad de Weave» que amenaza con destruirlo —y todo lo que le rodea— si no consume artefactos mágicos con regularidad.', NULL),
+(38, 19, 'Lae\'zel', 'Compañera', 'Barco Náutiloide / Campos de Batalla de Crecia', 'Guerrera githyanki de élite, criadadesde la infancia para matar ilusionistas. Disciplinada, directa hasta la brutalidad y convencida de la supremacía githyanki. Su misión es purificarse ante la Lich-Reina Vlaakith, pero el parásito y las revelaciones del viaje cuestionan todo lo que le han enseñado.', NULL),
+(39, 19, 'Wyll', 'Compañero', 'Goblin Camp / Ciudad de Baldur\'s Gate', 'El «Filo de los Fronteros», un hechicero-brujo humano famoso en la Ciudad de Baldur\'s Gate como héroe del pueblo. Hizo un pacto con la diablesa Mizora a cambio de poder suficiente para proteger a su ciudad, y ahora arrastra las consecuencias de ese trato. Un idealista atrapado entre su héroe interior y su patrona infernal.', NULL),
+(40, 19, 'Karlach', 'Compañera', 'Río Chionthar / Avernus', 'Bárbara tiefling con un motor infernal incrustado en el pecho: un artefacto de Avernus que la incendia desde dentro y la condena a muerte si no encuentra la forma de repararlo. Escapó del servicio forzado de Zariel y rebosa de energía y vitalidad, aunque sabe que su tiempo podría estar contado.', NULL),
+(41, 19, 'Halsin', 'Compañero Opcional', 'Campamento Goblin / Bosque Silvanus', 'Gran Druida elfo de madera del Bosque de Silvanus y líder del Campamento de los Druidas. Lleva décadas estudiando la Sombra que corrompe las Tierras Malditas. Cuando se une al grupo como compañero completo en el Acto II, aporta una perspectiva de sabio anciano y un corazón genuinamente bondadoso.', NULL),
+(42, 19, 'Minthara', 'Compañera Opcional', 'Campamento Goblin / Underdark', 'Paladín drow y comandante de las fuerzas goblins al servicio del Absoluto. Solo se une al grupo en una ruta moralmente oscura. Implacable, letal y con un trasfondo de nobleza drow que explica —aunque no justifica— su crueldad. Uno de los personajes más complejos moralmente del juego.', NULL),
+(43, 19, 'El Absoluto (Cazador de Ilusiones)', 'Antagonista', 'Templo del Absoluto / Ciudad de Baldur\'s Gate', 'Un antiguo Cazador de Ilusiones —la forma más poderosa de la raza de los ilusionistas— que ha sido corrompido y convertido en la encarnación del «Absoluto», un culto que controla mentes mediante parásitos cerebrales. Estratega frío e implacable, su objetivo es conquistar Faerûn comenzando por Baldur\'s Gate.', NULL),
+(44, 19, 'Dame Aylin', 'Aliada / PNJ', 'Shadowfell / Ciudad de Baldur\'s Gate', 'La Doncella de la Aurora, hija inmortal de la diosa Selûne. Fue capturada por Lorroakan para ser convertida en fuente de energía. Su amor por la princesa Isobel y su inmortalidad impuesta la convierten en uno de los personajes más trágicos del Acto II, y su liberación es uno de los momentos más épicos del juego.', NULL),
+(45, 20, 'Kratos', 'Protagonista', 'Los Nueve Reinos', 'El Fantasma de Esparta y antiguo dios griego de la guerra, busca redención mientras protege a su hijo.', NULL),
+(46, 20, 'Atreus (Loki)', 'Hijo de Kratos', 'Los Nueve Reinos', 'El hijo de Kratos y la gigante Laufey, intenta comprender su papel en el mundo y su destino.', NULL),
+(47, 20, 'Mimir', 'Aliado / Sabio', 'Los Nueve Reinos', 'El hombre más listo del mundo, una cabeza reanimada que acompaña a Kratos y Atreus en su viaje.', NULL),
+(48, 20, 'Freya', 'Aliada / Antagonista', 'Vanaheim', 'La reina de las Valquirias y antigua esposa de Odín, busca venganza por la muerte de su hijo Baldur.', NULL),
+(49, 20, 'Thor', 'Antagonista Principal', 'Asgard', 'El temible Dios del Trueno, hijo de Odín, un oponente formidable que busca venganza contra Kratos.', NULL),
+(50, 20, 'Odin', 'Antagonista Final', 'Asgard', 'El Rey de los Aesir, un ser increíblemente astuto y manipulador obsesionado con evitar el Ragnarök.', NULL),
+(51, 20, 'Týr', 'Aliado', 'Svartalfheim', 'El antiguo Dios de la Guerra nórdico, amante de la paz, cuyo regreso representa una chispa de esperanza.', NULL),
+(52, 20, 'Angrboda', 'Aliada / Gigante', 'Jötunheim', 'Una de las últimas gigantes, sabia y poderosa, ayuda a Atreus a comprender su herencia y su destino como Loki.', NULL),
+(53, 20, 'Brok', 'Herrero / Aliado', 'Svartalfheim', 'Un maestro herrero enano que forjó el hacha Leviatán y la lanza Draupnir, leal y habilidoso.', NULL),
+(54, 20, 'Sindri', 'Herrero / Aliado', 'Svartalfheim', 'El hermano de Brok, un herrero extremadamente meticuloso y brillante, vital para desbloquear los secretos de la forja.', NULL),
+(55, 21, 'V', 'Protagonista', 'Night City', 'Un joven mercenario que llega a Night City buscando hacerse un nombre. Su vida da un vuelco tras un trabajo fallido.', NULL),
+(56, 21, 'Johnny Silverhand', 'Guía (Engrama)', 'Night City', 'Legendario rockero y terrorista anticorporativo. Su conciencia digitalizada reside ahora en el cerebro de V. Es interpretado por Keanu Reeves.', NULL),
+(57, 21, 'Jackie Welles', 'Aliado (Mejor amigo)', 'Night City', 'Un mercenario leal y de buen corazón, compañero inseparable de V durante los primeros compases del juego.', NULL),
+(58, 21, 'Dexter DeShawn', 'Fixer (Arreglador)', 'Night City', 'Un intermediario cínico y calculador que conecta a V y Jackie con trabajos de alto riesgo.', NULL),
+(59, 21, 'Judy Álvarez', 'Aliada (Técnica de BD)', 'Night City', 'Una talentosa técnica de danza cerebral y miembro de las Mox, con un fuerte sentido de la justicia.', NULL),
+(60, 21, 'Victor Vector', 'Aliado (Doctor)', 'Night City', 'Un cirujano implantes que opera en un pequeño local y es el primer \"doc\" de confianza de V.', NULL),
+(61, 21, 'Panam Palmer', 'Aliada (Nómada)', 'Night City', 'Una experta conductora del Clan Aldecaldos. De carácter fuerte, independiente y leal hasta la muerte. Interés romántico de V.', NULL),
+(62, 21, 'Saburo Arasaka', 'Antagonista Corporativo', 'Night City', 'El legendario y anciano fundador de la megacorporación Arasaka, dueña de un imperio global.', NULL),
+(63, 21, 'Yorinobu Arasaka', 'Antagonista', 'Night City', 'El hijo pródigo de Saburo que traiciona a su padre y a la corporación, poniendo en marcha los acontecimientos del juego.', NULL),
+(64, 21, 'Adam Smasher', 'Maquinaria de combate', 'Night City', 'Un imponente cíborg que ha sido el ejecutor de la corporación Arasaka durante décadas, casi indestructible.', NULL),
+(65, 22, 'Único Superviviente', 'Protagonista', 'Refugio 111', 'El personaje controlado por el jugador. Despierta tras 210 años de criogenización. Busca a su hijo Shaun.', NULL),
+(66, 22, 'Shaun (Padre)', 'Antagonista principal / Hijo', 'El Instituto', 'El hijo del protagonista, ahora líder anciano del Instituto bajo el título de Padre.', NULL),
+(67, 22, 'Albóndiga (Dogmeat)', 'Compañero (Perro)', 'Taller de Red Rocket', 'Un pastor alemán leal. No cuenta como compañero a efectos de la ventaja Lobo Solitario.', NULL),
+(68, 22, 'Codsworth', 'Compañero (Robot Mr. Handy)', 'Sanctuary Hills', 'El robot mayordomo de la familia del protagonista antes de la guerra.', NULL),
+(69, 22, 'Preston Garvey', 'Compañero / Líder de los Minutemen', 'Museo de la Libertad, Concord', 'El líder de los Minutemen de la Commonwealth. Incansable defensor de los asentamientos.', NULL),
+(70, 22, 'Paladín Danse', 'Compañero / Hermandad del Acero', 'Comisaría de Policía de Cambridge', 'Un paladín de la Hermandad del Acero con una fuerte convicción en su misión.', NULL),
+(71, 22, 'Piper Wright', 'Compañera / Periodista', 'Diamond City', 'Una periodista independiente que busca exponer la verdad sobre el Instituto y la corrupción.', NULL),
+(72, 22, 'Nick Valentine', 'Compañero / Detective Sintético', 'Refugio 114 (rescate)', 'Un detective sintético con la personalidad de un policía de los años 40.', NULL),
+(73, 22, 'Cait', 'Compañera / Luchadora de jaula', 'Combat Zone, Boston', 'Una luchadora de jaula irlandesa con problemas de adicción. Experta en combate cuerpo a cuerpo.', NULL),
+(74, 22, 'Robert MacCready', 'Compañero / Mercenario', 'Goodneighbor (The Third Rail)', 'Un mercenario francotirador y antiguo alcalde de Little Lamplight.', NULL),
+(75, 22, 'Curie', 'Compañera / Científica (Mrs. Handy)', 'Refugio 81', 'Un robot científica con la conciencia de una investigadora pre-guerra.', NULL),
+(76, 22, 'Deacon', 'Compañero / Ferrocarril', 'Old North Church', 'Un espía del Ferrocarril experto en disfraces. Su pasado es un misterio.', NULL),
+(77, 22, 'John Hancock', 'Compañero / Alcalde de Goodneighbor', 'Old State House', 'El líder carismático y hedonista de la ciudad libre de Goodneighbor.', NULL),
+(78, 22, 'Strong', 'Compañero / Supermutante', 'Trinity Tower', 'Un supermutante interesado en la literatura, diferente al resto de su especie.', NULL),
+(79, 22, 'X6-88', 'Compañero / Cursor del Instituto', 'Libertalia', 'Un avanzado sintético del Instituto, asignado como escolta del protagonista.', NULL),
+(80, 22, 'Arthur Maxson', 'Líder de la Hermandad del Acero', 'El Prydwen', 'El joven pero formidable Elder de la Hermandad del Acero.', NULL),
+(81, 22, 'Desdemona', 'Líder del Ferrocarril', 'Old North Church', 'La líder de la facción Ferrocarril, dedicada a liberar a los sintéticos conscientes.', NULL),
+(82, 22, 'Padre (Father)', 'Líder del Instituto', 'El Instituto', 'El líder del Instituto, una organización científica secreta que controla tecnología avanzada.', NULL),
+(83, 22, 'Kellogg', 'Antagonista / Mercenario del Instituto', 'Fuerte Hagen', 'Un cazarrecompensas cibernético responsable del secuestro de Shaun.', NULL),
+(84, 22, 'Alcalde McDonough', 'Alcalde de Diamond City', 'Diamond City', 'El alcalde sintético de Diamond City, un infiltrado del Instituto.', NULL);
 
 -- --------------------------------------------------------
 
@@ -461,7 +550,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `user`, `email`, `pass`, `nombre`, `level`, `amigos`, `ultima_conexion`, `conectado`, `ban_hasta`, `avatar`, `bio`, `idioma`, `perfil_publico`) VALUES
-(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-05-07 10:57:10', 0, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
+(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-05-07 12:36:17', 1, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
 (2, 'editor', 'editor@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Editor de Contenido', 1, '#1#', '2026-05-07 10:33:13', 1, NULL, 'default.jpg', 'Editor de Next Level Code, cuyo superior es el Admin.', 'es', 0),
 (3, 'user', 'user@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Dani', 1, NULL, '2026-05-06 17:44:35', 0, NULL, 'default.jpg', NULL, 'es', 0),
 (5, 'nora', 'nora@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Nora', 1, NULL, NULL, 0, NULL, 'default.jpg', 'Exploradora de mundos abiertos y amante de los RPG.', 'es', 0),
@@ -581,18 +670,24 @@ INSERT INTO `visitas_juegos` (`id`, `id_juego`, `id_usuario`, `fecha`) VALUES
 (68, 15, 1, '2026-05-07 10:57:13'),
 (69, 15, 1, '2026-05-07 10:58:49'),
 (70, 15, 1, '2026-05-07 11:02:40'),
-(71, 15, 1, '2026-05-07 11:22:00');
+(71, 15, 1, '2026-05-07 11:22:00'),
+(72, 19, 1, '2026-05-07 12:13:26'),
+(73, 20, 1, '2026-05-07 12:18:32'),
+(74, 21, 1, '2026-05-07 12:36:25'),
+(75, 22, 1, '2026-05-07 13:04:59'),
+(76, 22, 1, '2026-05-07 13:06:51'),
+(77, 22, 1, '2026-05-07 13:06:56'),
+(78, 22, 1, '2026-05-07 13:18:43'),
+(79, 22, 1, '2026-05-07 13:21:01'),
+(80, 22, 1, '2026-05-07 13:22:05'),
+(81, 22, 1, '2026-05-07 13:27:02'),
+(82, 22, 1, '2026-05-07 13:30:41'),
+(83, 15, 1, '2026-05-07 13:32:50'),
+(84, 15, 1, '2026-05-07 13:33:22');
 
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `armas`
---
-ALTER TABLE `armas`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_juego` (`id_juego`);
 
 --
 -- Indices de la tabla `bloqueados`
@@ -709,12 +804,6 @@ ALTER TABLE `visitas_juegos`
 --
 
 --
--- AUTO_INCREMENT de la tabla `armas`
---
-ALTER TABLE `armas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
@@ -724,13 +813,13 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT de la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT de la tabla `juegos`
 --
 ALTER TABLE `juegos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `logros`
@@ -760,7 +849,7 @@ ALTER TABLE `mensajes_privados`
 -- AUTO_INCREMENT de la tabla `personajes`
 --
 ALTER TABLE `personajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -778,17 +867,11 @@ ALTER TABLE `valoraciones`
 -- AUTO_INCREMENT de la tabla `visitas_juegos`
 --
 ALTER TABLE `visitas_juegos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `armas`
---
-ALTER TABLE `armas`
-  ADD CONSTRAINT `armas_ibfk_1` FOREIGN KEY (`id_juego`) REFERENCES `juegos` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `bloqueados`

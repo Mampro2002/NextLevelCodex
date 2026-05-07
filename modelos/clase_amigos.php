@@ -154,6 +154,25 @@ class Amigos
     {
         include "../sec/bdd.php";
 
+        // Obtener la solicitud para verificar su estado
+        $filt = $db->prepare("SELECT statu, fecha FROM domingueros WHERE id_sol = ? AND id_rec = ?");
+        $filt->bind_param("ii", $id_sol, $id_rec);
+        $filt->execute();
+        $res = $filt->get_result();
+        $solicitud = $res->fetch_assoc();
+
+        if ($solicitud) {
+            // Si la solicitud está rechazada (statu = 0) y no han pasado 15 días, bloquear cancelación
+            if ($solicitud['statu'] == 0) {
+                $diff = time() - $solicitud['fecha'];
+                if ($diff <= (15 * 24 * 60 * 60)) {
+                    echo "bloqueada";
+                    return;
+                }
+            }
+        }
+
+        // Si no hay restricción, eliminar la solicitud
         $filt = $db->prepare("DELETE FROM domingueros WHERE id_sol = ? AND id_rec = ?");
         $filt->bind_param('ii', $id_sol, $id_rec);
         $filt->execute();

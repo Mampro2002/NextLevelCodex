@@ -147,9 +147,11 @@ include "../sec/header.php";
                     <tbody>
                         <?php foreach ($colaboradores as $col): ?>
                             <tr>
-                                <a href="perfil_publico.php?id=<?php echo (int) $col['id']; ?>">
-                                    @<?php echo htmlspecialchars($col['user']); ?>
-                                </a>
+                                <td>
+                                    <a href="perfil_publico.php?id=<?php echo (int) $col['id']; ?>">
+                                        @<?php echo htmlspecialchars($col['user']); ?>
+                                    </a>
+                                </td>
                                 <td><?php echo htmlspecialchars($col['nombre']); ?></td>
                                 <td>
                                     <?php if ($col['conectado'] == 1): ?>
@@ -254,50 +256,74 @@ include "../sec/header.php";
         // Aceptar solicitud
         $(document).on("click", ".Aceptar", function () {
             var id_sol = $(this).data('id');
-            $.post("../controladores/amigos_solicitudes.php", { id_sol: id_sol, options: 3 },
-                function () { location.reload(); }
-            );
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_sol: id_sol, options: 3 },
+                dataType: "text",
+                success: function () { location.reload(); }
+            });
         });
 
         // Rechazar solicitud
         $(document).on("click", ".Rechazar", function () {
             var id_sol = $(this).data('id');
-            $.post("../controladores/amigos_solicitudes.php", { id_sol: id_sol, options: 4 },
-                function () { location.reload(); }
-            );
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_sol: id_sol, options: 4 },
+                dataType: "text",
+                success: function () { location.reload(); }
+            });
         });
 
         // Bloquear usuario
         $(document).on("click", ".Bloquear", function () {
             var id_sol = $(this).data('id');
-            $.post("../controladores/amigos_solicitudes.php", { id_sol: id_sol, options: 5 },
-                function () { location.reload(); }
-            );
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_sol: id_sol, options: 5 },
+                dataType: "text",
+                success: function () { location.reload(); }
+            });
         });
 
         // Desbloquear usuario
         $(document).on("click", ".DesBloquear", function () {
             var id_block = $(this).data('id');
-            $.post("../controladores/amigos_solicitudes.php", { id_block: id_block, options: 7 },
-                function () { location.reload(); }
-            );
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_block: id_block, options: 7 },
+                dataType: "text",
+                success: function () { location.reload(); }
+            });
         });
 
         // Eliminar colaborador
         $(document).on("click", ".Eliminar", function () {
             var id_sol = $(this).data('id');
             if (!confirm('¿Eliminar a este colaborador?')) return;
-            $.post("../controladores/amigos_solicitudes.php", { id_sol: id_sol, options: 6 },
-                function () { location.reload(); }
-            );
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_sol: id_sol, options: 6 },
+                dataType: "text",
+                success: function () { location.reload(); }
+            });
         });
 
         // Enviar solicitud
         $(document).on("click", ".btn-send", function () {
             var id_rec = $(this).data('id');
             var btn = $(this);
-            $.post("../controladores/amigos_solicitudes.php", { id_rec: id_rec, options: 2 },
-                function (data) {
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_rec: id_rec, options: 2 },
+                dataType: "text",
+                success: function (data) {
                     if (data.trim() === "enviada") {
                         btn.removeClass('btn-primary btn-send')
                             .addClass('btn-warning btn-cancelar')
@@ -306,24 +332,30 @@ include "../sec/header.php";
                         alert("Error al enviar la solicitud.");
                     }
                 }
-            );
+            });
         });
 
         // Cancelar solicitud
         $(document).on("click", ".btn-cancelar", function () {
             var id_rec = $(this).data('id');
             var btn = $(this);
-            $.post("../controladores/amigos_solicitudes.php", { id_rec: id_rec, options: 8 },
-                function (data) {
+            $.ajax({
+                type: "post",
+                url: "../controladores/amigos_solicitudes.php",
+                data: { id_rec: id_rec, options: 8 },
+                dataType: "text",
+                success: function (data) {
                     if (data.trim() === "cancelada") {
                         btn.removeClass('btn-warning btn-cancelar')
                             .addClass('btn-primary btn-send')
                             .html('<i class="fas fa-paper-plane"></i> Enviar solicitud');
+                    } else if (data.trim() === "bloqueada") {
+                        alert("No puedes cancelar una solicitud rechazada hasta pasados 15 días.");
                     } else {
                         alert("Error al cancelar la solicitud.");
                     }
                 }
-            );
+            });
         });
     });
 </script>

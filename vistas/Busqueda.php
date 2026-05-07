@@ -40,12 +40,13 @@ if ($resultado->num_rows > 0) {
             continue; // Está bloqueado, no mostrar
         }
 
-        // Verificar si ya existe una solicitud pendiente enviada por el usuario actual
-        $filt_solicitud = $db->prepare("SELECT * FROM domingueros WHERE id_sol = ? AND id_rec = ?");
+        // Verificar si ya existe una solicitud enviada por el usuario actual
+        $filt_solicitud = $db->prepare("SELECT statu, fecha FROM domingueros WHERE id_sol = ? AND id_rec = ?");
         $filt_solicitud->bind_param("ii", $id_usuario_actual, $usuario['id']);
         $filt_solicitud->execute();
         $res_solicitud = $filt_solicitud->get_result();
-        $solicitud_enviada = ($res_solicitud->num_rows > 0);
+        $solicitud = $res_solicitud->fetch_assoc();
+        $solicitud_existe = ($res_solicitud->num_rows > 0);
         ?>
         <tr>
             <td>
@@ -55,12 +56,32 @@ if ($resultado->num_rows > 0) {
             </td>
             <td><?php echo htmlspecialchars($usuario['nombre']); ?></td>
             <td>
-                <?php if ($solicitud_enviada): ?>
-                    <button class="btn btn-sm btn-warning btn-cancelar" data-id="<?php echo $usuario['id']; ?>">
-                        <i class="fas fa-times"></i> Cancelar solicitud
-                    </button>
+                <?php if ($solicitud_existe): ?>
+                    <?php if ($solicitud['statu'] == 0): ?>
+                        <?php
+                        // Solicitud rechazada: calcular tiempo restante
+                        $diff = time() - $solicitud['fecha'];
+                        $segundos_15_dias = 15 * 24 * 60 * 60;
+                        if ($diff <= $segundos_15_dias) {
+                            $tiempo_restante = $segundos_15_dias - $diff;
+                            $dias = floor($tiempo_restante / (24 * 60 * 60));
+                            $horas = floor(($tiempo_restante % (24 * 60 * 60)) / 3600);
+                            ?>
+                            <span class="text-muted" style="font-size: 12px;">
+                                Rechazada<br>disponible en <?= $dias ?>d <?= $horas ?>h
+                            </span>
+                        <?php } else { ?>
+                            <button class="btn btn-sm btn-primary btn-send" data-id="<?= $usuario['id'] ?>">
+                                <i class="fas fa-paper-plane"></i> Enviar solicitud
+                            </button>
+                        <?php } ?>
+                    <?php else: ?>
+                        <button class="btn btn-sm btn-warning btn-cancelar" data-id="<?= $usuario['id'] ?>">
+                            <i class="fas fa-times"></i> Cancelar solicitud
+                        </button>
+                    <?php endif; ?>
                 <?php else: ?>
-                    <button class="btn btn-sm btn-primary btn-send" data-id="<?php echo $usuario['id']; ?>">
+                    <button class="btn btn-sm btn-primary btn-send" data-id="<?= $usuario['id'] ?>">
                         <i class="fas fa-paper-plane"></i> Enviar solicitud
                     </button>
                 <?php endif; ?>
