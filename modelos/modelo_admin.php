@@ -246,6 +246,15 @@ class ModeloAdmin
         return $filt->execute();
 
     }
+
+    public function obtenerPuntosMapa($id_juego)
+    {
+        include "../sec/bdd.php";
+        $filt = $db->prepare("SELECT * FROM mapas WHERE id_juego = ? ORDER BY nombre");
+        $filt->bind_param("i", $id_juego);
+        $filt->execute();
+        return $filt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
     public function eliminarPuntoMapa($id)
     {
         include "../sec/bdd.php";

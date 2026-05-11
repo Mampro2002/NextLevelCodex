@@ -254,7 +254,14 @@ include "../sec/header.php";
     // ── Resaltar icono por defecto al cargar ───────────────────────
     $(document).ready(function () {
         $(".icono-opcion[data-icono='📍']").css("border-color", "var(--accent-primary)");
-        cargarPuntosMapa();
+
+        // Cargar los puntos después de que la imagen del mapa esté lista
+        $('#imagenMapa').on('load', function () {
+            cargarPuntosMapa();
+        }).each(function () {
+            if (this.complete) $(this).trigger('load');
+        });
+
         // Limpiar pin temporal cuando el modal se oculta por cualquier motivo
         $('#modalPunto').on('click', '.modal-close', function () {
             if (pinTempEl) { pinTempEl.remove(); pinTempEl = null; }
@@ -349,15 +356,21 @@ include "../sec/header.php";
             icono: $("#puntoIcono").val()
         };
 
-        $.post("../controladores/controlador_admin.php", datos, function (res) {
-            if (res.success) {
-                $("#modalPunto").hide();
-                pinTempEl = null;
-                cargarPuntosMapa();
-            } else {
-                alert("Error al guardar: " + (res.error || ""));
+        $.ajax({
+            type: "post",
+            url: "../controladores/controlador_admin.php",
+            data: datos,
+            dataType: "json",
+            success: function (res) {
+                if (res.success) {
+                    $("#modalPunto").hide();
+                    pinTempEl = null;
+                    cargarPuntosMapa();
+                } else {
+                    alert("Error al guardar: " + (res.error || ""));
+                }
             }
-        }, "json");
+        });
     }
 
     // ── Eliminar punto ──────────────────────────────────────────────
@@ -368,56 +381,67 @@ include "../sec/header.php";
         $('.pin-real[data-pin-id="' + id + '"]').remove();
 
         // Eliminar en base de datos y refrescar tabla
-        $.post("../controladores/controlador_admin.php", { opt: 33, id: id }, function (res) {
-            if (res.success) {
-                cargarPuntosMapa(); // Solo refresca la tabla (el pin ya no está)
-            } else {
-                alert("Error al eliminar el punto");
-                cargarPuntosMapa(); // Reconstruye todo si falla
+        $.ajax({
+            type: "post",
+            url: "../controladores/controlador_admin.php",
+            data: { opt: 33, id: id },
+            dataType: "json",
+            success: function (res) {
+                if (res.success) {
+                    cargarPuntosMapa();
+                } else {
+                    alert("Error al eliminar el punto");
+                    cargarPuntosMapa();
+                }
             }
-        }, "json");
+        });
     }
 
     // ── Cargar puntos (tabla + pins en mapa, CON ICONO) ────────────
     function cargarPuntosMapa() {
-        $.post("../controladores/controlador_admin.php", { opt: 31, id_juego: idJuego }, function (puntos) {
+        $.ajax({
+            type: "post",
+            url: "../controladores/controlador_admin.php",
+            data: { opt: 31, id_juego: idJuego },
+            dataType: "json",
+            success: function (puntos) {
+                // Limpiar solo los pines reales anteriores
+                $("#mapaWrapper .pin-real").remove();
 
-            $("#mapaWrapper").find(".pin").not(".pin-temp").remove();
+                var html = "";
+                if (Array.isArray(puntos) && puntos.length > 0) {
+                    puntos.forEach(function (p) {
+                        var iconoPin = p.icono || '📍';
+                        var pin = $(
+                            '<div class="pin pin-real" data-pin-id="' + p.id + '" style="left:' + p.pos_x + '%;top:' + p.pos_y + '%;">' +
+                            iconoPin +
+                            '<div class="pin-tooltip">' +
+                            '<strong>' + escapeHtml(p.nombre) + '</strong>' +
+                            (p.tipo ? '<br><em>' + escapeHtml(p.tipo) + '</em>' : '') +
+                            (p.descripcion ? '<br>' + escapeHtml(p.descripcion) : '') +
+                            '</div>' +
+                            '<button class="pin-delete" onclick="eliminarPunto(' + p.id + ')" title="Eliminar">✕</button>' +
+                            '</div>'
+                        );
+                        $("#mapaWrapper").append(pin);
 
-            var html = "";
-            if (Array.isArray(puntos) && puntos.length > 0) {
-                puntos.forEach(function (p) {
-                    var iconoPin = p.icono || '📍';
-                    var pin = $(
-                        '<div class="pin pin-real" data-pin-id="' + p.id + '" style="left:' + p.pos_x + '%;top:' + p.pos_y + '%;">' +
-                        iconoPin +
-                        '<div class="pin-tooltip">' +
-                        '<strong>' + escapeHtml(p.nombre) + '</strong>' +
-                        (p.tipo ? '<br><em>' + escapeHtml(p.tipo) + '</em>' : '') +
-                        (p.descripcion ? '<br>' + escapeHtml(p.descripcion) : '') +
-                        '</div>' +
-                        '<button class="pin-delete" onclick="eliminarPunto(' + p.id + ')" title="Eliminar">✕</button>' +
-                        '</div>'
-                    );
-                    $("#mapaWrapper").append(pin);
+                        html += '<tr>' +
+                            '<td style="font-size:20px;">' + iconoPin + '</td>' +
+                            '<td><strong>' + escapeHtml(p.nombre) + '</strong></td>' +
+                            '<td>' + escapeHtml(p.tipo || '-') + '</td>' +
+                            '<td>' + p.pos_x + '%</td>' +
+                            '<td>' + p.pos_y + '%</td>' +
+                            '<td>' + escapeHtml(p.descripcion || '-') + '</td>' +
+                            '<td><button class="btn btn-sm btn-danger" onclick="eliminarPunto(' + p.id + ')"><i class="fas fa-trash"></i></button></td>' +
+                            '</tr>';
+                    });
+                } else {
+                    html = '<tr><td colspan="7" class="text-muted" style="text-align:center;">No hay puntos de interés. Haz clic en la imagen para añadir.</td></tr>';
+                }
 
-                    html += '<tr>' +
-                        '<td style="font-size:20px;">' + iconoPin + '</td>' +
-                        '<td><strong>' + escapeHtml(p.nombre) + '</strong></td>' +
-                        '<td>' + escapeHtml(p.tipo || '-') + '</td>' +
-                        '<td>' + p.pos_x + '%</td>' +
-                        '<td>' + p.pos_y + '%</td>' +
-                        '<td>' + escapeHtml(p.descripcion || '-') + '</td>' +
-                        '<td><button class="btn btn-sm btn-danger" onclick="eliminarPunto(' + p.id + ')"><i class="fas fa-trash"></i></button></td>' +
-                        '</tr>';
-                });
-
-            } else {
-                html = '<tr><td colspan="7" class="text-muted" style="text-align:center;">No hay puntos de interés. Haz clic en la imagen para añadir.</td></tr>';
+                $("#cuerpoPuntos").html(html);
             }
-
-            $("#cuerpoPuntos").html(html);
-        }, "json");
+        });
     }
 
     function escapeHtml(text) {
