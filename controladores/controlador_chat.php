@@ -27,9 +27,9 @@ switch ($opt) {
         break;
 
     case 2: // Enviar mensaje global
-        // ✅ SEGURIDAD: FILTER_DEFAULT en lugar de FILTER_SANITIZE_SPECIAL_CHARS (deprecado)
+
         $mensaje = trim(filter_input(INPUT_POST, 'mensaje', FILTER_DEFAULT) ?? '');
-        // ✅ SEGURIDAD: Limitar longitud del mensaje
+        //Limitar longitud del mensaje
         if (empty($mensaje) || mb_strlen($mensaje) > 500) {
             echo "error";
             exit;
@@ -42,7 +42,10 @@ switch ($opt) {
 
     case 3: // Obtener mensajes privados
         $otro = filter_input(INPUT_POST, 'otro', FILTER_VALIDATE_INT);
-        if (!$otro) { echo json_encode(["error" => "ID inválido"]); exit; }
+        if (!$otro) {
+            echo json_encode(["error" => "ID inválido"]);
+            exit;
+        }
         $mensajes = $chat->obtenerMensajesPrivados($_SESSION['id'], $otro);
         $chat->marcarComoLeidos($otro, $_SESSION['id']);
         echo json_encode($mensajes);
@@ -50,12 +53,12 @@ switch ($opt) {
 
     case 4: // Enviar mensaje privado
         $receptor = filter_input(INPUT_POST, 'receptor', FILTER_VALIDATE_INT);
-        $mensaje  = trim(filter_input(INPUT_POST, 'mensaje', FILTER_DEFAULT) ?? '');
+        $mensaje = trim(filter_input(INPUT_POST, 'mensaje', FILTER_DEFAULT) ?? '');
         if (!$receptor || empty($mensaje) || mb_strlen($mensaje) > 500) {
             echo "error";
             exit;
         }
-        // ✅ SEGURIDAD: No permitir enviarse mensajes a uno mismo
+        //No permitir enviarse mensajes a uno mismo
         if ($receptor === $_SESSION['id']) {
             echo "error";
             exit;
@@ -66,7 +69,7 @@ switch ($opt) {
 
     case 5: // Contar no leídos
         $total = $chat->contarNoLeidos($_SESSION['id']);
-        echo (int)$total;
+        echo (int) $total;
         break;
 
     case 6: // ✅ Solo mensajes nuevos desde un ID dado
@@ -76,9 +79,12 @@ switch ($opt) {
         break;
 
     case 7: // ✅ Solo mensajes privados nuevos desde un ID (polling inteligente)
-        $otro     = filter_input(INPUT_POST, 'otro',     FILTER_VALIDATE_INT);
+        $otro = filter_input(INPUT_POST, 'otro', FILTER_VALIDATE_INT);
         $desde_id = filter_input(INPUT_POST, 'desde_id', FILTER_VALIDATE_INT) ?? 0;
-        if (!$otro) { echo json_encode(["error" => "ID inválido"]); exit; }
+        if (!$otro) {
+            echo json_encode(["error" => "ID inválido"]);
+            exit;
+        }
         $mensajes = $chat->obtenerMensajesPrivadosDesde($_SESSION['id'], $otro, $desde_id);
         $chat->marcarComoLeidos($otro, $_SESSION['id']);
         echo json_encode($mensajes);
