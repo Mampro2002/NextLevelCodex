@@ -10,21 +10,28 @@ if (!isset($base)) {
     $enRaiz = (strpos($scriptPath, '/vistas/') === false);
     $base = $enRaiz ? '' : '../';
 }
+
+// Cargar idioma si no está definido (normalmente lo carga header.php)
+if (!isset($idioma) && isset($_SESSION['idioma'])) {
+    $idioma = simplexml_load_file(dirname(__FILE__) . "/../assets/locales/" . $_SESSION['idioma'] . ".xml");
+}
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <footer class="app-footer">
     <div class="footer-content">
-        <p>&copy; <?php echo date('Y'); ?> Next Level Codex - Proyecto de Empresa DAW</p>
+        <p>&copy; <?= date('Y') ?> Next Level Codex -
+            <?= $idioma->palabras->footer_proyecto ?? 'Proyecto de Empresa DAW' ?>
+        </p>
         <p class="footer-links">
             <a href="https://github.com/Mampro2002/NextLevelCodex.git" target="_blank" rel="noopener noreferrer">
                 <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="#">
-                <i class="fas fa-book"></i> Documentación
+            <a href="<?= $base ?>vistas/documento.php">
+                <i class="fas fa-book"></i> <?= $idioma->palabras->footer_documentacion ?>
             </a>
             <a href="<?= $base ?>vistas/contacto.php">
-                <i class="fas fa-envelope"></i> Contacto
+                <i class="fas fa-envelope"></i> <?= $idioma->palabras->footer_contacto ?? 'Contacto' ?>
             </a>
         </p>
         <p class="footer-version">v1.0 - Manuel Acevedo Marín</p>

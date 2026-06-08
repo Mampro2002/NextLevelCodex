@@ -477,6 +477,20 @@
         <admin_juegos_error_guardar>Error al guardar</admin_juegos_error_guardar>
         <admin_juegos_error_conexion>Error de conexión al guardar.</admin_juegos_error_conexion>
 
+        <!-- ===== FOOTER ===== -->
+        <footer_proyecto>Proyecto de Empresa DAW</footer_proyecto>
+        <footer_documentacion>Documentación</footer_documentacion>
+        <footer_contacto>Contacto</footer_contacto>
+
+        <!-- ===== DOCUMENTACIÓN ===== -->
+        <doc_elegir_formato>Selecciona el formato de documentación que deseas consultar:</doc_elegir_formato>
+        <doc_ver_pdf>Memoria (PDF)</doc_ver_pdf>
+        <doc_pdf_desc>Visualiza la memoria del proyecto en formato PDF.</doc_pdf_desc>
+        <doc_ver_pptx>Presentación (PowerPoint)</doc_ver_pptx>
+        <doc_pptx_desc>Descarga la presentación del proyecto en formato PowerPoint.</doc_pptx_desc>
+        <doc_abrir>Abrir</doc_abrir>
+        <doc_descargar>Descargar</doc_descargar>
+
     </palabras>
 
 

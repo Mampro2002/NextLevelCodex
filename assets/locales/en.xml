@@ -477,6 +477,20 @@
         <admin_juegos_error_guardar>Error saving</admin_juegos_error_guardar>
         <admin_juegos_error_conexion>Connection error while saving.</admin_juegos_error_conexion>
 
+        <!-- ===== FOOTER ===== -->
+        <footer_proyecto>DAW Enterprise Project</footer_proyecto>
+        <footer_documentacion>Documentation</footer_documentacion>
+        <footer_contacto>Contact</footer_contacto>
+
+        <!-- ===== DOCUMENTATION ===== -->
+        <doc_elegir_formato>Select the documentation format you wish to consult:</doc_elegir_formato>
+        <doc_ver_pdf>Report (PDF)</doc_ver_pdf>
+        <doc_pdf_desc>View the project report in PDF format.</doc_pdf_desc>
+        <doc_ver_pptx>Presentation (PowerPoint)</doc_ver_pptx>
+        <doc_pptx_desc>Download the project presentation in PowerPoint format.</doc_pptx_desc>
+        <doc_abrir>Open</doc_abrir>
+        <doc_descargar>Download</doc_descargar>
+
     </palabras>
 
 
