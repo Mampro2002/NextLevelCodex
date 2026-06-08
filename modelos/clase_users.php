@@ -2,6 +2,14 @@
 
 class Users
 {
+
+    private $db;
+
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
+
     function update($id, $name, $pass, $level, $email)
     {
         include "../sec/bdd.php";
@@ -97,7 +105,8 @@ class Users
             }
         } else {
             // Error en la inserción
-            return "error: " . $db->error;
+            return "error: " . $this->db->error;
+            ;
         }
     }
 

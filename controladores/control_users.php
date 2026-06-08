@@ -4,7 +4,7 @@ include "../modelos/clase_users.php";
 include "../sec/bdd.php";
 include "../sec/sec.php";
 
-$user = new Users();
+$user = new Users($db);
 $options = filter_input(INPUT_POST, 'options', FILTER_SANITIZE_NUMBER_INT);
 
 switch ($options) {
