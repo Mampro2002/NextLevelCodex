@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-05-2026 a las 14:35:19
+-- Tiempo de generación: 08-06-2026 a las 14:40:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -769,10 +769,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `user`, `email`, `pass`, `nombre`, `level`, `amigos`, `ultima_conexion`, `conectado`, `ban_hasta`, `avatar`, `bio`, `idioma`, `perfil_publico`) VALUES
-(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-05-12 14:29:18', 1, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
-(2, 'editor', 'editor@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Editor de Contenido', 1, '#1##5#', '2026-05-12 13:53:46', 0, NULL, 'default.jpg', 'Editor de Next Level Code, cuyo superior es el Admin.', 'es', 0),
+(1, 'admin', 'admin@codex.com', '$2y$10$.lcZx/nYYiigptnDuhgELuVDhUzm0BDs2/yUbzS1cMgt2qyBUQTze', 'Administrador', 0, '#2#', '2026-06-08 14:30:11', 0, NULL, 'avatar_1_1777879973.jpg', 'Me llamo Manuel Acevedo y soy el Admin de Next Level Code.', 'es', 0),
+(2, 'editor', 'editor@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Editor de Contenido', 1, '#1##5#', '2026-06-08 11:24:24', 0, NULL, 'default.jpg', 'Editor de Next Level Code, cuyo superior es el Admin.', 'en', 0),
 (3, 'user', 'user@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Dani', 1, NULL, '2026-05-11 17:20:24', 0, NULL, 'default.jpg', NULL, 'es', 0),
-(5, 'nora', 'nora@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Nora', 1, '#2#', '2026-05-12 13:39:15', 0, NULL, 'default.jpg', 'Exploradora de mundos abiertos y amante de los RPG.', 'es', 0),
+(5, 'nora', 'nora@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Nora', 1, '#2#', '2026-06-08 14:38:06', 0, NULL, 'default.jpg', 'Exploradora de mundos abiertos y amante de los RPG.', 'es', 0),
 (6, 'ivan', 'ivan@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Iván', 1, NULL, NULL, 0, NULL, 'default.jpg', 'Fan de los juegos de estrategia y los combates tácticos.', 'es', 0),
 (7, 'pedro', 'pedro@codex.com', '$2y$10$B6uMaHUm2lmgH05Awhj3.uCfdcU110VWBZnJNT0Ekwuz.JWbGdumO', 'Pedro', 1, NULL, '2026-05-12 13:43:40', 0, NULL, 'default.jpg', 'Coleccionista de logros y cazador de secretos en videojuegos.', 'es', 0);
 
@@ -1012,7 +1012,16 @@ INSERT INTO `visitas_juegos` (`id`, `id_juego`, `id_usuario`, `fecha`) VALUES
 (184, 24, 1, '2026-05-12 14:01:35'),
 (185, 21, 1, '2026-05-12 14:30:35'),
 (186, 19, 1, '2026-05-12 14:30:44'),
-(187, 20, 1, '2026-05-12 14:33:26');
+(187, 20, 1, '2026-05-12 14:33:26'),
+(188, 19, 1, '2026-05-14 16:30:59'),
+(189, 24, 1, '2026-06-08 10:48:26'),
+(190, 20, 1, '2026-06-08 11:15:54'),
+(191, 22, 2, '2026-06-08 11:24:46'),
+(192, 19, 1, '2026-06-08 13:10:16'),
+(193, 22, 1, '2026-06-08 13:20:20'),
+(194, 22, 1, '2026-06-08 13:23:18'),
+(195, 22, 1, '2026-06-08 13:25:00'),
+(196, 23, 1, '2026-06-08 13:42:03');
 
 --
 -- Índices para tablas volcadas
@@ -1184,7 +1193,7 @@ ALTER TABLE `personajes`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones`
@@ -1196,7 +1205,7 @@ ALTER TABLE `valoraciones`
 -- AUTO_INCREMENT de la tabla `visitas_juegos`
 --
 ALTER TABLE `visitas_juegos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- Restricciones para tablas volcadas
