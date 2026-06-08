@@ -74,10 +74,10 @@ switch ($options) {
         break;
     }
 
-    case 3: { // Registro (auto-login)
+    case 3: {
         $user_new = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_SPECIAL_CHARS);
         $name = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
-        $pass = filter_input(INPUT_POST, 'pass', FILTER_UNSAFE_RAW);
+        $pass = filter_input(INPUT_POST, 'pass', FILTER_UNSAFE_RAW); // No hashear aquí
         $level = 1;
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 
@@ -85,22 +85,21 @@ switch ($options) {
             echo "rellenos";
             exit;
         }
-
         if (strlen($user_new) > 20 || strlen($name) > 20 || strlen($pass) > 20) {
             echo "extenso";
             exit;
         }
 
-        // Hashear la contraseña
-        $pass = password_hash($pass, PASSWORD_DEFAULT);
-
-        $user->añadir($user_new, $name, $email, $pass, $level, $options);
-        // El modelo ya hace echo "ok" si $options == 3
-        break;
+        $resultado = $user->añadir($user_new, $name, $email, $pass, $level, $options);
+        if ($resultado === "ok") {
+            // La redirección se hará en el JavaScript
+        } else {
+            echo $resultado; // mostrará "error: ..."
+        }
+        exit;
     }
 
-    case 4: { // Añadir usuario (desde panel admin)
-        // Solo el admin puede añadir usuarios
+    case 4: {
         if ($_SESSION['level'] != 0) {
             echo "error";
             exit;
@@ -108,7 +107,7 @@ switch ($options) {
 
         $user_new = filter_input(INPUT_POST, 'user', FILTER_SANITIZE_SPECIAL_CHARS);
         $name = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
-        $pass = filter_input(INPUT_POST, 'pass', FILTER_UNSAFE_RAW);
+        $pass = filter_input(INPUT_POST, 'pass', FILTER_UNSAFE_RAW); // No hashear aquí
         $level = filter_input(INPUT_POST, 'level', FILTER_VALIDATE_INT);
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 
@@ -125,17 +124,13 @@ switch ($options) {
             exit;
         }
 
-        // Hashear la contraseña
-        $pass = password_hash($pass, PASSWORD_DEFAULT);
-
         if ($level == 0 || $level == 1) {
-            $user->añadir($user_new, $name, $email, $pass, $level, $options);
-            echo "añadir";
+            $resultado = $user->añadir($user_new, $name, $email, $pass, $level, $options);
+            echo $resultado; // "añadir" o "error: ..."
         } else {
             echo "solo";
-            exit;
         }
-        break;
+        exit;
     }
 
     case 5: { // Banear usuario

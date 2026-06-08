@@ -101,7 +101,7 @@ if ($_SESSION["level"] == 0) {
         for (var i = 0; i < ids.length; i++) {
             $.ajax({
                 type: "post",
-                url: "../controladores/control_users.php",
+                url: "/NextLevelCodex/controladores/control_users.php",
                 data: { laId: ids[i], options },
                 success: function (data) {
                     if (data == "level 0") alert("<?php echo $idioma->palabras->t2 ?>");
@@ -122,7 +122,7 @@ if ($_SESSION["level"] == 0) {
         let options = 1;
         $.ajax({
             type: "post",
-            url: "../controladores/control_users.php",
+            url: "/NextLevelCodex/controladores/control_users.php",
             data: { options, id: laId, nombre: name, pass: pass, level: level, email: email },
             success: function (data) {
                 if (data == "0 level") alert("<?php echo $idioma->palabras->t5 ?>");
@@ -143,7 +143,7 @@ if ($_SESSION["level"] == 0) {
         let options = 4;
         $.ajax({
             type: "post",
-            url: "../controladores/control_users.php",
+            url: "/NextLevelCodex/controladores/control_users.php",
             data: { options, user: user, nombre: name, pass: pass, level: level, email: email },
             success: function (data) {
                 if (data == "rellenos") alert("<?php echo $idioma->palabras->t6 ?>");
@@ -163,7 +163,7 @@ if ($_SESSION["level"] == 0) {
         if (!minutos || isNaN(minutos)) return;
         $.ajax({
             type: "post",
-            url: "../controladores/control_users.php",
+            url: "/NextLevelCodex/controladores/control_users.php",
             data: { laId: laId, minutos: minutos, options: 5 },
             success: function (data) {
                 if (data == "baneado") alert("Usuario baneado correctamente");
@@ -176,7 +176,7 @@ if ($_SESSION["level"] == 0) {
         let laId = $(this).attr("laId");
         $.ajax({
             type: "post",
-            url: "../controladores/control_users.php",
+            url: "/NextLevelCodex/controladores/control_users.php",
             data: { laId: laId, options: 6 },
             success: function (data) {
                 if (data == "desbaneado") alert("Usuario desbaneado correctamente");
