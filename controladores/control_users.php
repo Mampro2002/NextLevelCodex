@@ -78,7 +78,7 @@ switch ($options) {
         $user_new = filter_input(INPUT_POST, 'usuario', FILTER_SANITIZE_SPECIAL_CHARS);
         $name = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
         $pass = filter_input(INPUT_POST, 'pass', FILTER_UNSAFE_RAW);
-        $level = 2; // Por defecto, usuario normal
+        $level = 1;
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 
         if (empty($user_new) || empty($name) || empty($pass)) {
@@ -128,7 +128,7 @@ switch ($options) {
         // Hashear la contraseña
         $pass = password_hash($pass, PASSWORD_DEFAULT);
 
-        if ($level == 0 || $level == 1 || $level == 2) {
+        if ($level == 0 || $level == 1) {
             $user->añadir($user_new, $name, $email, $pass, $level, $options);
             echo "añadir";
         } else {
