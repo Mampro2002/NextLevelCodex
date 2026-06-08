@@ -17,6 +17,11 @@ $base = $enRaiz ? '' : '../';
 if (!isset($paginaActiva))
     $paginaActiva = '';
 
+// Cargar idioma si no está ya cargado por la página que incluye el header
+if (!isset($idioma)) {
+    $idioma = simplexml_load_file($base . "assets/locales/" . ($_SESSION["idioma"] ?? "es") . ".xml");
+}
+
 // Mensajes privados no leídos
 $noLeidos = 0;
 if (isset($db)) {
@@ -49,9 +54,9 @@ if ($noLeidos > 0) {
     if (!empty($ultimosMensajes)) {
         $nombres = array_map(function ($u) {
             return $u['nombre']; }, $ultimosMensajes);
-        $tooltipMensajes = 'Mensajes de: ' . implode(', ', $nombres);
+        $tooltipMensajes = $idioma->palabras->header_tooltipMensajes . ' ' . implode(', ', $nombres);
         if ($noLeidos > 3)
-            $tooltipMensajes .= " y " . ($noLeidos - 3) . " más";
+            $tooltipMensajes .= ' ' . $idioma->palabras->header_yMas . ' ' . ($noLeidos - 3) . ' más';
     }
 }
 
@@ -67,14 +72,14 @@ if ($solicitudesPendientes > 0) {
     if (!empty($ultimasSolicitudes)) {
         $nombres = array_map(function ($u) {
             return $u['nombre']; }, $ultimasSolicitudes);
-        $tooltipSolicitudes = 'Solicitudes de: ' . implode(', ', $nombres);
+        $tooltipSolicitudes = $idioma->palabras->header_tooltipSolicitudes . ' ' . implode(', ', $nombres);
         if ($solicitudesPendientes > 3)
-            $tooltipSolicitudes .= " y " . ($solicitudesPendientes - 3) . " más";
+            $tooltipSolicitudes .= ' ' . $idioma->palabras->header_yMas . ' ' . ($solicitudesPendientes - 3) . ' más';
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="<?php echo $_SESSION['idioma'] ?? 'es'; ?>">
 
 <head>
     <meta charset="UTF-8">
@@ -107,19 +112,22 @@ if ($solicitudesPendientes > 0) {
         </div>
 
         <nav class="nav-menu">
-            <a href="<?= $base ?>index.php"
-                class="nav-item <?= $paginaActiva === 'inicio' ? 'active' : '' ?>">Inicio</a>
+            <a href="<?= $base ?>index.php" class="nav-item <?= $paginaActiva === 'inicio' ? 'active' : '' ?>">
+                <?= $idioma->palabras->header_inicio ?>
+            </a>
             <a href="<?= $base ?>vistas/wiki_home.php"
-                class="nav-item <?= $paginaActiva === 'biblioteca' ? 'active' : '' ?>">Biblioteca</a>
+                class="nav-item <?= $paginaActiva === 'biblioteca' ? 'active' : '' ?>">
+                <?= $idioma->palabras->header_biblioteca ?>
+            </a>
             <a href="<?= $base ?>vistas/centro_colaboradores.php"
                 class="nav-item <?= $paginaActiva === 'colaboradores' ? 'active' : '' ?>"
                 title="<?= htmlspecialchars($tooltipSolicitudes) ?>">
-                <?= 'Colaboradores' . ($solicitudesPendientes > 0 ? ' <span class="badge">' . $solicitudesPendientes . '</span>' : '') ?>
+                <?= $idioma->palabras->header_colaboradores . ($solicitudesPendientes > 0 ? ' <span class="badge">' . $solicitudesPendientes . '</span>' : '') ?>
             </a>
             <a href="<?= $base ?>vistas/chat_global.php"
                 class="nav-item <?= $paginaActiva === 'chat' ? 'active' : '' ?>"
                 title="<?= htmlspecialchars($tooltipMensajes) ?>">
-                <?= 'Chat' . ($noLeidos > 0 ? ' <span class="badge">' . $noLeidos . '</span>' : '') ?>
+                <?= $idioma->palabras->header_chat . ($noLeidos > 0 ? ' <span class="badge">' . $noLeidos . '</span>' : '') ?>
             </a>
         </nav>
 
@@ -140,31 +148,31 @@ if ($solicitudesPendientes > 0) {
 
                 <div class="dropdown-menu">
                     <a href="<?= $base ?>vistas/perfil.php" class="dropdown-item">
-                        <i class="fas fa-user"></i> Mi Perfil
+                        <i class="fas fa-user"></i> <?= $idioma->palabras->header_perfil ?>
                     </a>
                     <a href="<?= $base ?>vistas/ajustes.php" class="dropdown-item">
-                        <i class="fas fa-cog"></i> Ajustes
+                        <i class="fas fa-cog"></i> <?= $idioma->palabras->header_ajustes ?>
                     </a>
 
                     <?php if ($_SESSION["level"] == 0): ?>
                         <div class="dropdown-divider"></div>
                         <a href="#" onclick="abrirPanelAdmin()" class="dropdown-item">
-                            <i class="fas fa-shield-alt"></i> Panel Admin
+                            <i class="fas fa-shield-alt"></i> <?= $idioma->palabras->header_panelAdmin ?>
                         </a>
                         <a href="#" onclick="abrirEstadisticas()" class="dropdown-item">
-                            <i class="fas fa-chart-bar"></i> Estadísticas
+                            <i class="fas fa-chart-bar"></i> <?= $idioma->palabras->header_estadisticas ?>
                         </a>
                     <?php endif; ?>
 
                     <?php if ($_SESSION["level"] <= 1): ?>
                         <a href="<?= $base ?>vistas/admin_juegos.php" class="dropdown-item">
-                            <i class="fas fa-gamepad"></i> Gestionar Juegos
+                            <i class="fas fa-gamepad"></i> <?= $idioma->palabras->header_gestionarJuegos ?>
                         </a>
                     <?php endif; ?>
 
                     <div class="dropdown-divider"></div>
                     <a href="<?= $base ?>sec/log_out.php" class="dropdown-item" style="color:var(--danger);">
-                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        <i class="fas fa-sign-out-alt"></i> <?= $idioma->palabras->log ?>
                     </a>
                 </div>
             </div>
@@ -176,10 +184,10 @@ if ($solicitudesPendientes > 0) {
         <div id="modalAdmin" class="modal-overlay" style="display:none;">
             <div class="modal" style="max-width:90%;width:1200px;">
                 <div class="modal-header">
-                    <h3 class="modal-title">Panel de Administración</h3>
+                    <h3 class="modal-title"><?= $idioma->palabras->header_panelAdminTitulo ?></h3>
                     <button class="modal-close" onclick="$('#modalAdmin').hide();">&times;</button>
                 </div>
-                <div class="modal-body" id="modalAdminBody">Cargando...</div>
+                <div class="modal-body" id="modalAdminBody"><?= $idioma->palabras->g6 ?></div>
             </div>
         </div>
 
@@ -187,10 +195,10 @@ if ($solicitudesPendientes > 0) {
         <div id="modalEstadisticas" class="modal-overlay" style="display: none;">
             <div class="modal" style="max-width: 1000px; width: 95%; max-height: 90vh; overflow-y: auto;">
                 <div class="modal-header">
-                    <h3 class="modal-title">Estadísticas de Next Level Codex</h3>
+                    <h3 class="modal-title"><?= $idioma->palabras->header_estadisticasTitulo ?></h3>
                     <button class="modal-close" onclick="$('#modalEstadisticas').hide();">&times;</button>
                 </div>
-                <div class="modal-body" id="contenedorEstadisticas">Cargando...</div>
+                <div class="modal-body" id="contenedorEstadisticas"><?= $idioma->palabras->g6 ?></div>
             </div>
         </div>
 
@@ -255,6 +263,3 @@ if ($solicitudesPendientes > 0) {
             $(this).find('.pin-tooltip-ficha').hide();
         });
     </script>
-</body>
-
-</html>

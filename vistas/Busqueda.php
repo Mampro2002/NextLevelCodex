@@ -2,6 +2,9 @@
 include "../sec/bdd.php";
 include "../sec/sec.php";
 
+// Cargar idioma
+$idioma = simplexml_load_file("../assets/locales/" . $_SESSION["idioma"] . ".xml");
+
 $id_usuario_actual = $_SESSION["id"];
 $termino = trim(filter_input(INPUT_POST, 'query', FILTER_DEFAULT) ?? '');
 $query = "%" . $termino . "%";
@@ -50,11 +53,11 @@ if ($resultado->num_rows > 0) {
         ?>
         <tr>
             <td>
-                <a href="perfil_publico.php?id=<?php echo (int) $usuario['id']; ?>">
-                    @<?php echo htmlspecialchars($usuario['user']); ?>
+                <a href="perfil_publico.php?id=<?= (int) $usuario['id']; ?>">
+                    @<?= htmlspecialchars($usuario['user']); ?>
                 </a>
             </td>
-            <td><?php echo htmlspecialchars($usuario['nombre']); ?></td>
+            <td><?= htmlspecialchars($usuario['nombre']); ?></td>
             <td>
                 <?php if ($solicitud_existe): ?>
                     <?php if ($solicitud['statu'] == 0): ?>
@@ -66,23 +69,24 @@ if ($resultado->num_rows > 0) {
                             $tiempo_restante = $segundos_15_dias - $diff;
                             $dias = floor($tiempo_restante / (24 * 60 * 60));
                             $horas = floor(($tiempo_restante % (24 * 60 * 60)) / 3600);
+                            $texto_rechazada = str_replace(['{dias}', '{horas}'], [$dias, $horas], $idioma->palabras->busq_rechazada_tiempo);
                             ?>
                             <span class="text-muted" style="font-size: 12px;">
-                                Rechazada<br>disponible en <?= $dias ?>d <?= $horas ?>h
+                                <?= $texto_rechazada ?>
                             </span>
                         <?php } else { ?>
                             <button class="btn btn-sm btn-primary btn-send" data-id="<?= $usuario['id'] ?>">
-                                <i class="fas fa-paper-plane"></i> Enviar solicitud
+                                <i class="fas fa-paper-plane"></i> <?= $idioma->palabras->busq_enviar_solicitud ?>
                             </button>
                         <?php } ?>
                     <?php else: ?>
                         <button class="btn btn-sm btn-warning btn-cancelar" data-id="<?= $usuario['id'] ?>">
-                            <i class="fas fa-times"></i> Cancelar solicitud
+                            <i class="fas fa-times"></i> <?= $idioma->palabras->busq_cancelar_solicitud ?>
                         </button>
                     <?php endif; ?>
                 <?php else: ?>
                     <button class="btn btn-sm btn-primary btn-send" data-id="<?= $usuario['id'] ?>">
-                        <i class="fas fa-paper-plane"></i> Enviar solicitud
+                        <i class="fas fa-paper-plane"></i> <?= $idioma->palabras->busq_enviar_solicitud ?>
                     </button>
                 <?php endif; ?>
             </td>
@@ -90,6 +94,6 @@ if ($resultado->num_rows > 0) {
         <?php
     }
 } else {
-    echo '<tr><td colspan="4" class="text-muted" style="text-align: center;">No se encontraron usuarios.</td></tr>';
+    echo '<tr><td colspan="4" class="text-muted" style="text-align: center;">' . $idioma->palabras->busq_no_encontrado . '</td></tr>';
 }
 ?>

@@ -66,20 +66,18 @@ $favoritos = [];
 $juegosAnadidos = [];
 
 if ($puedeVer) {
-    // Juegos favoritos
     $stmtFav = $db->prepare("
-    SELECT j.id, j.titulo, j.portada, j.desarrollador
-    FROM favoritos f
-    JOIN juegos j ON f.id_juego = j.id
-    WHERE f.id_usuario = ?
-    ORDER BY f.fecha DESC
-    LIMIT 6
+        SELECT j.id, j.titulo, j.portada, j.desarrollador
+        FROM favoritos f
+        JOIN juegos j ON f.id_juego = j.id
+        WHERE f.id_usuario = ?
+        ORDER BY f.fecha DESC
+        LIMIT 6
     ");
     $stmtFav->bind_param("i", $id_visto);
     $stmtFav->execute();
     $favoritos = $stmtFav->get_result()->fetch_all(MYSQLI_ASSOC);
 
-    // Juegos añadidos
     $stmtJuegos = $db->prepare("
         SELECT id, titulo, portada, desarrollador, fecha_creacion
         FROM juegos
@@ -92,6 +90,15 @@ if ($puedeVer) {
     $juegosAnadidos = $stmtJuegos->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
+$idioma = simplexml_load_file("../assets/locales/" . $_SESSION["idioma"] . ".xml");
+
+// Variables JS
+$js_errorEnviar = addslashes((string) $idioma->palabras->perfil_errorEnviar);
+$js_errorCancelar = addslashes((string) $idioma->palabras->perfil_errorCancelar);
+$js_noCancelar = addslashes((string) $idioma->palabras->perfil_noCancelar);
+$js_confirmarEliminar = addslashes((string) $idioma->palabras->perfil_confirmarEliminar);
+$js_enviarSolicitud = addslashes((string) $idioma->palabras->enviar);
+
 include "../sec/header.php";
 ?>
 
@@ -102,32 +109,28 @@ include "../sec/header.php";
         <img src="../assets/img/avatars/<?php echo htmlspecialchars($usuario['avatar'] ?: 'default.jpg'); ?>"
             alt="Avatar" class="perfil-avatar" onerror="this.src='../assets/img/avatars/default.jpg'">
         <div class="perfil-info">
-            <h1>
-                <?php echo htmlspecialchars($usuario['nombre']); ?>
-            </h1>
-            <p class="text-muted">@
-                <?php echo htmlspecialchars($usuario['user']); ?>
-            </p>
+            <h1><?php echo htmlspecialchars($usuario['nombre']); ?></h1>
+            <p class="text-muted">@<?php echo htmlspecialchars($usuario['user']); ?></p>
 
             <!-- Estado de conexión -->
             <?php if ($usuario['conectado'] == 1): ?>
-                <span style="color: var(--success);"><i class="fas fa-circle"></i> Conectado</span>
+                <span style="color: var(--success);"><i class="fas fa-circle"></i> <?= $idioma->palabras->fecha7 ?></span>
             <?php else: ?>
-                <span class="text-muted"><i class="far fa-circle"></i> Desconectado</span>
+                <span class="text-muted"><i class="far fa-circle"></i> <?= $idioma->palabras->perfil_desconectado ?></span>
             <?php endif; ?>
 
-            <!-- Bio (solo si puede ver) -->
+            <!-- Bio -->
             <?php if ($puedeVer): ?>
                 <?php if (!empty($usuario['bio'])): ?>
                     <p class="perfil-bio" style="margin-top: var(--spacing-sm);">
                         <?php echo nl2br(htmlspecialchars($usuario['bio'])); ?>
                     </p>
                 <?php else: ?>
-                    <p class="text-muted"><em>Sin biografía.</em></p>
+                    <p class="text-muted"><em><?= $idioma->palabras->perfil_sinBio ?></em></p>
                 <?php endif; ?>
             <?php else: ?>
                 <p class="text-muted" style="margin-top: var(--spacing-sm);">
-                    <i class="fas fa-lock"></i> Este perfil es privado.
+                    <i class="fas fa-lock"></i> <?= $idioma->palabras->perfil_privadoMsg ?>
                 </p>
             <?php endif; ?>
 
@@ -135,17 +138,17 @@ include "../sec/header.php";
             <div style="margin-top: var(--spacing-md); display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
                 <?php if ($esColaborador): ?>
                     <a href="chat_privado.php?id=<?php echo $id_visto; ?>" class="btn btn-primary">
-                        <i class="fas fa-comment"></i> Chat privado
+                        <i class="fas fa-comment"></i> <?= $idioma->palabras->perfil_chatPrivado ?>
                     </a>
                     <button class="btn btn-danger" onclick="eliminarColaborador(<?php echo $id_visto; ?>)">
-                        <i class="fas fa-user-minus"></i> Eliminar colaborador
+                        <i class="fas fa-user-minus"></i> <?= $idioma->palabras->amgE ?>
                     </button>
                 <?php elseif ($solicitudRecibida): ?>
                     <button class="btn btn-success" onclick="aceptarSolicitud(<?php echo $id_visto; ?>)">
-                        <i class="fas fa-check"></i> Aceptar solicitud
+                        <i class="fas fa-check"></i> <?= $idioma->palabras->perfil_aceptar ?>
                     </button>
                     <button class="btn btn-danger" onclick="rechazarSolicitud(<?php echo $id_visto; ?>)">
-                        <i class="fas fa-times"></i> Rechazar
+                        <i class="fas fa-times"></i> <?= $idioma->palabras->perfil_rechazar ?>
                     </button>
                 <?php elseif ($solicitudRechazada): ?>
                     <?php
@@ -157,21 +160,21 @@ include "../sec/header.php";
                         $horas = floor(($tiempo_restante % (24 * 60 * 60)) / 3600);
                         ?>
                         <span class="text-muted" style="font-size: 14px;">
-                            <i class="fas fa-clock"></i> Solicitud rechazada<br>
-                            Disponible en <?= $dias ?>d <?= $horas ?>h
+                            <i class="fas fa-clock"></i> <?= $idioma->palabras->enviada3 ?><br>
+                            <?= $idioma->palabras->perfil_disponibleEn ?>         <?= $dias ?>d <?= $horas ?>h
                         </span>
                     <?php } else { ?>
                         <button class="btn btn-primary" id="btnSolicitud" onclick="enviarSolicitud(<?php echo $id_visto; ?>)">
-                            <i class="fas fa-user-plus"></i> Enviar solicitud
+                            <i class="fas fa-user-plus"></i> <?= $idioma->palabras->enviar ?>
                         </button>
                     <?php } ?>
                 <?php elseif ($solicitudEnviada): ?>
                     <button class="btn btn-warning" id="btnSolicitud" onclick="cancelarSolicitud(<?php echo $id_visto; ?>)">
-                        <i class="fas fa-clock"></i> Solicitud enviada (cancelar)
+                        <i class="fas fa-clock"></i> <?= $idioma->palabras->perfil_solicitudCancelar ?>
                     </button>
                 <?php else: ?>
                     <button class="btn btn-primary" id="btnSolicitud" onclick="enviarSolicitud(<?php echo $id_visto; ?>)">
-                        <i class="fas fa-user-plus"></i> Enviar solicitud
+                        <i class="fas fa-user-plus"></i> <?= $idioma->palabras->enviar ?>
                     </button>
                 <?php endif; ?>
             </div>
@@ -182,7 +185,7 @@ include "../sec/header.php";
 
         <!-- Juegos favoritos -->
         <section style="margin-top: var(--spacing-xl);">
-            <h2><i class="fas fa-heart"></i> Juegos Favoritos</h2>
+            <h2><i class="fas fa-heart"></i> <?= $idioma->palabras->perfil_misFavoritos ?></h2>
             <?php if (count($favoritos) > 0): ?>
                 <div class="grid">
                     <?php foreach ($favoritos as $juego): ?>
@@ -191,26 +194,26 @@ include "../sec/header.php";
                                 alt="<?php echo htmlspecialchars($juego['titulo']); ?>" class="card-img"
                                 onerror="this.src='../assets/img/games/default_game.jpg'">
                             <div class="card-body">
-                                <h3 class="card-title">
-                                    <?php echo htmlspecialchars($juego['titulo']); ?>
-                                </h3>
+                                <h3 class="card-title"><?php echo htmlspecialchars($juego['titulo']); ?></h3>
                                 <p class="card-subtitle">
-                                    <?php echo htmlspecialchars($juego['desarrollador'] ?: 'Desconocido'); ?>
+                                    <?php echo htmlspecialchars($juego['desarrollador'] ?: $idioma->palabras->ini_desconocido); ?>
                                 </p>
                                 <a href="ficha_juego.php?id=<?php echo (int) $juego['id']; ?>" class="btn btn-primary btn-sm"
-                                    style="width:100%;">Ver Ficha</a>
+                                    style="width:100%;">
+                                    <?= $idioma->palabras->ini_verFicha ?>
+                                </a>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
-                <p class="text-muted">No tiene juegos favoritos aún.</p>
+                <p class="text-muted"><?= $idioma->palabras->perfil_sinFavOtro ?></p>
             <?php endif; ?>
         </section>
 
         <!-- Juegos añadidos -->
         <section style="margin-top: var(--spacing-xl);">
-            <h2><i class="fas fa-gamepad"></i> Juegos Añadidos</h2>
+            <h2><i class="fas fa-gamepad"></i> <?= $idioma->palabras->perfil_misJuegos ?></h2>
             <?php if (count($juegosAnadidos) > 0): ?>
                 <div class="grid">
                     <?php foreach ($juegosAnadidos as $juego): ?>
@@ -219,20 +222,20 @@ include "../sec/header.php";
                                 alt="<?php echo htmlspecialchars($juego['titulo']); ?>" class="card-img"
                                 onerror="this.src='../assets/img/games/default_game.jpg'">
                             <div class="card-body">
-                                <h3 class="card-title">
-                                    <?php echo htmlspecialchars($juego['titulo']); ?>
-                                </h3>
+                                <h3 class="card-title"><?php echo htmlspecialchars($juego['titulo']); ?></h3>
                                 <p class="card-subtitle">
-                                    <?php echo htmlspecialchars($juego['desarrollador'] ?: 'Desconocido'); ?>
+                                    <?php echo htmlspecialchars($juego['desarrollador'] ?: $idioma->palabras->ini_desconocido); ?>
                                 </p>
                                 <a href="ficha_juego.php?id=<?php echo (int) $juego['id']; ?>" class="btn btn-primary btn-sm"
-                                    style="width:100%;">Ver Ficha</a>
+                                    style="width:100%;">
+                                    <?= $idioma->palabras->ini_verFicha ?>
+                                </a>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
-                <p class="text-muted">No ha añadido ningún juego aún.</p>
+                <p class="text-muted"><?= $idioma->palabras->perfil_sinJuegosOtro ?></p>
             <?php endif; ?>
         </section>
 
@@ -241,8 +244,8 @@ include "../sec/header.php";
         <div class="card" style="margin-top: var(--spacing-xl); text-align: center; padding: var(--spacing-xl);">
             <i class="fas fa-lock"
                 style="font-size: 48px; color: var(--text-secondary); margin-bottom: var(--spacing-md);"></i>
-            <h3>Este perfil es privado</h3>
-            <p class="text-muted">Envía una solicitud de colaboración para ver su contenido.</p>
+            <h3><?= $idioma->palabras->perfil_privadoTitulo ?></h3>
+            <p class="text-muted"><?= $idioma->palabras->perfil_privadoSub ?></p>
         </div>
     <?php endif; ?>
 
@@ -265,7 +268,7 @@ include "../sec/header.php";
                     if (data.trim() === "enviada") {
                         location.reload();
                     } else {
-                        alert("Error al enviar la solicitud.");
+                        alert('<?= $js_errorEnviar ?>');
                     }
                 }
             });
@@ -283,12 +286,12 @@ include "../sec/header.php";
                             .removeClass('btn-warning')
                             .addClass('btn-primary')
                             .attr('onclick', 'enviarSolicitud(' + id_rec + ')')
-                            .html('<i class="fas fa-user-plus"></i> Enviar solicitud');
+                            .html('<i class="fas fa-user-plus"></i> <?= $js_enviarSolicitud ?>');
                     } else if (data.trim() === "bloqueada") {
-                        alert("No puedes cancelar una solicitud rechazada hasta pasados 15 días.");
+                        alert('<?= $js_noCancelar ?>');
                         location.reload();
                     } else {
-                        alert("Error al cancelar la solicitud.");
+                        alert('<?= $js_errorCancelar ?>');
                     }
                 }
             });
@@ -315,7 +318,7 @@ include "../sec/header.php";
         }
 
         function eliminarColaborador(id_sol) {
-            if (!confirm('¿Eliminar a este colaborador?')) return;
+            if (!confirm('<?= $js_confirmarEliminar ?>')) return;
             $.ajax({
                 type: "post",
                 url: "../controladores/amigos_solicitudes.php",

@@ -142,17 +142,17 @@ include "../sec/header.php";
 </style>
 
 <div class="main-container">
-    <a href="admin_juegos.php" class="btn"><i class="fas fa-arrow-left"></i> Volver</a>
+    <a href="admin_juegos.php" class="btn"><i class="fas fa-arrow-left"></i> <?= $idioma->palabras->pj_volver ?></a>
     <div style="display:flex; justify-content:space-between; align-items:center; margin-top: var(--spacing-md);">
         <h1><?= htmlspecialchars($nombre_items) ?> de: <?= htmlspecialchars($juego['titulo']) ?></h1>
         <button class="btn btn-primary" onclick="abrirModalElemento()">
-            <i class="fas fa-plus"></i> Añadir <?= htmlspecialchars($nombre_items) ?>
+            <i class="fas fa-plus"></i> <?= $idioma->palabras->elem_añadir ?> <?= htmlspecialchars($nombre_items) ?>
         </button>
     </div>
 
     <!-- Grid de elementos -->
     <div class="elementos-grid" id="gridElementos">
-        <p class="text-muted">Cargando...</p>
+        <p class="text-muted"><?= $idioma->palabras->pj_cargando ?></p>
     </div>
 </div>
 
@@ -166,30 +166,30 @@ include "../sec/header.php";
         <div class="modal-body">
             <div style="text-align:center; font-size:64px; margin-bottom: var(--spacing-md);" id="detalleIcono"></div>
             <div class="detalle-row">
-                <span class="detalle-label">Tipo</span>
+                <span class="detalle-label"><?= $idioma->palabras->elem_detalle_tipo ?></span>
                 <span class="detalle-valor" id="detalleTipo"></span>
             </div>
             <div class="detalle-row">
-                <span class="detalle-label" id="detalleLabel1">Valor 1</span>
+                <span class="detalle-label" id="detalleLabel1"><?= $idioma->palabras->elem_valor1_default ?></span>
                 <span class="detalle-valor" id="detalleValor1"></span>
             </div>
             <div class="detalle-row">
-                <span class="detalle-label" id="detalleLabel2">Valor 2</span>
+                <span class="detalle-label" id="detalleLabel2"><?= $idioma->palabras->elem_valor2_default ?></span>
                 <span class="detalle-valor" id="detalleValor2"></span>
             </div>
             <div class="detalle-row">
-                <span class="detalle-label">Rareza</span>
+                <span class="detalle-label"><?= $idioma->palabras->elem_detalle_rareza ?></span>
                 <span class="detalle-valor" id="detalleRareza"></span>
             </div>
             <div class="detalle-row">
-                <span class="detalle-label">Descripción</span>
+                <span class="detalle-label"><?= $idioma->palabras->elem_detalle_descripcion ?></span>
                 <span class="detalle-valor" id="detalleDescripcion"></span>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn" onclick="$('#modalDetalle').hide()">Cerrar</button>
+            <button class="btn" onclick="$('#modalDetalle').hide()"><?= $idioma->palabras->Cerrar ?></button>
             <button class="btn btn-primary" id="btnEditarDesdeDetalle">
-                <i class="fas fa-edit"></i> Editar
+                <i class="fas fa-edit"></i> <?= $idioma->palabras->pj_editar ?>
             </button>
         </div>
     </div>
@@ -199,62 +199,64 @@ include "../sec/header.php";
 <div id="modalElemento" class="modal-overlay" style="display:none;">
     <div class="modal" style="max-width:500px;">
         <div class="modal-header">
-            <h3 class="modal-title" id="modalElementoTitulo">Nuevo <?= htmlspecialchars($nombre_items) ?></h3>
+            <h3 class="modal-title" id="modalElementoTitulo"><?= $idioma->palabras->elem_nuevo ?>
+                <?= htmlspecialchars($nombre_items) ?></h3>
             <button class="modal-close" onclick="$('#modalElemento').hide()">&times;</button>
         </div>
         <div class="modal-body">
             <form id="formElemento">
                 <input type="hidden" id="elementoId" name="id">
                 <div class="form-group">
-                    <label>Nombre *</label>
+                    <label><?= $idioma->palabras->elem_nombre_label ?></label>
                     <input type="text" id="elemNombre" name="nombre" class="input" required>
                 </div>
                 <div class="form-group">
-                    <label>Tipo</label>
+                    <label><?= $idioma->palabras->elem_tipo_label ?></label>
                     <select id="elemTipo" name="tipo" class="input" onchange="cambiarLabels()">
-                        <option value="">Seleccionar tipo...</option>
-                        <option value="Arma">Arma</option>
-                        <option value="Carta">Carta</option>
-                        <option value="Hechizo">Hechizo</option>
-                        <option value="Objeto">Objeto</option>
-                        <option value="Armadura/Traje">Armadura/Traje</option>
-                        <option value="Otro">Otro</option>
+                        <option value=""><?= $idioma->palabras->elem_tipo_placeholder ?></option>
+                        <option value="Arma"><?= $idioma->palabras->elem_tipo_arma ?></option>
+                        <option value="Carta"><?= $idioma->palabras->elem_tipo_carta ?></option>
+                        <option value="Hechizo"><?= $idioma->palabras->elem_tipo_hechizo ?></option>
+                        <option value="Objeto"><?= $idioma->palabras->elem_tipo_objeto ?></option>
+                        <option value="Armadura/Traje"><?= $idioma->palabras->elem_tipo_armadura ?></option>
+                        <option value="Otro"><?= $idioma->palabras->elem_tipo_otro ?></option>
                     </select>
                     <input type="text" id="elemTipoCustom" name="tipo_custom" class="input"
-                        placeholder="Especifica el tipo..." style="display:none; margin-top:5px;">
+                        placeholder="<?= $idioma->palabras->elem_tipo_custom_placeholder ?>"
+                        style="display:none; margin-top:5px;">
                 </div>
                 <div class="form-group">
-                    <label id="labelValor1">Valor 1</label>
+                    <label id="labelValor1"><?= $idioma->palabras->elem_valor1_default ?></label>
                     <input type="text" id="elemValor1" name="valor1" class="input">
                 </div>
                 <div class="form-group">
-                    <label id="labelValor2">Valor 2</label>
+                    <label id="labelValor2"><?= $idioma->palabras->elem_valor2_default ?></label>
                     <input type="text" id="elemValor2" name="valor2" class="input">
                 </div>
                 <div class="form-group">
-                    <label>Rareza</label>
+                    <label><?= $idioma->palabras->elem_rareza_label ?></label>
                     <select id="elemRareza" name="rareza" class="input">
-                        <option value="">Sin rareza</option>
-                        <option value="Común">Común</option>
-                        <option value="Raro">Raro</option>
-                        <option value="Épico">Épico</option>
-                        <option value="Legendario">Legendario</option>
+                        <option value=""><?= $idioma->palabras->elem_rareza_sin ?></option>
+                        <option value="Común"><?= $idioma->palabras->elem_rareza_comun ?></option>
+                        <option value="Raro"><?= $idioma->palabras->elem_rareza_raro ?></option>
+                        <option value="Épico"><?= $idioma->palabras->elem_rareza_epico ?></option>
+                        <option value="Legendario"><?= $idioma->palabras->elem_rareza_legendario ?></option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Descripción</label>
+                    <label><?= $idioma->palabras->elem_descripcion_label ?></label>
                     <textarea id="elemDescripcion" name="descripcion" class="input" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Imagen</label>
+                    <label><?= $idioma->palabras->elem_imagen_label ?></label>
                     <input type="file" id="elemImagen" name="imagen" class="input" accept="image/*">
-                    <small class="text-muted">Dejar vacío para mantener la actual.</small>
+                    <small class="text-muted"><?= $idioma->palabras->pj_imagen_info ?></small>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn" onclick="$('#modalElemento').hide()">Cancelar</button>
-            <button class="btn btn-primary" onclick="guardarElemento()">Guardar</button>
+            <button class="btn" onclick="$('#modalElemento').hide()"><?= $idioma->palabras->Cerrar ?></button>
+            <button class="btn btn-primary" onclick="guardarElemento()"><?= $idioma->palabras->pj_guardar ?></button>
         </div>
     </div>
 </div>
@@ -262,8 +264,26 @@ include "../sec/header.php";
 <?php include "../sec/footer.php"; ?>
 
 <script>
-    var idJuego = <?= (int) $id_juego ?>;
+    // Traducciones pasadas desde PHP
     var nombreItems = '<?= addslashes(htmlspecialchars($nombre_items)) ?>';
+    var msgNoHay = '<?= addslashes($idioma->palabras->elem_no_hay) ?>';
+    var msgEliminar = '<?= addslashes($idioma->palabras->elem_confirmar_eliminar) ?>';
+    var msgErrorTipo = '<?= addslashes($idioma->palabras->elem_error_tipo_obligatorio) ?>';
+    var msgErrorGuardar = '<?= addslashes($idioma->palabras->elem_error_guardar) ?>';
+    var labelSinTipo = '<?= addslashes($idioma->palabras->elem_sin_tipo) ?>';
+    var labelEditar = '<?= addslashes($idioma->palabras->elem_editar) ?>';
+    var labelNuevo = '<?= addslashes($idioma->palabras->elem_nuevo) ?>';
+
+    var labelsJS = {
+        'Arma': { v1: '<?= addslashes($idioma->palabras->elem_label_dano) ?>', v2: '<?= addslashes($idioma->palabras->elem_label_municion) ?>' },
+        'Carta': { v1: '<?= addslashes($idioma->palabras->elem_label_puntos) ?>', v2: '<?= addslashes($idioma->palabras->elem_label_coste) ?>' },
+        'Hechizo': { v1: '<?= addslashes($idioma->palabras->elem_label_poder) ?>', v2: '<?= addslashes($idioma->palabras->elem_label_mana) ?>' },
+        'Objeto': { v1: '<?= addslashes($idioma->palabras->elem_label_efecto) ?>', v2: '<?= addslashes($idioma->palabras->elem_label_duracion) ?>' },
+        'Armadura/Traje': { v1: '<?= addslashes($idioma->palabras->elem_label_defensa) ?>', v2: '<?= addslashes($idioma->palabras->elem_label_resistencia) ?>' },
+        'Otro': { v1: '<?= addslashes($idioma->palabras->elem_valor1_default) ?>', v2: '<?= addslashes($idioma->palabras->elem_valor2_default) ?>' }
+    };
+
+    var idJuego = <?= (int) $id_juego ?>;
     var elementosData = [];
 
     function escapeHtml(text) {
@@ -271,7 +291,6 @@ include "../sec/header.php";
         return $('<div>').text(String(text)).html();
     }
 
-    // Icono por tipo
     function iconoPorTipo(tipo) {
         var iconos = {
             'Arma': '⚔️',
@@ -284,7 +303,6 @@ include "../sec/header.php";
         return iconos[tipo] || '📦';
     }
 
-    // Clase CSS por rareza
     function clasePorRareza(rareza) {
         if (!rareza) return '';
         var r = rareza.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -292,7 +310,6 @@ include "../sec/header.php";
         return clases[r] || '';
     }
 
-    // Color por rareza
     function colorPorRareza(rareza) {
         if (!rareza) return 'var(--text-secondary)';
         var r = rareza.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -303,23 +320,13 @@ include "../sec/header.php";
     function cambiarLabels() {
         var tipo = $("#elemTipo").val();
         if (tipo === 'Otro') {
-            // Mostrar campo de texto para tipo personalizado
             $("#elemTipoCustom").show().focus();
-            // Etiquetas genéricas
-            $("#labelValor1").text('Valor 1');
-            $("#labelValor2").text('Valor 2');
+            var defLabels = labelsJS['Otro'];
+            $("#labelValor1").text(defLabels.v1);
+            $("#labelValor2").text(defLabels.v2);
         } else {
             $("#elemTipoCustom").hide().val('');
-            // Lógica normal
-            var labels = {
-                'Arma': { v1: 'Daño', v2: 'Munición' },
-                'Carta': { v1: 'Puntos', v2: 'Coste' },
-                'Hechizo': { v1: 'Poder', v2: 'Maná' },
-                'Objeto': { v1: 'Efecto', v2: 'Duración' },
-                'Armadura/Traje': { v1: 'Defensa', v2: 'Resistencia' },
-                'Otro': { v1: 'Valor 1', v2: 'Valor 2' }
-            };
-            var lbl = labels[tipo] || labels['Otro'];
+            var lbl = labelsJS[tipo] || labelsJS['Otro'];
             $("#labelValor1").text(lbl.v1);
             $("#labelValor2").text(lbl.v2);
         }
@@ -331,7 +338,7 @@ include "../sec/header.php";
             var html = "";
 
             if (elementosData.length === 0) {
-                html = '<p class="text-muted">No hay ' + nombreItems + '. ¡Añade el primero!</p>';
+                html = '<p class="text-muted">' + msgNoHay.replace('{nombre}', nombreItems) + '</p>';
             } else {
                 elementosData.forEach(function (e) {
                     var rareza = e.rareza || '';
@@ -351,7 +358,7 @@ include "../sec/header.php";
                         '</div>' +
                         '<div class="elemento-card-info">' +
                         '<div class="elemento-card-nombre">' + escapeHtml(e.nombre) + '</div>' +
-                        '<div class="elemento-card-tipo">' + escapeHtml(e.tipo || 'Sin tipo') + '</div>' +
+                        '<div class="elemento-card-tipo">' + escapeHtml(e.tipo || labelSinTipo) + '</div>' +
                         (rareza ? '<div class="elemento-card-rareza" style="color:' + color + '">' + escapeHtml(rareza) + '</div>' : '') +
                         '</div>' +
                         '</div>';
@@ -366,25 +373,15 @@ include "../sec/header.php";
         var e = elementosData.find(function (x) { return x.id == id; });
         if (!e) return;
 
-        var labels = {
-            'Arma': { v1: 'Daño', v2: 'Munición' },
-            'Carta': { v1: 'Puntos', v2: 'Coste' },
-            'Hechizo': { v1: 'Poder', v2: 'Maná' },
-            'Objeto': { v1: 'Efecto', v2: 'Duración' },
-            'Otro': { v1: 'Valor 1', v2: 'Valor 2' }
-        };
-        var lbl = labels[e.tipo] || labels['Otro'];
+        var lbl = labelsJS[e.tipo] || labelsJS['Otro'];
         var color = colorPorRareza(e.rareza);
 
-        // Mostrar imagen o icono
         var $iconoContainer = $("#detalleIcono");
-        $iconoContainer.empty(); // Limpiar contenido anterior
+        $iconoContainer.empty();
 
         if (e.imagen) {
-            // Si tiene imagen, mostrarla
             $iconoContainer.html('<img src="../assets/img/elementos/' + e.imagen + '" style="width:120px;height:120px;object-fit:contain;border-radius:8px;" onerror="this.style.display=\'none\';$iconoContainer.text(\'' + iconoPorTipo(e.tipo) + '\')">');
         } else {
-            // Si no tiene imagen, mostrar el icono por defecto
             $iconoContainer.text(iconoPorTipo(e.tipo));
         }
         $("#detalleNombre").text(e.nombre);
@@ -405,21 +402,20 @@ include "../sec/header.php";
     }
 
     function abrirModalElemento() {
-        $("#modalElementoTitulo").text("Nuevo " + nombreItems);
+        $("#modalElementoTitulo").text(labelNuevo + " " + nombreItems);
         $("#formElemento")[0].reset();
         $("#elementoId").val("");
-        $("#elemTipoCustom").hide().val(''); // Reset
+        $("#elemTipoCustom").hide().val('');
         cambiarLabels();
         $("#modalElemento").show();
     }
 
     function editarElemento(id) {
         $.post("../controladores/controlador_admin.php", { opt: 11, id: id }, function (e) {
-            $("#modalElementoTitulo").text("Editar " + nombreItems);
+            $("#modalElementoTitulo").text(labelEditar + " " + nombreItems);
             $("#elementoId").val(e.id);
             $("#elemNombre").val(e.nombre);
 
-            // Lógica de tipo
             var tiposFijos = ["Arma", "Carta", "Hechizo", "Objeto", "Armadura/Traje", ""];
             if (tiposFijos.includes(e.tipo)) {
                 $("#elemTipo").val(e.tipo);
@@ -446,12 +442,11 @@ include "../sec/header.php";
         formData.append("id_juego", idJuego);
         if (id) formData.append("id", id);
 
-        // Gestionar tipo
         var tipo = $("#elemTipo").val();
         if (tipo === 'Otro') {
             tipo = $("#elemTipoCustom").val().trim();
             if (!tipo) {
-                alert("Por favor, especifica el tipo personalizado.");
+                alert(msgErrorTipo);
                 return;
             }
         }
@@ -469,14 +464,14 @@ include "../sec/header.php";
                     $("#modalElemento").hide();
                     cargarElementos();
                 } else {
-                    alert("Error: " + (res.error || "No se pudo guardar"));
+                    alert(msgErrorGuardar + " " + (res.error || ""));
                 }
             }
         });
     }
 
     function eliminarElemento(id) {
-        if (!confirm("¿Eliminar este " + nombreItems + "?")) return;
+        if (!confirm(msgEliminar.replace('{nombre}', nombreItems))) return;
         $.post("../controladores/controlador_admin.php", { opt: 14, id: id }, function (res) {
             if (res.success) cargarElementos();
         }, "json");

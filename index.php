@@ -30,7 +30,7 @@ $stmt->execute();
 $juegosRecientes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="<?php echo $_SESSION['idioma']; ?>">
 
 <head>
     <meta charset="UTF-8">
@@ -51,7 +51,6 @@ $juegosRecientes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
     <!-- ✅ RENDIMIENTO: tema.js en el head para evitar flash de tema incorrecto -->
     <script src="assets/js/tema.js"></script>
-    <!-- ✅ jQuery se carga solo en footer.php, eliminado de aquí -->
 </head>
 
 <body>
@@ -63,28 +62,32 @@ $juegosRecientes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         <!-- Bienvenida -->
         <section class="welcome-section">
 
-            <h1 class="welcome-title">¡Bienvenido, <?php echo htmlspecialchars($_SESSION["nombre"]); ?>!</h1>
-            <p class="welcome-subtitle">Explora la biblioteca, conecta con colaboradores y descubre nuevos juegos.</p>
+            <h1 class="welcome-title">
+                <?php echo $idioma->palabras->bienve; ?>, <?php echo htmlspecialchars($_SESSION["nombre"]); ?>!
+            </h1>
+            <p class="welcome-subtitle">
+                <?php echo $idioma->palabras->ini_subtitulo; ?>
+            </p>
 
             <div class="stats-container">
                 <div class="stat-card">
                     <div class="stat-value"><?php echo (int) $totalJuegos; ?></div>
-                    <div class="stat-label">Juegos en la Wiki</div>
+                    <div class="stat-label"><?php echo $idioma->palabras->ini_stat1; ?></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value"><?php echo (int) $totalColaboradores; ?></div>
-                    <div class="stat-label">Colaboradores</div>
+                    <div class="stat-label"><?php echo $idioma->palabras->ini_stat2; ?></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value"><?php echo (int) $totalSolicitudes; ?></div>
-                    <div class="stat-label">Solicitudes pendientes</div>
+                    <div class="stat-label"><?php echo $idioma->palabras->ini_stat3; ?></div>
                 </div>
             </div>
         </section>
 
         <!-- Juegos Recientes -->
         <section>
-            <h2>🕹️ Juegos Recientes</h2>
+            <h2><?php echo $idioma->palabras->ini_juegosRecientes; ?></h2>
 
             <?php if (count($juegosRecientes) > 0): ?>
                 <div class="grid">
@@ -100,10 +103,12 @@ $juegosRecientes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                             <div class="card-body">
                                 <h3 class="card-title"><?php echo htmlspecialchars($juego['titulo']); ?></h3>
                                 <p class="card-subtitle">
-                                    <?php echo htmlspecialchars($juego['desarrollador'] ?: 'Desconocido'); ?>
+                                    <?php echo htmlspecialchars($juego['desarrollador'] ?: $idioma->palabras->ini_desconocido); ?>
                                 </p>
                                 <?php if ($juego['en_desarrollo']): ?>
-                                    <span class="badge" style="background: var(--warning); color: #000;">Próximamente</span>
+                                    <span class="badge" style="background: var(--warning); color: #000;">
+                                        <?php echo $idioma->palabras->ini_proximamente; ?>
+                                    </span>
                                 <?php else: ?>
                                     <p class="text-muted" style="font-size: 13px; margin-bottom: var(--spacing-sm);">
                                         📅 <?php echo date('Y', strtotime($juego['fecha_lanzamiento'])); ?>
@@ -111,7 +116,7 @@ $juegosRecientes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                                 <?php endif; ?>
                                 <a href="vistas/ficha_juego.php?id=<?php echo (int) $juego['id']; ?>"
                                     class="btn btn-primary btn-sm" style="width: 100%;">
-                                    Ver Ficha
+                                    <?php echo $idioma->palabras->ini_verFicha; ?>
                                 </a>
                             </div>
                         </div>
@@ -119,11 +124,13 @@ $juegosRecientes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                 </div>
             <?php else: ?>
                 <div class="card" style="padding: var(--spacing-xl); text-align: center;">
-                    <p class="text-muted" style="font-size: 18px;">📭 Aún no hay juegos en la biblioteca.</p>
+                    <p class="text-muted" style="font-size: 18px;">
+                        <?php echo $idioma->palabras->ini_sinJuegos; ?>
+                    </p>
                     <?php if ($_SESSION['level'] <= 1): ?>
                         <p class="text-muted" style="margin-top: var(--spacing-sm);">
-                            ¿Eres editor o administrador?
-                            <a href="vistas/admin_juegos.php">Añade el primer juego</a>.
+                            <?php echo $idioma->palabras->ini_esEditor; ?>
+                            <a href="vistas/admin_juegos.php"><?php echo $idioma->palabras->ini_añadirJuego; ?></a>.
                         </p>
                     <?php endif; ?>
                 </div>

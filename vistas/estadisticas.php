@@ -9,6 +9,8 @@ if ($_SESSION['level'] != 0) {
     exit;
 }
 
+$idioma = simplexml_load_file("../assets/locales/" . $_SESSION["idioma"] . ".xml");
+
 // ── 1. KPIs rápidos ──────────────────────────────────────────────
 $totalUsuarios = $db->query("SELECT COUNT(*) FROM usuarios")->fetch_row()[0];
 $usuariosConectados = $db->query("SELECT COUNT(*) FROM usuarios WHERE conectado = 1")->fetch_row()[0];
@@ -51,7 +53,6 @@ $topVisitados = $db->query("
     LIMIT 5
 ")->fetch_all(MYSQLI_ASSOC);
 
-// Si no hay visitas aún, usar favoritos como alternativa
 if (empty($topVisitados)) {
     $topVisitados = $db->query("
         SELECT j.titulo, COUNT(f.id_juego) AS visitas
@@ -112,70 +113,56 @@ $masActivos = $db->query("
 
 <div class="stats-dashboard">
     <h3 style="margin-bottom: 16px; font-size: 18px;">
-        <i class="fas fa-chart-line"></i> Panel de Estadísticas
+        <i class="fas fa-chart-line"></i> <?= $idioma->palabras->estad_titulo ?>
     </h3>
 
     <!-- KPIs -->
     <div class="kpi-grid">
         <div class="kpi-card">
             <div class="kpi-icon"><i class="fas fa-users"></i></div>
-            <div class="kpi-value">
-                <?= $totalUsuarios ?>
-            </div>
-            <div class="kpi-label">Usuarios totales</div>
+            <div class="kpi-value"><?= $totalUsuarios ?></div>
+            <div class="kpi-label"><?= $idioma->palabras->estad_kpi_usuarios ?></div>
         </div>
         <div class="kpi-card">
             <div class="kpi-icon"><i class="fas fa-circle" style="color:var(--success)"></i></div>
-            <div class="kpi-value" style="color:var(--success)">
-                <?= $usuariosConectados ?>
-            </div>
-            <div class="kpi-label">Conectados ahora</div>
+            <div class="kpi-value" style="color:var(--success)"><?= $usuariosConectados ?></div>
+            <div class="kpi-label"><?= $idioma->palabras->estad_kpi_conectados ?></div>
         </div>
         <div class="kpi-card">
             <div class="kpi-icon"><i class="fas fa-gamepad"></i></div>
-            <div class="kpi-value">
-                <?= $totalJuegos ?>
-            </div>
-            <div class="kpi-label">Juegos en wiki</div>
+            <div class="kpi-value"><?= $totalJuegos ?></div>
+            <div class="kpi-label"><?= $idioma->palabras->estad_kpi_juegos ?></div>
         </div>
         <div class="kpi-card">
             <div class="kpi-icon"><i class="fas fa-comments"></i></div>
-            <div class="kpi-value">
-                <?= $totalComentarios ?>
-            </div>
-            <div class="kpi-label">Comentarios</div>
+            <div class="kpi-value"><?= $totalComentarios ?></div>
+            <div class="kpi-label"><?= $idioma->palabras->estad_kpi_comentarios ?></div>
         </div>
         <div class="kpi-card">
             <div class="kpi-icon"><i class="fas fa-paper-plane"></i></div>
-            <div class="kpi-value">
-                <?= $totalMensajes ?>
-            </div>
-            <div class="kpi-label">Mensajes chat</div>
+            <div class="kpi-value"><?= $totalMensajes ?></div>
+            <div class="kpi-label"><?= $idioma->palabras->estad_kpi_mensajes ?></div>
         </div>
         <div class="kpi-card">
             <div class="kpi-icon"><i class="fas fa-heart"></i></div>
-            <div class="kpi-value">
-                <?= $totalFavoritos ?>
-            </div>
-            <div class="kpi-label">Favoritos</div>
+            <div class="kpi-value"><?= $totalFavoritos ?></div>
+            <div class="kpi-label"><?= $idioma->palabras->estad_kpi_favoritos ?></div>
         </div>
         <div class="kpi-card">
             <div class="kpi-icon"><i class="fas fa-star"></i></div>
-            <div class="kpi-value" style="color:var(--warning)">
-                <?= $valoracionMedia ?>
-            </div>
-            <div class="kpi-label">Valoración media</div>
+            <div class="kpi-value" style="color:var(--warning)"><?= $valoracionMedia ?></div>
+            <div class="kpi-label"><?= $idioma->palabras->estad_kpi_valoracion ?></div>
         </div>
     </div>
 
     <!-- Gráficas fila 1 -->
     <div class="charts-grid">
         <div class="chart-card">
-            <h4><i class="fas fa-gamepad"></i> Juegos añadidos por mes</h4>
+            <h4><i class="fas fa-gamepad"></i> <?= $idioma->palabras->estad_chart_juegos_mes ?></h4>
             <canvas id="chartJuegosMes"></canvas>
         </div>
         <div class="chart-card">
-            <h4><i class="fas fa-user-clock"></i> Actividad de usuarios por mes</h4>
+            <h4><i class="fas fa-user-clock"></i> <?= $idioma->palabras->estad_chart_usuarios_mes ?></h4>
             <canvas id="chartUsuariosMes"></canvas>
         </div>
     </div>
@@ -183,11 +170,11 @@ $masActivos = $db->query("
     <!-- Gráficas fila 2 -->
     <div class="charts-grid">
         <div class="chart-card">
-            <h4><i class="fas fa-fire"></i> Juegos más populares</h4>
+            <h4><i class="fas fa-fire"></i> <?= $idioma->palabras->estad_chart_populares ?></h4>
             <canvas id="chartTopJuegos"></canvas>
         </div>
         <div class="chart-card">
-            <h4><i class="fas fa-comment-dots"></i> Actividad del chat (7 días)</h4>
+            <h4><i class="fas fa-comment-dots"></i> <?= $idioma->palabras->estad_chart_chat ?></h4>
             <canvas id="chartChat"></canvas>
         </div>
     </div>
@@ -195,48 +182,37 @@ $masActivos = $db->query("
     <!-- Gráficas fila 3 -->
     <div class="charts-grid">
         <div class="chart-card">
-            <h4><i class="fas fa-star"></i> Juegos mejor valorados</h4>
+            <h4><i class="fas fa-star"></i> <?= $idioma->palabras->estad_chart_valorados ?></h4>
             <canvas id="chartValorados"></canvas>
         </div>
         <div class="chart-card">
-            <h4><i class="fas fa-user-shield"></i> Tipos de usuario</h4>
+            <h4><i class="fas fa-user-shield"></i> <?= $idioma->palabras->estad_chart_niveles ?></h4>
             <canvas id="chartNiveles"></canvas>
         </div>
     </div>
 
     <!-- Tabla usuarios más activos -->
     <div class="chart-card" style="margin-top: 0;">
-        <h4><i class="fas fa-trophy"></i> Usuarios más activos</h4>
+        <h4><i class="fas fa-trophy"></i> <?= $idioma->palabras->estad_tabla_activos ?></h4>
         <table class="tabla-activos">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Usuario</th>
-                    <th>Comentarios</th>
-                    <th>Valoraciones</th>
-                    <th>Total actividad</th>
+                    <th><?= $idioma->palabras->estad_tabla_num ?></th>
+                    <th><?= $idioma->palabras->estad_tabla_usuario ?></th>
+                    <th><?= $idioma->palabras->estad_tabla_comentarios ?></th>
+                    <th><?= $idioma->palabras->estad_tabla_valoraciones ?></th>
+                    <th><?= $idioma->palabras->estad_tabla_total ?></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($masActivos as $i => $u): ?>
                     <tr>
-                        <td>
-                            <?= $i + 1 ?>
-                        </td>
-                        <td>
-                            <?= htmlspecialchars($u['nombre']) ?> <span style="color:var(--text-secondary)">@
-                                <?= htmlspecialchars($u['user']) ?>
-                            </span>
-                        </td>
-                        <td>
-                            <?= $u['comentarios'] ?>
-                        </td>
-                        <td>
-                            <?= $u['valoraciones'] ?>
-                        </td>
-                        <td><strong>
-                                <?= $u['comentarios'] + $u['valoraciones'] ?>
-                            </strong></td>
+                        <td><?= $i + 1 ?></td>
+                        <td><?= htmlspecialchars($u['nombre']) ?> <span
+                                style="color:var(--text-secondary)">@<?= htmlspecialchars($u['user']) ?></span></td>
+                        <td><?= $u['comentarios'] ?></td>
+                        <td><?= $u['valoraciones'] ?></td>
+                        <td><strong><?= $u['comentarios'] + $u['valoraciones'] ?></strong></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -245,8 +221,18 @@ $masActivos = $db->query("
 </div>
 
 <script>
+    // Traducciones para datasets de Chart.js
+    var estadLabels = {
+        juegos: '<?= addslashes($idioma->palabras->estad_dataset_juegos) ?>',
+        usuarios: '<?= addslashes($idioma->palabras->estad_dataset_usuarios) ?>',
+        popularidad: '<?= addslashes($idioma->palabras->estad_dataset_popularidad) ?>',
+        mensajes: '<?= addslashes($idioma->palabras->estad_dataset_mensajes) ?>',
+        valoracion: '<?= addslashes($idioma->palabras->estad_dataset_valoracion) ?>',
+        administradores: '<?= addslashes($idioma->palabras->estad_dataset_admins) ?>',
+        usuariosNormales: '<?= addslashes($idioma->palabras->estad_dataset_usuarios_normales) ?>'
+    };
+
     (function () {
-        // ===== DESTRUIR GRÁFICOS ANTERIORES (evita "Canvas is already in use") =====
         var graficosAnteriores = [
             'chartJuegosMes', 'chartUsuariosMes', 'chartTopJuegos',
             'chartChat', 'chartValorados', 'chartNiveles'
@@ -257,7 +243,6 @@ $masActivos = $db->query("
             }
         });
 
-        // Colores base
         var azul = 'rgba(26, 159, 255, 0.8)';
         var azulB = 'rgba(26, 159, 255, 0.2)';
         var verde = 'rgba(164, 208, 7, 0.8)';
@@ -272,14 +257,13 @@ $masActivos = $db->query("
         Chart.defaults.color = textColor;
         Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
 
-        // ── Juegos por mes ─────────────────────────────────────────
         var jMes = <?= json_encode($juegosPorMes) ?>;
         window.chartJuegosMes = new Chart(document.getElementById('chartJuegosMes'), {
             type: 'bar',
             data: {
                 labels: jMes.map(r => r.mes_label),
                 datasets: [{
-                    label: 'Juegos',
+                    label: estadLabels.juegos,
                     data: jMes.map(r => r.total),
                     backgroundColor: azul,
                     borderRadius: 6
@@ -288,14 +272,13 @@ $masActivos = $db->query("
             options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
         });
 
-        // ── Usuarios activos por mes ────────────────────────────────
         var uMes = <?= json_encode($usuariosPorMes) ?>;
         window.chartUsuariosMes = new Chart(document.getElementById('chartUsuariosMes'), {
             type: 'line',
             data: {
                 labels: uMes.map(r => r.mes_label),
                 datasets: [{
-                    label: 'Usuarios activos',
+                    label: estadLabels.usuarios,
                     data: uMes.map(r => r.total),
                     borderColor: verde,
                     backgroundColor: verdeB,
@@ -307,14 +290,13 @@ $masActivos = $db->query("
             options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
         });
 
-        // ── Top juegos más populares ────────────────────────────────
         var topJ = <?= json_encode($topVisitados) ?>;
         window.chartTopJuegos = new Chart(document.getElementById('chartTopJuegos'), {
             type: 'bar',
             data: {
                 labels: topJ.map(r => r.titulo),
                 datasets: [{
-                    label: 'Popularidad',
+                    label: estadLabels.popularidad,
                     data: topJ.map(r => r.visitas),
                     backgroundColor: colores,
                     borderRadius: 6
@@ -327,14 +309,13 @@ $masActivos = $db->query("
             }
         });
 
-        // ── Actividad chat ──────────────────────────────────────────
         var chat = <?= json_encode($actividadChat) ?>;
         window.chartChat = new Chart(document.getElementById('chartChat'), {
             type: 'line',
             data: {
                 labels: chat.map(r => r.dia),
                 datasets: [{
-                    label: 'Mensajes',
+                    label: estadLabels.mensajes,
                     data: chat.map(r => r.total),
                     borderColor: naranja,
                     backgroundColor: 'rgba(233,183,65,0.15)',
@@ -346,14 +327,13 @@ $masActivos = $db->query("
             options: { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
         });
 
-        // ── Top valorados ───────────────────────────────────────────
         var topV = <?= json_encode($topValorados) ?>;
         window.chartValorados = new Chart(document.getElementById('chartValorados'), {
             type: 'bar',
             data: {
                 labels: topV.map(r => r.titulo),
                 datasets: [{
-                    label: 'Valoración',
+                    label: estadLabels.valoracion,
                     data: topV.map(r => r.media),
                     backgroundColor: 'rgba(233,183,65,0.8)',
                     borderRadius: 6
@@ -366,12 +346,11 @@ $masActivos = $db->query("
             }
         });
 
-        // ── Tipos de usuario (doughnut) ─────────────────────────────
         var niv = <?= json_encode($niveles) ?>;
         window.chartNiveles = new Chart(document.getElementById('chartNiveles'), {
             type: 'doughnut',
             data: {
-                labels: ['Administradores', 'Usuarios'],
+                labels: [estadLabels.administradores, estadLabels.usuariosNormales],
                 datasets: [{
                     data: [niv.admins, niv.usuarios],
                     backgroundColor: [rojo, azul],

@@ -43,43 +43,46 @@ $stmtBlock->execute();
 $bloqueados = $stmtBlock->get_result()->fetch_all(MYSQLI_ASSOC);
 
 include "../sec/header.php";
+
 ?>
 
 <link rel="stylesheet" href="../assets/css/colaboradores.css">
 
 <div class="main-container">
-    <h1><i class="fas fa-users"></i> Centro de Colaboradores</h1>
+    <h1><i class="fas fa-users"></i> <?= $idioma->palabras->colab_titulo ?></h1>
 
     <!-- Pestañas -->
     <div class="tabs-container" style="margin-bottom: var(--spacing-lg);">
-        <button class="tab-button active" data-tab="buscar"><i class="fas fa-search"></i> Buscar Colaboradores</button>
+        <button class="tab-button active" data-tab="buscar"><i class="fas fa-search"></i>
+            <?= $idioma->palabras->amg1 ?></button>
         <button class="tab-button" data-tab="solicitudes">
-            <i class="fas fa-envelope"></i> Solicitudes Pendientes
+            <i class="fas fa-envelope"></i> <?= $idioma->palabras->amg2 ?>
             <?php if (count($solicitudes) > 0): ?>
-                <span class="badge"><?php echo count($solicitudes); ?></span>
+                <span class="badge"><?= count($solicitudes) ?></span>
             <?php endif; ?>
         </button>
-        <button class="tab-button" data-tab="lista"><i class="fas fa-user-friends"></i> Mis Colaboradores
-            (<?php echo count($colaboradores); ?>)</button>
-        <button class="tab-button" data-tab="block"><i class="fas fa-ban"></i> Bloqueados
-            (<?php echo count($bloqueados); ?>)</button>
+        <button class="tab-button" data-tab="lista"><i class="fas fa-user-friends"></i> <?= $idioma->palabras->amg3 ?>
+            (<?= count($colaboradores) ?>)</button>
+        <button class="tab-button" data-tab="block"><i class="fas fa-ban"></i> <?= $idioma->palabras->amg4 ?>
+            (<?= count($bloqueados) ?>)</button>
     </div>
 
     <!-- Pestaña: Buscar -->
     <div id="tab-buscar" class="tab-pane active">
         <div class="search-box" style="display: flex; gap: var(--spacing-sm); margin-bottom: var(--spacing-lg);">
-            <input type="text" id="queryBusqueda" class="input" placeholder="Buscar por nombre o usuario..."
+            <input type="text" id="queryBusqueda" class="input" placeholder="<?= $idioma->palabras->introducir2 ?>"
                 style="flex: 1;">
-            <button class="btn btn-primary" id="ejecutarBusqueda"><i class="fas fa-search"></i> Buscar</button>
+            <button class="btn btn-primary" id="ejecutarBusqueda"><i class="fas fa-search"></i>
+                <?= $idioma->palabras->amgB ?></button>
         </div>
         <div id="status-busqueda" style="margin-bottom: var(--spacing-md);"></div>
         <div class="table-container">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Usuario</th>
-                        <th>Nombre</th>
-                        <th>Acción</th>
+                        <th><?= $idioma->palabras->colab_th_usuario ?></th>
+                        <th><?= $idioma->palabras->colab_th_nombre ?></th>
+                        <th><?= $idioma->palabras->colab_th_accion ?></th>
                     </tr>
                 </thead>
                 <tbody id="cuerpoResultados"></tbody>
@@ -89,36 +92,33 @@ include "../sec/header.php";
 
     <!-- Pestaña: Solicitudes -->
     <div id="tab-solicitudes" class="tab-pane" style="display: none;">
-        <h2><i class="fas fa-envelope"></i> Solicitudes Pendientes</h2>
+        <h2><i class="fas fa-envelope"></i> <?= $idioma->palabras->th12 ?></h2>
         <?php if (count($solicitudes) > 0): ?>
             <div class="table-container">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Usuario</th>
-                            <th>Nombre</th>
-                            <th>Fecha</th>
-                            <th>Acciones</th>
+                            <th><?= $idioma->palabras->colab_th_usuario ?></th>
+                            <th><?= $idioma->palabras->colab_th_nombre ?></th>
+                            <th><?= $idioma->palabras->colab_th_fecha ?></th>
+                            <th><?= $idioma->palabras->colab_th_acciones ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($solicitudes as $sol): ?>
                             <tr>
                                 <td><a
-                                        href="perfil_publico.php?id=<?php echo (int) $sol['id_sol']; ?>">@<?php echo htmlspecialchars($sol['user']); ?></a>
+                                        href="perfil_publico.php?id=<?= (int) $sol['id_sol'] ?>">@<?= htmlspecialchars($sol['user']) ?></a>
                                 </td>
-                                <td><?php echo htmlspecialchars($sol['nombre']); ?></td>
-                                <td><?php echo date('d/m/Y H:i', $sol['fecha']); ?></td>
+                                <td><?= htmlspecialchars($sol['nombre']) ?></td>
+                                <td><?= date('d/m/Y H:i', $sol['fecha']) ?></td>
                                 <td>
-                                    <button class="btn btn-sm btn-success Aceptar"
-                                        data-id="<?php echo (int) $sol['id_sol']; ?>"><i class="fas fa-check"></i>
-                                        Aceptar</button>
-                                    <button class="btn btn-sm btn-danger Rechazar"
-                                        data-id="<?php echo (int) $sol['id_sol']; ?>"><i class="fas fa-times"></i>
-                                        Rechazar</button>
-                                    <button class="btn btn-sm btn-warning Bloquear"
-                                        data-id="<?php echo (int) $sol['id_sol']; ?>"><i class="fas fa-ban"></i>
-                                        Bloquear</button>
+                                    <button class="btn btn-sm btn-success Aceptar" data-id="<?= (int) $sol['id_sol'] ?>"><i
+                                            class="fas fa-check"></i> <?= $idioma->palabras->boton6 ?></button>
+                                    <button class="btn btn-sm btn-danger Rechazar" data-id="<?= (int) $sol['id_sol'] ?>"><i
+                                            class="fas fa-times"></i> <?= $idioma->palabras->boton7 ?></button>
+                                    <button class="btn btn-sm btn-warning Bloquear" data-id="<?= (int) $sol['id_sol'] ?>"><i
+                                            class="fas fa-ban"></i> <?= $idioma->palabras->boton8 ?></button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -126,47 +126,47 @@ include "../sec/header.php";
                 </table>
             </div>
         <?php else: ?>
-            <p class="text-muted">No hay solicitudes pendientes.</p>
+            <p class="text-muted"><?= $idioma->palabras->amgS ?></p>
         <?php endif; ?>
     </div>
 
     <!-- Pestaña: Mis Colaboradores -->
     <div id="tab-lista" class="tab-pane" style="display: none;">
-        <h2><i class="fas fa-user-friends"></i> Mis Colaboradores</h2>
+        <h2><i class="fas fa-user-friends"></i> <?= $idioma->palabras->mor2 ?></h2>
         <?php if (count($colaboradores) > 0): ?>
             <div class="table-container">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Usuario</th>
-                            <th>Nombre</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
+                            <th><?= $idioma->palabras->colab_th_usuario ?></th>
+                            <th><?= $idioma->palabras->colab_th_nombre ?></th>
+                            <th><?= $idioma->palabras->colab_th_estado ?></th>
+                            <th><?= $idioma->palabras->colab_th_acciones ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($colaboradores as $col): ?>
                             <tr>
-                                <td>
-                                    <a href="perfil_publico.php?id=<?php echo (int) $col['id']; ?>">
-                                        @<?php echo htmlspecialchars($col['user']); ?>
-                                    </a>
+                                <td><a
+                                        href="perfil_publico.php?id=<?= (int) $col['id'] ?>">@<?= htmlspecialchars($col['user']) ?></a>
                                 </td>
-                                <td><?php echo htmlspecialchars($col['nombre']); ?></td>
+                                <td><?= htmlspecialchars($col['nombre']) ?></td>
                                 <td>
                                     <?php if ($col['conectado'] == 1): ?>
-                                        <span style="color: var(--success);"><i class="fas fa-circle"></i> Conectado</span>
+                                        <span style="color: var(--success);"><i class="fas fa-circle"></i>
+                                            <?= $idioma->palabras->colab_conectado ?></span>
                                     <?php else: ?>
-                                        <span class="text-muted"><i class="far fa-circle"></i> Desconectado</span>
+                                        <span class="text-muted"><i class="far fa-circle"></i>
+                                            <?= $idioma->palabras->colab_desconectado ?></span>
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <a href="chat_privado.php?id=<?php echo (int) $col['id']; ?>"
-                                        class="btn btn-sm btn-primary"><i class="fas fa-comment"></i> Chat</a>
-                                    <button class="btn btn-sm btn-danger Eliminar" data-id="<?php echo (int) $col['id']; ?>"><i
-                                            class="fas fa-user-minus"></i> Eliminar</button>
-                                    <button class="btn btn-sm btn-warning Bloquear" data-id="<?php echo (int) $col['id']; ?>"><i
-                                            class="fas fa-ban"></i> Bloquear</button>
+                                    <a href="chat_privado.php?id=<?= (int) $col['id'] ?>" class="btn btn-sm btn-primary"><i
+                                            class="fas fa-comment"></i> <?= $idioma->palabras->colab_chat ?></a>
+                                    <button class="btn btn-sm btn-danger Eliminar" data-id="<?= (int) $col['id'] ?>"><i
+                                            class="fas fa-user-minus"></i> <?= $idioma->palabras->amgE ?></button>
+                                    <button class="btn btn-sm btn-warning Bloquear" data-id="<?= (int) $col['id'] ?>"><i
+                                            class="fas fa-ban"></i> <?= $idioma->palabras->boton8 ?></button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -174,32 +174,32 @@ include "../sec/header.php";
                 </table>
             </div>
         <?php else: ?>
-            <p class="text-muted">Aún no tienes colaboradores.</p>
+            <p class="text-muted"><?= $idioma->palabras->amgN ?></p>
         <?php endif; ?>
     </div>
 
     <!-- Pestaña: Bloqueados -->
     <div id="tab-block" class="tab-pane" style="display: none;">
-        <h2><i class="fas fa-ban"></i> Usuarios Bloqueados</h2>
+        <h2><i class="fas fa-ban"></i> <?= $idioma->palabras->mor3 ?></h2>
         <?php if (count($bloqueados) > 0): ?>
             <div class="table-container">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Usuario</th>
-                            <th>Nombre</th>
-                            <th>Acción</th>
+                            <th><?= $idioma->palabras->colab_th_usuario ?></th>
+                            <th><?= $idioma->palabras->colab_th_nombre ?></th>
+                            <th><?= $idioma->palabras->colab_th_accion ?></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($bloqueados as $block): ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($block['user']); ?></td>
-                                <td><?php echo htmlspecialchars($block['nombre']); ?></td>
+                                <td><?= htmlspecialchars($block['user']) ?></td>
+                                <td><?= htmlspecialchars($block['nombre']) ?></td>
                                 <td>
                                     <button class="btn btn-sm btn-success DesBloquear"
-                                        data-id="<?php echo (int) $block['id_block']; ?>"><i class="fas fa-unlock"></i>
-                                        Desbloquear</button>
+                                        data-id="<?= (int) $block['id_block'] ?>"><i class="fas fa-unlock"></i>
+                                        <?= $idioma->palabras->boton9 ?></button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -207,7 +207,7 @@ include "../sec/header.php";
                 </table>
             </div>
         <?php else: ?>
-            <p class="text-muted">No hay usuarios bloqueados.</p>
+            <p class="text-muted"><?= $idioma->palabras->amgD ?></p>
         <?php endif; ?>
     </div>
 </div>
@@ -215,9 +215,20 @@ include "../sec/header.php";
 <?php include "../sec/footer.php"; ?>
 
 <script>
+    // Traducciones para JavaScript
+    var colabMsg = {
+        buscando: '<?= addslashes($idioma->palabras->colab_buscando) ?>',
+        errorBuscar: '<?= addslashes($idioma->palabras->colab_error_buscar) ?>',
+        confirmarEliminar: '<?= addslashes($idioma->palabras->colab_confirmar_eliminar) ?>',
+        errorEnviar: '<?= addslashes($idioma->palabras->colab_error_enviar) ?>',
+        errorCancelar: '<?= addslashes($idioma->palabras->colab_error_cancelar) ?>',
+        errorCancelarRechazada: '<?= addslashes($idioma->palabras->colab_error_cancelar_rechazada) ?>',
+        enviarSolicitud: '<?= addslashes($idioma->palabras->enviar) ?>',
+        cancelarSolicitud: '<?= addslashes($idioma->palabras->enviar2) ?>'
+    };
+
     $(document).ready(function () {
 
-        // Cambio de pestañas
         $('.tab-button').click(function () {
             var tabId = $(this).data('tab');
             $('.tab-button').removeClass('active');
@@ -226,11 +237,10 @@ include "../sec/header.php";
             $('#tab-' + tabId).show();
         });
 
-        // Buscar usuarios
         function buscar() {
             var texto = $("#queryBusqueda").val().trim();
             if (texto === "") return;
-            $("#status-busqueda").html('<p class="text-muted"><i class="fas fa-spinner fa-spin"></i> Buscando...</p>');
+            $("#status-busqueda").html('<p class="text-muted"><i class="fas fa-spinner fa-spin"></i> ' + colabMsg.buscando + '</p>');
             $.ajax({
                 type: "post",
                 url: "Busqueda.php",
@@ -240,7 +250,7 @@ include "../sec/header.php";
                     $("#cuerpoResultados").html(data);
                 },
                 error: function () {
-                    $("#status-busqueda").html('<p class="text-danger">Error al buscar.</p>');
+                    $("#status-busqueda").html('<p class="text-danger">' + colabMsg.errorBuscar + '</p>');
                 }
             });
         }
@@ -250,10 +260,8 @@ include "../sec/header.php";
             if (e.which === 13) buscar();
         });
 
-        // ✅ SEGURIDAD: id_rec siempre desde PHP/sesión, nunca manipulable desde JS
-        var miId = <?php echo (int) $_SESSION['id']; ?>;
+        var miId = <?= (int) $_SESSION['id']; ?>;
 
-        // Aceptar solicitud
         $(document).on("click", ".Aceptar", function () {
             var id_sol = $(this).data('id');
             $.ajax({
@@ -265,7 +273,6 @@ include "../sec/header.php";
             });
         });
 
-        // Rechazar solicitud
         $(document).on("click", ".Rechazar", function () {
             var id_sol = $(this).data('id');
             $.ajax({
@@ -277,7 +284,6 @@ include "../sec/header.php";
             });
         });
 
-        // Bloquear usuario
         $(document).on("click", ".Bloquear", function () {
             var id_sol = $(this).data('id');
             $.ajax({
@@ -289,7 +295,6 @@ include "../sec/header.php";
             });
         });
 
-        // Desbloquear usuario
         $(document).on("click", ".DesBloquear", function () {
             var id_block = $(this).data('id');
             $.ajax({
@@ -301,10 +306,9 @@ include "../sec/header.php";
             });
         });
 
-        // Eliminar colaborador
         $(document).on("click", ".Eliminar", function () {
             var id_sol = $(this).data('id');
-            if (!confirm('¿Eliminar a este colaborador?')) return;
+            if (!confirm(colabMsg.confirmarEliminar)) return;
             $.ajax({
                 type: "post",
                 url: "../controladores/amigos_solicitudes.php",
@@ -314,7 +318,6 @@ include "../sec/header.php";
             });
         });
 
-        // Enviar solicitud
         $(document).on("click", ".btn-send", function () {
             var id_rec = $(this).data('id');
             var btn = $(this);
@@ -327,15 +330,14 @@ include "../sec/header.php";
                     if (data.trim() === "enviada") {
                         btn.removeClass('btn-primary btn-send')
                             .addClass('btn-warning btn-cancelar')
-                            .html('<i class="fas fa-times"></i> Cancelar solicitud');
+                            .html('<i class="fas fa-times"></i> ' + colabMsg.cancelarSolicitud);
                     } else {
-                        alert("Error al enviar la solicitud.");
+                        alert(colabMsg.errorEnviar);
                     }
                 }
             });
         });
 
-        // Cancelar solicitud
         $(document).on("click", ".btn-cancelar", function () {
             var id_rec = $(this).data('id');
             var btn = $(this);
@@ -348,11 +350,11 @@ include "../sec/header.php";
                     if (data.trim() === "cancelada") {
                         btn.removeClass('btn-warning btn-cancelar')
                             .addClass('btn-primary btn-send')
-                            .html('<i class="fas fa-paper-plane"></i> Enviar solicitud');
+                            .html('<i class="fas fa-paper-plane"></i> ' + colabMsg.enviarSolicitud);
                     } else if (data.trim() === "bloqueada") {
-                        alert("No puedes cancelar una solicitud rechazada hasta pasados 15 días.");
+                        alert(colabMsg.errorCancelarRechazada);
                     } else {
-                        alert("Error al cancelar la solicitud.");
+                        alert(colabMsg.errorCancelar);
                     }
                 }
             });

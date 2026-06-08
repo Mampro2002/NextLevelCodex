@@ -131,7 +131,351 @@
         <fecha12>Subida el:</fecha12>
         <fecha13>a las</fecha13>
 
+        <!-- ===== INICIO ===== -->
+        <ini_subtitulo>Explora la biblioteca, conecta con colaboradores y descubre nuevos juegos.</ini_subtitulo>
+        <ini_stat1>Juegos en la Wiki</ini_stat1>
+        <ini_stat2>Colaboradores</ini_stat2>
+        <ini_stat3>Solicitudes pendientes</ini_stat3>
+        <ini_juegosRecientes>🕹️ Juegos Recientes</ini_juegosRecientes>
+        <ini_verFicha>Ver Ficha</ini_verFicha>
+        <ini_proximamente>Próximamente</ini_proximamente>
+        <ini_sinJuegos>📭 Aún no hay juegos en la biblioteca.</ini_sinJuegos>
+        <ini_esEditor>¿Eres editor o administrador?</ini_esEditor>
+        <ini_añadirJuego>Añade el primer juego</ini_añadirJuego>
+        <ini_desconocido>Desconocido</ini_desconocido>
 
+        <!-- ===== HEADER ===== -->
+        <header_inicio>Inicio</header_inicio>
+        <header_biblioteca>Biblioteca</header_biblioteca>
+        <header_colaboradores>Colaboradores</header_colaboradores>
+        <header_chat>Chat</header_chat>
+        <header_perfil>Mi Perfil</header_perfil>
+        <header_ajustes>Ajustes</header_ajustes>
+        <header_panelAdmin>Panel Admin</header_panelAdmin>
+        <header_estadisticas>Estadísticas</header_estadisticas>
+        <header_gestionarJuegos>Gestionar Juegos</header_gestionarJuegos>
+        <header_tooltipMensajes>Mensajes de:</header_tooltipMensajes>
+        <header_tooltipSolicitudes>Solicitudes de:</header_tooltipSolicitudes>
+        <header_yMas>y</header_yMas>
+        <header_panelAdminTitulo>Panel de Administración</header_panelAdminTitulo>
+        <header_estadisticasTitulo>Estadísticas de Next Level Codex</header_estadisticasTitulo>
+
+        <!-- ===== WIKI HOME ===== -->
+        <wiki_placeholder>Buscar por título o desarrollador...</wiki_placeholder>
+        <wiki_todosGeneros>Todos los géneros</wiki_todosGeneros>
+        <wiki_placeholderDev>Desarrollador</wiki_placeholderDev>
+        <wiki_placeholderAnyo>Año</wiki_placeholderAnyo>
+        <wiki_th1>Título</wiki_th1>
+        <wiki_th2>Desarrollador</wiki_th2>
+        <wiki_th3>Lanzamiento</wiki_th3>
+        <wiki_th4>Valoración</wiki_th4>
+        <wiki_th5>Acción</wiki_th5>
+        <wiki_buscando>Buscando...</wiki_buscando>
+        <wiki_noJuegos>No se encontraron juegos.</wiki_noJuegos>
+        <wiki_errorServidor>Error al conectar con el servidor.</wiki_errorServidor>
+
+
+        <!-- ===== VER PERFIL (AJENO) ===== -->
+        <perfil_privadoMsg>Este perfil es privado.</perfil_privadoMsg>
+        <perfil_chatPrivado>Chat privado</perfil_chatPrivado>
+        <perfil_aceptar>Aceptar solicitud</perfil_aceptar>
+        <perfil_rechazar>Rechazar</perfil_rechazar>
+        <perfil_disponibleEn>Disponible en</perfil_disponibleEn>
+        <perfil_solicitudCancelar>Solicitud enviada (cancelar)</perfil_solicitudCancelar>
+        <perfil_sinFavOtro>No tiene juegos favoritos aún.</perfil_sinFavOtro>
+        <perfil_sinJuegosOtro>No ha añadido ningún juego aún.</perfil_sinJuegosOtro>
+        <perfil_privadoTitulo>Este perfil es privado</perfil_privadoTitulo>
+        <perfil_privadoSub>Envía una solicitud de colaboración para ver su contenido.</perfil_privadoSub>
+        <perfil_errorEnviar>Error al enviar la solicitud.</perfil_errorEnviar>
+        <perfil_errorCancelar>Error al cancelar la solicitud.</perfil_errorCancelar>
+        <perfil_noCancelar>No puedes cancelar una solicitud rechazada hasta pasados 15 días.</perfil_noCancelar>
+        <perfil_confirmarEliminar>¿Eliminar a este colaborador?</perfil_confirmarEliminar>
+
+        <!-- ===== PERFIL ===== -->
+        <perfil_sinBio>Sin biografía</perfil_sinBio>
+        <perfil_misColaboradores>Mis Colaboradores</perfil_misColaboradores>
+        <perfil_desconectado>Desconectado</perfil_desconectado>
+        <perfil_sinColaboradores>Aún no tienes colaboradores.</perfil_sinColaboradores>
+        <perfil_misJuegos>Mis Juegos Añadidos</perfil_misJuegos>
+        <perfil_fecha>Fecha</perfil_fecha>
+        <perfil_ver>Ver</perfil_ver>
+        <perfil_sinJuegos>No has añadido ningún juego.</perfil_sinJuegos>
+        <perfil_misFavoritos>Mis Juegos Favoritos</perfil_misFavoritos>
+        <perfil_sinFavoritos>Aún no has marcado juegos como favoritos.</perfil_sinFavoritos>
+        <perfil_misLogros>Mis Logros</perfil_misLogros>
+        <perfil_verLogros>Ver todos los logros disponibles</perfil_verLogros>
+        <perfil_sinLogros>Aún no has desbloqueado ningún logro.</perfil_sinLogros>
+
+        <!-- ===== TABLA ADMIN ===== -->
+        <admin_dejarVacio>Dejar vacío</admin_dejarVacio>
+        <admin_minutosBan>¿Cuántos minutos quieres banear al usuario?</admin_minutosBan>
+        <admin_baneado>Usuario baneado correctamente</admin_baneado>
+        <admin_desbaneado>Usuario desbaneado correctamente</admin_desbaneado>
+
+        <!-- ===== GESTIÓN DE PERSONAJES ===== -->
+        <pj_volver>Volver</pj_volver>
+        <pj_titulo>Personajes de:</pj_titulo>
+        <pj_añadir>Añadir Personaje</pj_añadir>
+        <pj_cargando>Cargando...</pj_cargando>
+        <pj_rol>Rol</pj_rol>
+        <pj_ubicacion>Ubicación</pj_ubicacion>
+        <pj_descripcion>Descripción</pj_descripcion>
+        <pj_editar>Editar</pj_editar>
+        <pj_nuevo_personaje>Nuevo Personaje</pj_nuevo_personaje>
+        <pj_nombre>Nombre *</pj_nombre>
+        <pj_placeholder_rol>Principal, Enemigo, Aliado...</pj_placeholder_rol>
+        <pj_imagen>Imagen</pj_imagen>
+        <pj_imagen_info>Dejar vacío para mantener la actual.</pj_imagen_info>
+        <pj_guardar>Guardar</pj_guardar>
+        <pj_sin_personajes>No hay personajes. ¡Añade el primero!</pj_sin_personajes>
+        <pj_sin_rol>Sin rol</pj_sin_rol>
+        <pj_confirmar_eliminar>¿Eliminar este personaje?</pj_confirmar_eliminar>
+        <pj_error_guardar>Error al guardar:</pj_error_guardar>
+        <pj_editar_personaje>Editar Personaje</pj_editar_personaje>
+
+        <!-- ===== GESTIÓN DE MAPA ===== -->
+        <mapa_titulo>Mapa de:</mapa_titulo>
+        <mapa_imagen_titulo>Imagen del mapa</mapa_imagen_titulo>
+        <mapa_imagen_subir>Sube la imagen del mapa del juego (jpg, png, webp)</mapa_imagen_subir>
+        <mapa_subir>Subir</mapa_subir>
+        <mapa_instruccion>Haz <strong>clic en la imagen</strong> para añadir un punto de interés en esa posición.</mapa_instruccion>
+        <mapa_puntos>Puntos de interés</mapa_puntos>
+        <mapa_th_icono>Icono</mapa_th_icono>
+        <mapa_th_nombre>Nombre</mapa_th_nombre>
+        <mapa_th_tipo>Tipo</mapa_th_tipo>
+        <mapa_th_posx>Pos X (%)</mapa_th_posx>
+        <mapa_th_posy>Pos Y (%)</mapa_th_posy>
+        <mapa_th_descripcion>Descripción</mapa_th_descripcion>
+        <mapa_th_accion>Acción</mapa_th_accion>
+        <mapa_sin_imagen>Sube primero la imagen del mapa para poder añadir puntos de interés.</mapa_sin_imagen>
+        <mapa_nuevo_punto>Nuevo Punto de Interés</mapa_nuevo_punto>
+        <mapa_posicion>Posición:</mapa_posicion>
+        <mapa_nombre>Nombre *</mapa_nombre>
+        <mapa_placeholder_nombre>Ej: Ciudad de Mondstadt</mapa_placeholder_nombre>
+        <mapa_tipo>Tipo</mapa_tipo>
+        <mapa_placeholder_tipo>Ciudad, Mazmorra, Jefe, Tienda...</mapa_placeholder_tipo>
+        <mapa_descripcion>Descripción</mapa_descripcion>
+        <mapa_placeholder_desc>Descripción opcional del punto...</mapa_placeholder_desc>
+        <mapa_icono_punto>Icono del punto</mapa_icono_punto>
+        <mapa_guardar_punto>Guardar punto</mapa_guardar_punto>
+        <mapa_error_nombre>El nombre es obligatorio.</mapa_error_nombre>
+        <mapa_error_subir>Error al subir imagen:</mapa_error_subir>
+        <mapa_error_guardar>Error al guardar:</mapa_error_guardar>
+        <mapa_error_eliminar>Error al eliminar el punto</mapa_error_eliminar>
+        <mapa_confirmar_eliminar>¿Eliminar este punto?</mapa_confirmar_eliminar>
+        <mapa_tabla_vacia>No hay puntos de interés. Haz clic en la imagen para añadir.</mapa_tabla_vacia>
+
+        <!-- ===== GESTIÓN DE ELEMENTOS ===== -->
+        <elem_añadir>Añadir</elem_añadir>
+        <elem_nuevo>Nuevo</elem_nuevo>
+        <elem_editar>Editar</elem_editar>
+        <elem_no_hay>No hay {nombre}. ¡Añade el primero!</elem_no_hay>
+        <elem_sin_tipo>Sin tipo</elem_sin_tipo>
+        <elem_confirmar_eliminar>¿Eliminar este {nombre}?</elem_confirmar_eliminar>
+        <elem_error_guardar>Error al guardar:</elem_error_guardar>
+        <elem_error_tipo_obligatorio>Por favor, especifica el tipo personalizado.</elem_error_tipo_obligatorio>
+
+        <elem_detalle_tipo>Tipo</elem_detalle_tipo>
+        <elem_detalle_rareza>Rareza</elem_detalle_rareza>
+        <elem_detalle_descripcion>Descripción</elem_detalle_descripcion>
+        <elem_valor1_default>Valor 1</elem_valor1_default>
+        <elem_valor2_default>Valor 2</elem_valor2_default>
+
+        <elem_nombre_label>Nombre *</elem_nombre_label>
+        <elem_tipo_label>Tipo</elem_tipo_label>
+        <elem_tipo_placeholder>Seleccionar tipo...</elem_tipo_placeholder>
+        <elem_tipo_custom_placeholder>Especifica el tipo...</elem_tipo_custom_placeholder>
+        <elem_tipo_arma>Arma</elem_tipo_arma>
+        <elem_tipo_carta>Carta</elem_tipo_carta>
+        <elem_tipo_hechizo>Hechizo</elem_tipo_hechizo>
+        <elem_tipo_objeto>Objeto</elem_tipo_objeto>
+        <elem_tipo_armadura>Armadura/Traje</elem_tipo_armadura>
+        <elem_tipo_otro>Otro</elem_tipo_otro>
+
+        <elem_rareza_label>Rareza</elem_rareza_label>
+        <elem_rareza_sin>Sin rareza</elem_rareza_sin>
+        <elem_rareza_comun>Común</elem_rareza_comun>
+        <elem_rareza_raro>Raro</elem_rareza_raro>
+        <elem_rareza_epico>Épico</elem_rareza_epico>
+        <elem_rareza_legendario>Legendario</elem_rareza_legendario>
+
+        <elem_descripcion_label>Descripción</elem_descripcion_label>
+        <elem_imagen_label>Imagen</elem_imagen_label>
+
+        <elem_label_dano>Daño</elem_label_dano>
+        <elem_label_municion>Municion</elem_label_municion>
+        <elem_label_puntos>Puntos</elem_label_puntos>
+        <elem_label_coste>Coste</elem_label_coste>
+        <elem_label_poder>Poder</elem_label_poder>
+        <elem_label_mana>Maná</elem_label_mana>
+        <elem_label_efecto>Efecto</elem_label_efecto>
+        <elem_label_duracion>Duración</elem_label_duracion>
+        <elem_label_defensa>Defensa</elem_label_defensa>
+        <elem_label_resistencia>Resistencia</elem_label_resistencia>
+
+        <!-- ===== FICHA DE JUEGO ===== -->
+        <ficha_volver>Volver a la biblioteca</ficha_volver>
+        <ficha_no_encontrado>Juego no encontrado.</ficha_no_encontrado>
+        <ficha_sin_genero>Sin género</ficha_sin_genero>
+        <ficha_sin_descripcion>Sin descripción.</ficha_sin_descripcion>
+        <ficha_anadido_por>Añadido por</ficha_anadido_por>
+        <ficha_comprar_tienda>Comprar en tienda</ficha_comprar_tienda>
+        <ficha_buscar_steam>Buscar en Steam</ficha_buscar_steam>
+        <ficha_marcar_favorito>Marcar como favorito</ficha_marcar_favorito>
+        <ficha_quitar_favorito>Quitar de favoritos</ficha_quitar_favorito>
+        <ficha_tu_valoracion>Tu valoración:</ficha_tu_valoracion>
+        <ficha_votos>votos</ficha_votos>
+        <ficha_general>General</ficha_general>
+        <ficha_elementos>Elementos</ficha_elementos>
+        <ficha_personajes>Personajes</ficha_personajes>
+        <ficha_mapa_interactivo>Mapa Interactivo</ficha_mapa_interactivo>
+        <ficha_comentarios>Comentarios</ficha_comentarios>
+        <ficha_trailer>Tráiler</ficha_trailer>
+        <ficha_info_general>Información General</ficha_info_general>
+        <ficha_distribuidora>Distribuidora</ficha_distribuidora>
+        <ficha_genero_tabla>Género</ficha_genero_tabla>
+        <ficha_proximo_lanzamiento>Próximo lanzamiento</ficha_proximo_lanzamiento>
+        <ficha_dias>Días</ficha_dias>
+        <ficha_horas>Horas</ficha_horas>
+        <ficha_min>Min</ficha_min>
+        <ficha_seg>Seg</ficha_seg>
+        <ficha_ya_disponible>¡Ya disponible!</ficha_ya_disponible>
+        <ficha_mapa_instruccion>Pasa el ratón por los marcadores para ver información del punto.</ficha_mapa_instruccion>
+        <ficha_placeholder_comentario>Escribe un comentario...</ficha_placeholder_comentario>
+        <ficha_publicar>Publicar</ficha_publicar>
+        <ficha_ver_trailer>Ver tráiler</ficha_ver_trailer>
+        <ficha_primer_comentario>Sé el primero en comentar.</ficha_primer_comentario>
+        <ficha_confirmar_eliminar_comentario>¿Eliminar este comentario?</ficha_confirmar_eliminar_comentario>
+        <ficha_error_publicar>Error al publicar el comentario.</ficha_error_publicar>
+
+        <!-- ===== ESTADÍSTICAS ===== -->
+        <estad_titulo>Panel de Estadísticas</estad_titulo>
+        <estad_kpi_usuarios>Usuarios totales</estad_kpi_usuarios>
+        <estad_kpi_conectados>Conectados ahora</estad_kpi_conectados>
+        <estad_kpi_juegos>Juegos en wiki</estad_kpi_juegos>
+        <estad_kpi_comentarios>Comentarios</estad_kpi_comentarios>
+        <estad_kpi_mensajes>Mensajes chat</estad_kpi_mensajes>
+        <estad_kpi_favoritos>Favoritos</estad_kpi_favoritos>
+        <estad_kpi_valoracion>Valoración media</estad_kpi_valoracion>
+
+        <estad_chart_juegos_mes>Juegos añadidos por mes</estad_chart_juegos_mes>
+        <estad_chart_usuarios_mes>Actividad de usuarios por mes</estad_chart_usuarios_mes>
+        <estad_chart_populares>Juegos más populares</estad_chart_populares>
+        <estad_chart_chat>Actividad del chat (7 días)</estad_chart_chat>
+        <estad_chart_valorados>Juegos mejor valorados</estad_chart_valorados>
+        <estad_chart_niveles>Tipos de usuario</estad_chart_niveles>
+
+        <estad_tabla_activos>Usuarios más activos</estad_tabla_activos>
+        <estad_tabla_num>#</estad_tabla_num>
+        <estad_tabla_usuario>Usuario</estad_tabla_usuario>
+        <estad_tabla_comentarios>Comentarios</estad_tabla_comentarios>
+        <estad_tabla_valoraciones>Valoraciones</estad_tabla_valoraciones>
+        <estad_tabla_total>Total actividad</estad_tabla_total>
+
+        <estad_dataset_juegos>Juegos</estad_dataset_juegos>
+        <estad_dataset_usuarios>Usuarios activos</estad_dataset_usuarios>
+        <estad_dataset_popularidad>Popularidad</estad_dataset_popularidad>
+        <estad_dataset_mensajes>Mensajes</estad_dataset_mensajes>
+        <estad_dataset_valoracion>Valoración</estad_dataset_valoracion>
+        <estad_dataset_admins>Administradores</estad_dataset_admins>
+        <estad_dataset_usuarios_normales>Usuarios</estad_dataset_usuarios_normales>
+
+        <!-- ===== CONTACTO ===== -->
+        <contacto_titulo>Contacto</contacto_titulo>
+        <contacto_info>Información de contacto</contacto_info>
+        <contacto_texto>Si tienes sugerencias, quieres colaborar en el proyecto o simplemente quieres ponerte en contacto con el desarrollador, puedes utilizar los siguientes medios:</contacto_texto>
+        <contacto_desarrollador>Desarrollador</contacto_desarrollador>
+        <contacto_email>Email</contacto_email>
+        <contacto_proyecto>Proyecto</contacto_proyecto>
+        <contacto_desc_proyecto>Proyecto de Fin de Ciclo – Desarrollo de Aplicaciones Web (DAW)</contacto_desc_proyecto>
+        <contacto_volver>Volver al inicio</contacto_volver>
+
+        <!-- ===== CHAT PRIVADO ===== -->
+        <chat_privado_con>Chat con</chat_privado_con>
+        <chat_privado_placeholder>Escribe un mensaje...</chat_privado_placeholder>
+        <chat_privado_enviar>Enviar</chat_privado_enviar>
+        <chat_privado_tu>Tú</chat_privado_tu>
+        <chat_privado_sin_mensajes>No hay mensajes aún. ¡Sé el primero!</chat_privado_sin_mensajes>
+        <chat_privado_error_cargar>Error al cargar mensajes.</chat_privado_error_cargar>
+        <chat_privado_error_enviar>Error de conexión al enviar el mensaje.</chat_privado_error_enviar>
+
+        <!-- ===== CHAT GLOBAL ===== -->
+        <chat_global_titulo>Chat Global</chat_global_titulo>
+
+        <!-- ===== CENTRO DE COLABORADORES ===== -->
+        <colab_titulo>Centro de Colaboradores</colab_titulo>
+        <colab_th_usuario>Usuario</colab_th_usuario>
+        <colab_th_nombre>Nombre</colab_th_nombre>
+        <colab_th_fecha>Fecha</colab_th_fecha>
+        <colab_th_estado>Estado</colab_th_estado>
+        <colab_th_accion>Acción</colab_th_accion>
+        <colab_th_acciones>Acciones</colab_th_acciones>
+        <colab_conectado>Conectado</colab_conectado>
+        <colab_desconectado>Desconectado</colab_desconectado>
+        <colab_chat>Chat</colab_chat>
+        <colab_buscando>Buscando...</colab_buscando>
+        <colab_error_buscar>Error al buscar.</colab_error_buscar>
+        <colab_confirmar_eliminar>¿Eliminar a este colaborador?</colab_confirmar_eliminar>
+        <colab_error_enviar>Error al enviar la solicitud.</colab_error_enviar>
+        <colab_error_cancelar>Error al cancelar la solicitud.</colab_error_cancelar>
+        <colab_error_cancelar_rechazada>No puedes cancelar una solicitud rechazada hasta pasados 15 días.</colab_error_cancelar_rechazada>
+
+        <!-- ===== BUSQUEDA DE USUARIOS ===== -->
+        <busq_enviar_solicitud>Enviar solicitud</busq_enviar_solicitud>
+        <busq_cancelar_solicitud>Cancelar solicitud</busq_cancelar_solicitud>
+        <busq_rechazada_tiempo>Rechazada <br></br>disponible en {dias}d {horas}h</busq_rechazada_tiempo>
+        <busq_no_encontrado>No se encontraron usuarios.</busq_no_encontrado>
+
+        <!-- ===== AJUSTES ===== -->
+        <ajustes_perfil_titulo>Perfil</ajustes_perfil_titulo>
+        <ajustes_nombre>Nombre</ajustes_nombre>
+        <ajustes_bio>Bio</ajustes_bio>
+        <ajustes_guardar_cambios>Guardar Cambios</ajustes_guardar_cambios>
+        <ajustes_perfil_actualizado>Perfil actualizado correctamente.</ajustes_perfil_actualizado>
+        <ajustes_error_nombre_vacio>El nombre no puede estar vacío.</ajustes_error_nombre_vacio>
+
+        <ajustes_pass_titulo>Contraseña</ajustes_pass_titulo>
+        <ajustes_pass_actual>Contraseña actual</ajustes_pass_actual>
+        <ajustes_pass_nueva>Nueva contraseña</ajustes_pass_nueva>
+        <ajustes_pass_confirmar>Confirmar nueva contraseña</ajustes_pass_confirmar>
+        <ajustes_pass_cambiar>Cambiar Contraseña</ajustes_pass_cambiar>
+        <ajustes_pass_cambiada>Contraseña cambiada correctamente.</ajustes_pass_cambiada>
+        <ajustes_error_pass_actual>La contraseña actual es incorrecta.</ajustes_error_pass_actual>
+        <ajustes_error_pass_no_coinciden>Las contraseñas nuevas no coinciden.</ajustes_error_pass_no_coinciden>
+        <ajustes_error_pass_corta>La contraseña debe tener al menos 8 caracteres.</ajustes_error_pass_corta>
+
+        <ajustes_avatar_titulo>Avatar</ajustes_avatar_titulo>
+        <ajustes_avatar_actual>Avatar actual</ajustes_avatar_actual>
+        <ajustes_avatar_subir>Subir Avatar</ajustes_avatar_subir>
+        <ajustes_avatar_actualizado>Avatar actualizado correctamente.</ajustes_avatar_actualizado>
+        <ajustes_error_formato_imagen>Formato de imagen no permitido. Usa JPG, PNG o WEBP.</ajustes_error_formato_imagen>
+        <ajustes_error_subir_imagen>Error al subir la imagen.</ajustes_error_subir_imagen>
+        <ajustes_error_no_imagen>No se recibió ninguna imagen.</ajustes_error_no_imagen>
+
+        <ajustes_idioma_titulo>Idioma</ajustes_idioma_titulo>
+        <ajustes_idioma_seleccionar>Seleccionar idioma</ajustes_idioma_seleccionar>
+        <ajustes_idioma_cambiar>Cambiar Idioma</ajustes_idioma_cambiar>
+        <ajustes_idioma_cambiado>Idioma cambiado correctamente.</ajustes_idioma_cambiado>
+        <ajustes_error_idioma>Idioma no válido.</ajustes_error_idioma>
+
+        <ajustes_privacidad_titulo>Privacidad</ajustes_privacidad_titulo>
+        <ajustes_perfil_publico_label>Hacer mi perfil público (visible para otros usuarios)</ajustes_perfil_publico_label>
+        <ajustes_perfil_publico_on>Tu perfil ahora es público.</ajustes_perfil_publico_on>
+        <ajustes_perfil_publico_off>Tu perfil ahora es privado.</ajustes_perfil_publico_off>
+        <ajustes_error_admin_publico>Los administradores no pueden tener perfil público.</ajustes_error_admin_publico>
+
+        <!-- ===== ADMIN JUEGOS ===== -->
+        <admin_juegos_nuevo>Nuevo Juego</admin_juegos_nuevo>
+        <admin_juegos_editar>Editar Juego</admin_juegos_editar>
+        <admin_juegos_elementos>Elementos</admin_juegos_elementos>
+        <admin_juegos_mapa>Mapa</admin_juegos_mapa>
+        <admin_juegos_enlace>Enlace de compra (Steam, GOG...)</admin_juegos_enlace>
+        <admin_juegos_portada>Portada</admin_juegos_portada>
+        <admin_juegos_en_desarrollo>Marcar como "En desarrollo" (próximo lanzamiento)</admin_juegos_en_desarrollo>
+        <admin_juegos_guardando>Guardando...</admin_juegos_guardando>
+        <admin_juegos_confirmar_eliminar>¿Eliminar este juego y todo su contenido?</admin_juegos_confirmar_eliminar>
+        <admin_juegos_error_guardar>Error al guardar</admin_juegos_error_guardar>
+        <admin_juegos_error_conexion>Error de conexión al guardar.</admin_juegos_error_conexion>
 
     </palabras>
 

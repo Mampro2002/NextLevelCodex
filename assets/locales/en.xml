@@ -46,7 +46,7 @@
         <fotos2>[02] MY FAVORITE PHOTOS</fotos2>
         <fotos3>[03] PHOTOS THAT HAVE BEEN SHARED WITH ME</fotos3>
         <fotos4>[04] TRASH CAN</fotos4>
-        <fotos5>Editar Foto</fotos5>
+        <fotos5>Edit Photo</fotos5>
         <fotos6>Shared by:</fotos6>
 
         <mor>[ COLLABORATOR SEARCH ]</mor>
@@ -130,7 +130,352 @@
         <fecha11>Application Date</fecha11>
         <fecha12>Uploaded on:</fecha12>
         <fecha13>at</fecha13>
-        
+
+        <!-- ===== INICIO ===== -->
+        <ini_subtitulo>Explore the library, connect with collaborators and discover new games.</ini_subtitulo>
+        <ini_stat1>Games in the Wiki</ini_stat1>
+        <ini_stat2>Collaborators</ini_stat2>
+        <ini_stat3>Pending requests</ini_stat3>
+        <ini_juegosRecientes>🕹️ Recent Games</ini_juegosRecientes>
+        <ini_verFicha>View Details</ini_verFicha>
+        <ini_proximamente>Coming Soon</ini_proximamente>
+        <ini_sinJuegos>📭 There are no games in the library yet.</ini_sinJuegos>
+        <ini_esEditor>Are you an editor or administrator?</ini_esEditor>
+        <ini_añadirJuego>Add the first game</ini_añadirJuego>
+        <ini_desconocido>Unknown</ini_desconocido>
+
+        <!-- ===== HEADER ===== -->
+        <header_inicio>Home</header_inicio>
+        <header_biblioteca>Library</header_biblioteca>
+        <header_colaboradores>Collaborators</header_colaboradores>
+        <header_chat>Chat</header_chat>
+        <header_perfil>My Profile</header_perfil>
+        <header_ajustes>Settings</header_ajustes>
+        <header_panelAdmin>Admin Panel</header_panelAdmin>
+        <header_estadisticas>Statistics</header_estadisticas>
+        <header_gestionarJuegos>Manage Games</header_gestionarJuegos>
+        <header_tooltipMensajes>Messages from:</header_tooltipMensajes>
+        <header_tooltipSolicitudes>Requests from:</header_tooltipSolicitudes>
+        <header_yMas>and</header_yMas>
+        <header_panelAdminTitulo>Administration Panel</header_panelAdminTitulo>
+        <header_estadisticasTitulo>Next Level Codex Statistics</header_estadisticasTitulo>
+
+        <!-- ===== WIKI HOME ===== -->
+        <wiki_placeholder>Search by title or developer...</wiki_placeholder>
+        <wiki_todosGeneros>All genres</wiki_todosGeneros>
+        <wiki_placeholderDev>Developer</wiki_placeholderDev>
+        <wiki_placeholderAnyo>Year</wiki_placeholderAnyo>
+        <wiki_th1>Title</wiki_th1>
+        <wiki_th2>Developer</wiki_th2>
+        <wiki_th3>Release</wiki_th3>
+        <wiki_th4>Rating</wiki_th4>
+        <wiki_th5>Action</wiki_th5>
+        <wiki_buscando>Searching...</wiki_buscando>
+        <wiki_noJuegos>No games found.</wiki_noJuegos>
+        <wiki_errorServidor>Error connecting to the server.</wiki_errorServidor>
+
+
+        <!-- ===== VER PERFIL (AJENO) ===== -->
+        <perfil_privadoMsg>This profile is private.</perfil_privadoMsg>
+        <perfil_chatPrivado>Private chat</perfil_chatPrivado>
+        <perfil_aceptar>Accept request</perfil_aceptar>
+        <perfil_rechazar>Decline</perfil_rechazar>
+        <perfil_disponibleEn>Available in</perfil_disponibleEn>
+        <perfil_solicitudCancelar>Request sent (cancel)</perfil_solicitudCancelar>
+        <perfil_sinFavOtro>No favourite games yet.</perfil_sinFavOtro>
+        <perfil_sinJuegosOtro>No games added yet.</perfil_sinJuegosOtro>
+        <perfil_privadoTitulo>This profile is private</perfil_privadoTitulo>
+        <perfil_privadoSub>Send a collaboration request to view their content.</perfil_privadoSub>
+        <perfil_errorEnviar>Error sending the request.</perfil_errorEnviar>
+        <perfil_errorCancelar>Error cancelling the request.</perfil_errorCancelar>
+        <perfil_noCancelar>You cannot cancel a declined request for 15 days.</perfil_noCancelar>
+        <perfil_confirmarEliminar>Remove this collaborator?</perfil_confirmarEliminar>
+
+        <!-- ===== PERFIL ===== -->
+        <perfil_sinBio>No biography</perfil_sinBio>
+        <perfil_misColaboradores>My Collaborators</perfil_misColaboradores>
+        <perfil_desconectado>Offline</perfil_desconectado>
+        <perfil_sinColaboradores>You have no collaborators yet.</perfil_sinColaboradores>
+        <perfil_misJuegos>My Added Games</perfil_misJuegos>
+        <perfil_fecha>Date</perfil_fecha>
+        <perfil_ver>View</perfil_ver>
+        <perfil_sinJuegos>You have not added any games.</perfil_sinJuegos>
+        <perfil_misFavoritos>My Favourite Games</perfil_misFavoritos>
+        <perfil_sinFavoritos>You have not marked any games as favourites yet.</perfil_sinFavoritos>
+        <perfil_misLogros>My Achievements</perfil_misLogros>
+        <perfil_verLogros>View all available achievements</perfil_verLogros>
+        <perfil_sinLogros>You have not unlocked any achievements yet.</perfil_sinLogros>
+
+        <!-- ===== TABLA ADMIN ===== -->
+        <admin_dejarVacio>Leave empty</admin_dejarVacio>
+        <admin_minutosBan>How many minutes do you want to ban this user?</admin_minutosBan>
+        <admin_baneado>User banned successfully</admin_baneado>
+        <admin_desbaneado>User unbanned successfully</admin_desbaneado>
+
+        <!-- ===== CHARACTER MANAGEMENT ===== -->
+        <pj_volver>Back</pj_volver>
+        <pj_titulo>Characters of:</pj_titulo>
+        <pj_añadir>Add Character</pj_añadir>
+        <pj_cargando>Loading...</pj_cargando>
+        <pj_rol>Role</pj_rol>
+        <pj_ubicacion>Location</pj_ubicacion>
+        <pj_descripcion>Description</pj_descripcion>
+        <pj_editar>Edit</pj_editar>
+        <pj_nuevo_personaje>New Character</pj_nuevo_personaje>
+        <pj_nombre>Name *</pj_nombre>
+        <pj_placeholder_rol>Main, Enemy, Ally...</pj_placeholder_rol>
+        <pj_imagen>Image</pj_imagen>
+        <pj_imagen_info>Leave empty to keep the current one.</pj_imagen_info>
+        <pj_guardar>Save</pj_guardar>
+        <pj_sin_personajes>No characters. Add the first one!</pj_sin_personajes>
+        <pj_sin_rol>No role</pj_sin_rol>
+        <pj_confirmar_eliminar>Delete this character?</pj_confirmar_eliminar>
+        <pj_error_guardar>Error saving:</pj_error_guardar>
+        <pj_editar_personaje>Edit Character</pj_editar_personaje>
+
+        <!-- ===== MAP MANAGEMENT ===== -->
+        <mapa_titulo>Map of:</mapa_titulo>
+        <mapa_imagen_titulo>Map image</mapa_imagen_titulo>
+        <mapa_imagen_subir>Upload the game map image (jpg, png, webp)</mapa_imagen_subir>
+        <mapa_subir>Upload</mapa_subir>
+        <mapa_instruccion><strong>Click on the image</strong> to add a point of interest at that position.</mapa_instruccion>
+        <mapa_puntos>Points of interest</mapa_puntos>
+        <mapa_th_icono>Icon</mapa_th_icono>
+        <mapa_th_nombre>Name</mapa_th_nombre>
+        <mapa_th_tipo>Type</mapa_th_tipo>
+        <mapa_th_posx>Pos X (%)</mapa_th_posx>
+        <mapa_th_posy>Pos Y (%)</mapa_th_posy>
+        <mapa_th_descripcion>Description</mapa_th_descripcion>
+        <mapa_th_accion>Action</mapa_th_accion>
+        <mapa_sin_imagen>Upload the map image first to add points of interest.</mapa_sin_imagen>
+        <mapa_nuevo_punto>New Point of Interest</mapa_nuevo_punto>
+        <mapa_posicion>Position:</mapa_posicion>
+        <mapa_nombre>Name *</mapa_nombre>
+        <mapa_placeholder_nombre>E.g. Mondstadt City</mapa_placeholder_nombre>
+        <mapa_tipo>Type</mapa_tipo>
+        <mapa_placeholder_tipo>City, Dungeon, Boss, Shop...</mapa_placeholder_tipo>
+        <mapa_descripcion>Description</mapa_descripcion>
+        <mapa_placeholder_desc>Optional description of the point...</mapa_placeholder_desc>
+        <mapa_icono_punto>Point icon</mapa_icono_punto>
+        <mapa_guardar_punto>Save point</mapa_guardar_punto>
+        <mapa_error_nombre>Name is required.</mapa_error_nombre>
+        <mapa_error_subir>Error uploading image:</mapa_error_subir>
+        <mapa_error_guardar>Error saving:</mapa_error_guardar>
+        <mapa_error_eliminar>Error deleting the point</mapa_error_eliminar>
+        <mapa_confirmar_eliminar>Delete this point?</mapa_confirmar_eliminar>
+        <mapa_tabla_vacia>No points of interest. Click on the image to add one.</mapa_tabla_vacia>
+
+        <!-- ===== ELEMENT MANAGEMENT ===== -->
+        <elem_añadir>Add</elem_añadir>
+        <elem_nuevo>New</elem_nuevo>
+        <elem_editar>Edit</elem_editar>
+        <elem_no_hay>No {nombre}. Add the first one!</elem_no_hay>
+        <elem_sin_tipo>No type</elem_sin_tipo>
+        <elem_confirmar_eliminar>Delete this {nombre}?</elem_confirmar_eliminar>
+        <elem_error_guardar>Error saving:</elem_error_guardar>
+        <elem_error_tipo_obligatorio>Please specify the custom type.</elem_error_tipo_obligatorio>
+
+        <elem_detalle_tipo>Type</elem_detalle_tipo>
+        <elem_detalle_rareza>Rarity</elem_detalle_rareza>
+        <elem_detalle_descripcion>Description</elem_detalle_descripcion>
+        <elem_valor1_default>Value 1</elem_valor1_default>
+        <elem_valor2_default>Value 2</elem_valor2_default>
+
+        <elem_nombre_label>Name *</elem_nombre_label>
+        <elem_tipo_label>Type</elem_tipo_label>
+        <elem_tipo_placeholder>Select type...</elem_tipo_placeholder>
+        <elem_tipo_custom_placeholder>Specify the type...</elem_tipo_custom_placeholder>
+        <elem_tipo_arma>Weapon</elem_tipo_arma>
+        <elem_tipo_carta>Card</elem_tipo_carta>
+        <elem_tipo_hechizo>Spell</elem_tipo_hechizo>
+        <elem_tipo_objeto>Object</elem_tipo_objeto>
+        <elem_tipo_armadura>Armor/Suit</elem_tipo_armadura>
+        <elem_tipo_otro>Other</elem_tipo_otro>
+
+        <elem_rareza_label>Rarity</elem_rareza_label>
+        <elem_rareza_sin>No rarity</elem_rareza_sin>
+        <elem_rareza_comun>Common</elem_rareza_comun>
+        <elem_rareza_raro>Rare</elem_rareza_raro>
+        <elem_rareza_epico>Epic</elem_rareza_epico>
+        <elem_rareza_legendario>Legendary</elem_rareza_legendario>
+
+        <elem_descripcion_label>Description</elem_descripcion_label>
+        <elem_imagen_label>Image</elem_imagen_label>
+
+        <elem_label_dano>Damage</elem_label_dano>
+        <elem_label_municion>Ammo</elem_label_municion>
+        <elem_label_puntos>Points</elem_label_puntos>
+        <elem_label_coste>Cost</elem_label_coste>
+        <elem_label_poder>Power</elem_label_poder>
+        <elem_label_mana>Mana</elem_label_mana>
+        <elem_label_efecto>Effect</elem_label_efecto>
+        <elem_label_duracion>Duration</elem_label_duracion>
+        <elem_label_defensa>Defense</elem_label_defensa>
+        <elem_label_resistencia>Resistance</elem_label_resistencia>
+
+        <!-- ===== GAME DETAIL PAGE ===== -->
+        <ficha_volver>Back to library</ficha_volver>
+        <ficha_no_encontrado>Game not found.</ficha_no_encontrado>
+        <ficha_sin_genero>No genre</ficha_sin_genero>
+        <ficha_sin_descripcion>No description.</ficha_sin_descripcion>
+        <ficha_anadido_por>Added by</ficha_anadido_por>
+        <ficha_comprar_tienda>Buy in store</ficha_comprar_tienda>
+        <ficha_buscar_steam>Search on Steam</ficha_buscar_steam>
+        <ficha_marcar_favorito>Add to favourites</ficha_marcar_favorito>
+        <ficha_quitar_favorito>Remove from favourites</ficha_quitar_favorito>
+        <ficha_tu_valoracion>Your rating:</ficha_tu_valoracion>
+        <ficha_votos>votes</ficha_votos>
+        <ficha_general>General</ficha_general>
+        <ficha_elementos>Elements</ficha_elementos>
+        <ficha_personajes>Characters</ficha_personajes>
+        <ficha_mapa_interactivo>Interactive Map</ficha_mapa_interactivo>
+        <ficha_comentarios>Comments</ficha_comentarios>
+        <ficha_trailer>Trailer</ficha_trailer>
+        <ficha_info_general>General Information</ficha_info_general>
+        <ficha_distribuidora>Publisher</ficha_distribuidora>
+        <ficha_genero_tabla>Genre</ficha_genero_tabla>
+        <ficha_proximo_lanzamiento>Upcoming release</ficha_proximo_lanzamiento>
+        <ficha_dias>Days</ficha_dias>
+        <ficha_horas>Hours</ficha_horas>
+        <ficha_min>Min</ficha_min>
+        <ficha_seg>Sec</ficha_seg>
+        <ficha_ya_disponible>Available now!</ficha_ya_disponible>
+        <ficha_mapa_instruccion>Hover over the markers to see point information.</ficha_mapa_instruccion>
+        <ficha_placeholder_comentario>Write a comment...</ficha_placeholder_comentario>
+        <ficha_publicar>Publish</ficha_publicar>
+        <ficha_ver_trailer>Watch trailer</ficha_ver_trailer>
+        <ficha_primer_comentario>Be the first to comment.</ficha_primer_comentario>
+        <ficha_confirmar_eliminar_comentario>Delete this comment?</ficha_confirmar_eliminar_comentario>
+        <ficha_error_publicar>Error publishing comment.</ficha_error_publicar>
+
+        <!-- ===== STATISTICS ===== -->
+        <estad_titulo>Statistics Panel</estad_titulo>
+        <estad_kpi_usuarios>Total users</estad_kpi_usuarios>
+        <estad_kpi_conectados>Online now</estad_kpi_conectados>
+        <estad_kpi_juegos>Games in wiki</estad_kpi_juegos>
+        <estad_kpi_comentarios>Comments</estad_kpi_comentarios>
+        <estad_kpi_mensajes>Chat messages</estad_kpi_mensajes>
+        <estad_kpi_favoritos>Favourites</estad_kpi_favoritos>
+        <estad_kpi_valoracion>Average rating</estad_kpi_valoracion>
+
+        <estad_chart_juegos_mes>Games added per month</estad_chart_juegos_mes>
+        <estad_chart_usuarios_mes>User activity per month</estad_chart_usuarios_mes>
+        <estad_chart_populares>Most popular games</estad_chart_populares>
+        <estad_chart_chat>Chat activity (7 days)</estad_chart_chat>
+        <estad_chart_valorados>Top rated games</estad_chart_valorados>
+        <estad_chart_niveles>User types</estad_chart_niveles>
+
+        <estad_tabla_activos>Most active users</estad_tabla_activos>
+        <estad_tabla_num>#</estad_tabla_num>
+        <estad_tabla_usuario>User</estad_tabla_usuario>
+        <estad_tabla_comentarios>Comments</estad_tabla_comentarios>
+        <estad_tabla_valoraciones>Ratings</estad_tabla_valoraciones>
+        <estad_tabla_total>Total activity</estad_tabla_total>
+
+        <estad_dataset_juegos>Games</estad_dataset_juegos>
+        <estad_dataset_usuarios>Active users</estad_dataset_usuarios>
+        <estad_dataset_popularidad>Popularity</estad_dataset_popularidad>
+        <estad_dataset_mensajes>Messages</estad_dataset_mensajes>
+        <estad_dataset_valoracion>Rating</estad_dataset_valoracion>
+        <estad_dataset_admins>Administrators</estad_dataset_admins>
+        <estad_dataset_usuarios_normales>Users</estad_dataset_usuarios_normales>
+
+        <!-- ===== CONTACT ===== -->
+        <contacto_titulo>Contact</contacto_titulo>
+        <contacto_info>Contact Information</contacto_info>
+        <contacto_texto>If you have suggestions, want to collaborate on the project or simply want to get in touch with the developer, you can use the following means:</contacto_texto>
+        <contacto_desarrollador>Developer</contacto_desarrollador>
+        <contacto_email>Email</contacto_email>
+        <contacto_proyecto>Project</contacto_proyecto>
+        <contacto_desc_proyecto>End of Degree Project – Web Application Development (DAW)</contacto_desc_proyecto>
+        <contacto_volver>Back to home</contacto_volver>
+
+        <!-- ===== PRIVATE CHAT ===== -->
+        <chat_privado_con>Chat with</chat_privado_con>
+        <chat_privado_placeholder>Write a message...</chat_privado_placeholder>
+        <chat_privado_enviar>Send</chat_privado_enviar>
+        <chat_privado_tu>You</chat_privado_tu>
+        <chat_privado_sin_mensajes>No messages yet. Be the first!</chat_privado_sin_mensajes>
+        <chat_privado_error_cargar>Error loading messages.</chat_privado_error_cargar>
+        <chat_privado_error_enviar>Connection error while sending the message.</chat_privado_error_enviar>
+
+        <!-- ===== GLOBAL CHAT ===== -->
+        <chat_global_titulo>Global Chat</chat_global_titulo>
+
+        <!-- ===== COLLABORATOR CENTER ===== -->
+        <colab_titulo>Collaborator Center</colab_titulo>
+        <colab_th_usuario>User</colab_th_usuario>
+        <colab_th_nombre>Name</colab_th_nombre>
+        <colab_th_fecha>Date</colab_th_fecha>
+        <colab_th_estado>Status</colab_th_estado>
+        <colab_th_accion>Action</colab_th_accion>
+        <colab_th_acciones>Actions</colab_th_acciones>
+        <colab_conectado>Online</colab_conectado>
+        <colab_desconectado>Offline</colab_desconectado>
+        <colab_chat>Chat</colab_chat>
+        <colab_buscando>Searching...</colab_buscando>
+        <colab_error_buscar>Error searching.</colab_error_buscar>
+        <colab_confirmar_eliminar>Remove this collaborator?</colab_confirmar_eliminar>
+        <colab_error_enviar>Error sending the request.</colab_error_enviar>
+        <colab_error_cancelar>Error cancelling the request.</colab_error_cancelar>
+        <colab_error_cancelar_rechazada>You cannot cancel a rejected request for 15 days.</colab_error_cancelar_rechazada>
+
+        <!-- ===== USER SEARCH ===== -->
+        <busq_enviar_solicitud>Send request</busq_enviar_solicitud>
+        <busq_cancelar_solicitud>Cancel request</busq_cancelar_solicitud>
+        <busq_rechazada_tiempo>Rejected<br></br> available in {dias}d {horas}h</busq_rechazada_tiempo>
+        <busq_no_encontrado>No users found.</busq_no_encontrado>
+
+        <!-- ===== SETTINGS ===== -->
+        <ajustes_perfil_titulo>Profile</ajustes_perfil_titulo>
+        <ajustes_nombre>Name</ajustes_nombre>
+        <ajustes_bio>Bio</ajustes_bio>
+        <ajustes_guardar_cambios>Save Changes</ajustes_guardar_cambios>
+        <ajustes_perfil_actualizado>Profile updated successfully.</ajustes_perfil_actualizado>
+        <ajustes_error_nombre_vacio>Name cannot be empty.</ajustes_error_nombre_vacio>
+
+        <ajustes_pass_titulo>Password</ajustes_pass_titulo>
+        <ajustes_pass_actual>Current password</ajustes_pass_actual>
+        <ajustes_pass_nueva>New password</ajustes_pass_nueva>
+        <ajustes_pass_confirmar>Confirm new password</ajustes_pass_confirmar>
+        <ajustes_pass_cambiar>Change Password</ajustes_pass_cambiar>
+        <ajustes_pass_cambiada>Password changed successfully.</ajustes_pass_cambiada>
+        <ajustes_error_pass_actual>Current password is incorrect.</ajustes_error_pass_actual>
+        <ajustes_error_pass_no_coinciden>New passwords do not match.</ajustes_error_pass_no_coinciden>
+        <ajustes_error_pass_corta>Password must be at least 8 characters.</ajustes_error_pass_corta>
+
+        <ajustes_avatar_titulo>Avatar</ajustes_avatar_titulo>
+        <ajustes_avatar_actual>Current avatar</ajustes_avatar_actual>
+        <ajustes_avatar_subir>Upload Avatar</ajustes_avatar_subir>
+        <ajustes_avatar_actualizado>Avatar updated successfully.</ajustes_avatar_actualizado>
+        <ajustes_error_formato_imagen>Image format not allowed. Use JPG, PNG or WEBP.</ajustes_error_formato_imagen>
+        <ajustes_error_subir_imagen>Error uploading image.</ajustes_error_subir_imagen>
+        <ajustes_error_no_imagen>No image received.</ajustes_error_no_imagen>
+
+        <ajustes_idioma_titulo>Language</ajustes_idioma_titulo>
+        <ajustes_idioma_seleccionar>Select language</ajustes_idioma_seleccionar>
+        <ajustes_idioma_cambiar>Change Language</ajustes_idioma_cambiar>
+        <ajustes_idioma_cambiado>Language changed successfully.</ajustes_idioma_cambiado>
+        <ajustes_error_idioma>Invalid language.</ajustes_error_idioma>
+
+        <ajustes_privacidad_titulo>Privacy</ajustes_privacidad_titulo>
+        <ajustes_perfil_publico_label>Make my profile public (visible to other users)</ajustes_perfil_publico_label>
+        <ajustes_perfil_publico_on>Your profile is now public.</ajustes_perfil_publico_on>
+        <ajustes_perfil_publico_off>Your profile is now private.</ajustes_perfil_publico_off>
+        <ajustes_error_admin_publico>Administrators cannot have a public profile.</ajustes_error_admin_publico>
+
+        <!-- ===== ADMIN GAMES ===== -->
+        <admin_juegos_nuevo>New Game</admin_juegos_nuevo>
+        <admin_juegos_editar>Edit Game</admin_juegos_editar>
+        <admin_juegos_elementos>Elements</admin_juegos_elementos>
+        <admin_juegos_mapa>Map</admin_juegos_mapa>
+        <admin_juegos_enlace>Purchase link (Steam, GOG...)</admin_juegos_enlace>
+        <admin_juegos_portada>Cover</admin_juegos_portada>
+        <admin_juegos_en_desarrollo>Mark as "In development" (upcoming release)</admin_juegos_en_desarrollo>
+        <admin_juegos_guardando>Saving...</admin_juegos_guardando>
+        <admin_juegos_confirmar_eliminar>Delete this game and all its content?</admin_juegos_confirmar_eliminar>
+        <admin_juegos_error_guardar>Error saving</admin_juegos_error_guardar>
+        <admin_juegos_error_conexion>Connection error while saving.</admin_juegos_error_conexion>
 
     </palabras>
 

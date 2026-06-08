@@ -104,17 +104,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "Idioma no válido.";
         }
     } elseif ($accion === 'toggle_perfil_publico') {
-    // ✅ Admin no puede tener perfil público
-    if ($_SESSION['level'] == 0) {
-        $error = "Los administradores no pueden tener perfil público.";
-    } else {
-        $valor = isset($_POST['perfil_publico']) ? 1 : 0;
-        $stmt = $db->prepare("UPDATE usuarios SET perfil_publico = ? WHERE id = ?");
-        $stmt->bind_param("ii", $valor, $_SESSION['id']);
-        $stmt->execute();
-        $mensaje = $valor ? "Tu perfil ahora es público." : "Tu perfil ahora es privado.";
+        // ✅ Admin no puede tener perfil público
+        if ($_SESSION['level'] == 0) {
+            $error = "Los administradores no pueden tener perfil público.";
+        } else {
+            $valor = isset($_POST['perfil_publico']) ? 1 : 0;
+            $stmt = $db->prepare("UPDATE usuarios SET perfil_publico = ? WHERE id = ?");
+            $stmt->bind_param("ii", $valor, $_SESSION['id']);
+            $stmt->execute();
+            $mensaje = $valor ? "Tu perfil ahora es público." : "Tu perfil ahora es privado.";
+        }
     }
-}
 }
 
 // ✅ SEGURIDAD: SELECT solo campos necesarios, sin traer la contraseña
@@ -127,14 +127,13 @@ include "../sec/header.php";
 ?>
 
 <div class="main-container">
-    <h1><i class="fas fa-cog"></i> Ajustes</h1>
+    <h1><i class="fas fa-cog"></i> <?= $idioma->palabras->header_ajustes ?></h1>
 
     <?php if ($mensaje): ?>
-        <!-- ✅ SEGURIDAD: htmlspecialchars en mensajes -->
-        <div class="alert alert-success"><?php echo htmlspecialchars($mensaje); ?></div>
+        <div class="alert alert-success"><?= htmlspecialchars($mensaje) ?></div>
     <?php endif; ?>
     <?php if ($error): ?>
-        <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
 
     <div class="ajustes-grid">
@@ -142,20 +141,21 @@ include "../sec/header.php";
         <!-- Perfil -->
         <div class="card">
             <div class="card-body">
-                <h3><i class="fas fa-user-edit"></i> Perfil</h3>
+                <h3><i class="fas fa-user-edit"></i> <?= $idioma->palabras->ajustes_perfil_titulo ?></h3>
                 <form method="post">
                     <input type="hidden" name="accion" value="actualizar_perfil">
                     <div class="form-group">
-                        <label>Nombre</label>
+                        <label><?= $idioma->palabras->ajustes_nombre ?></label>
                         <input type="text" name="nombre" class="input"
-                            value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
+                            value="<?= htmlspecialchars($usuario['nombre']) ?>" required>
                     </div>
                     <div class="form-group">
-                        <label>Bio</label>
+                        <label><?= $idioma->palabras->ajustes_bio ?></label>
                         <textarea name="bio" class="input"
-                            rows="3"><?php echo htmlspecialchars($usuario['bio'] ?? ''); ?></textarea>
+                            rows="3"><?= htmlspecialchars($usuario['bio'] ?? '') ?></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="submit"
+                        class="btn btn-primary"><?= $idioma->palabras->ajustes_guardar_cambios ?></button>
                 </form>
             </div>
         </div>
@@ -163,23 +163,23 @@ include "../sec/header.php";
         <!-- Contraseña -->
         <div class="card">
             <div class="card-body">
-                <h3><i class="fas fa-lock"></i> Contraseña</h3>
+                <h3><i class="fas fa-lock"></i> <?= $idioma->palabras->ajustes_pass_titulo ?></h3>
                 <form method="post">
                     <input type="hidden" name="accion" value="cambiar_password">
                     <div class="form-group">
-                        <label>Contraseña actual</label>
+                        <label><?= $idioma->palabras->ajustes_pass_actual ?></label>
                         <input type="password" name="pass_actual" class="input" required>
                     </div>
                     <div class="form-group">
-                        <label>Nueva contraseña</label>
-                        <!-- ✅ SEGURIDAD: mínimo 8 caracteres -->
+                        <label><?= $idioma->palabras->ajustes_pass_nueva ?></label>
                         <input type="password" name="pass_nueva" class="input" required minlength="8">
                     </div>
                     <div class="form-group">
-                        <label>Confirmar nueva contraseña</label>
+                        <label><?= $idioma->palabras->ajustes_pass_confirmar ?></label>
                         <input type="password" name="pass_confirmar" class="input" required minlength="8">
                     </div>
-                    <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                    <button type="submit"
+                        class="btn btn-primary"><?= $idioma->palabras->ajustes_pass_cambiar ?></button>
                 </form>
             </div>
         </div>
@@ -187,18 +187,18 @@ include "../sec/header.php";
         <!-- Avatar -->
         <div class="card">
             <div class="card-body">
-                <h3><i class="fas fa-image"></i> Avatar</h3>
-                <p>Avatar actual:</p>
-                <img src="../assets/img/avatars/<?php echo htmlspecialchars($usuario['avatar'] ?? 'default.jpg'); ?>"
+                <h3><i class="fas fa-image"></i> <?= $idioma->palabras->ajustes_avatar_titulo ?></h3>
+                <p><?= $idioma->palabras->ajustes_avatar_actual ?>:</p>
+                <img src="../assets/img/avatars/<?= htmlspecialchars($usuario['avatar'] ?? 'default.jpg') ?>"
                     alt="Avatar" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;"
                     onerror="this.src='../assets/img/avatars/default.jpg'">
                 <form method="post" enctype="multipart/form-data" style="margin-top: 15px;">
                     <input type="hidden" name="accion" value="cambiar_avatar">
                     <div class="form-group">
-                        <!-- ✅ Solo formatos permitidos -->
                         <input type="file" name="avatar" class="input" accept=".jpg,.jpeg,.png,.webp">
                     </div>
-                    <button type="submit" class="btn btn-primary">Subir Avatar</button>
+                    <button type="submit"
+                        class="btn btn-primary"><?= $idioma->palabras->ajustes_avatar_subir ?></button>
                 </form>
             </div>
         </div>
@@ -206,42 +206,43 @@ include "../sec/header.php";
         <!-- Idioma -->
         <div class="card">
             <div class="card-body">
-                <h3><i class="fas fa-language"></i> Idioma</h3>
+                <h3><i class="fas fa-language"></i> <?= $idioma->palabras->ajustes_idioma_titulo ?></h3>
                 <form method="post">
                     <input type="hidden" name="accion" value="cambiar_idioma">
                     <div class="form-group">
-                        <label>Seleccionar idioma</label>
+                        <label><?= $idioma->palabras->ajustes_idioma_seleccionar ?></label>
                         <select name="idioma" class="input">
-                            <option value="es" <?php echo ($_SESSION['idioma'] ?? 'es') === 'es' ? 'selected' : ''; ?>>
-                                Español</option>
-                            <option value="en" <?php echo ($_SESSION['idioma'] ?? 'es') === 'en' ? 'selected' : ''; ?>>
-                                English</option>
+                            <option value="es" <?= ($_SESSION['idioma'] ?? 'es') === 'es' ? 'selected' : '' ?>>Español
+                            </option>
+                            <option value="en" <?= ($_SESSION['idioma'] ?? 'es') === 'en' ? 'selected' : '' ?>>English
+                            </option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Cambiar Idioma</button>
+                    <button type="submit"
+                        class="btn btn-primary"><?= $idioma->palabras->ajustes_idioma_cambiar ?></button>
                 </form>
             </div>
         </div>
 
         <!-- Privacidad -->
-         <?php if ($_SESSION['level'] != 0): ?>
-    <div class="card">
-        <div class="card-body">
-            <h3><i class="fas fa-eye"></i> Privacidad</h3>
-        <form method="post">
-            <input type="hidden" name="accion" value="toggle_perfil_publico">
-            <div class="form-group" style="display:flex; align-items:center; gap: var(--spacing-md);">
-                <input type="checkbox" name="perfil_publico" id="perfilPublico"
-                    <?php echo $usuario['perfil_publico'] ? 'checked' : ''; ?>>
-                <label for="perfilPublico" style="margin:0;">
-                    Hacer mi perfil público (visible para otros usuarios)
-                </label>
+        <?php if ($_SESSION['level'] != 0): ?>
+            <div class="card">
+                <div class="card-body">
+                    <h3><i class="fas fa-eye"></i> <?= $idioma->palabras->ajustes_privacidad_titulo ?></h3>
+                    <form method="post">
+                        <input type="hidden" name="accion" value="toggle_perfil_publico">
+                        <div class="form-group" style="display:flex; align-items:center; gap: var(--spacing-md);">
+                            <input type="checkbox" name="perfil_publico" id="perfilPublico" <?= $usuario['perfil_publico'] ? 'checked' : '' ?>>
+                            <label for="perfilPublico" style="margin:0;">
+                                <?= $idioma->palabras->ajustes_perfil_publico_label ?>
+                            </label>
+                        </div>
+                        <button type="submit"
+                            class="btn btn-primary"><?= $idioma->palabras->ajustes_guardar_cambios ?></button>
+                    </form>
+                </div>
             </div>
-                <button type="submit" class="btn btn-primary">Guardar</button>
-            </form>
-        </div>
-    </div>
-<?php endif; ?>
+        <?php endif; ?>
     </div>
 </div>
 

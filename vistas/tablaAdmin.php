@@ -9,6 +9,11 @@ if (!isset($_SESSION["user"]) || !isset($_SESSION["level"])) {
 
 $idioma = simplexml_load_file("../assets/locales/" . $_SESSION["idioma"] . ".xml");
 
+// Variables de idioma para JavaScript
+$js_minutosBan = addslashes((string) $idioma->palabras->admin_minutosBan);
+$js_baneado = addslashes((string) $idioma->palabras->admin_baneado);
+$js_desbaneado = addslashes((string) $idioma->palabras->admin_desbaneado);
+
 if ($_SESSION["level"] == 0) {
     ?>
 
@@ -39,7 +44,7 @@ if ($_SESSION["level"] == 0) {
                 </thead>
                 <tbody>
                     <?php
-                    $filt = $db->prepare("SELECT * FROM usuarios ");
+                    $filt = $db->prepare("SELECT * FROM usuarios");
                     $filt->execute();
                     $res = $filt->get_result();
                     for ($i = 0; $i < $res->num_rows; $i++) {
@@ -49,7 +54,10 @@ if ($_SESSION["level"] == 0) {
                             <td><input type="checkbox" laId="<?php echo $vec["id"] ?>" class="check"></td>
                             <td><?php echo $vec["id"]; ?></td>
                             <td><?php echo $vec["user"]; ?></td>
-                            <td><input type="password" value="" placeholder="Dejar vacío" id="pass_<?php echo $vec["id"] ?>">
+                            <td>
+                                <input type="password" value=""
+                                    placeholder="<?php echo htmlspecialchars((string) $idioma->palabras->admin_dejarVacio) ?>"
+                                    id="pass_<?php echo $vec["id"] ?>">
                             </td>
                             <td><input value="<?php echo $vec["nombre"] ?>" id="nombre_<?php echo $vec["id"] ?>"></td>
                             <td><input type="number" value="<?php echo $vec["level"] ?>" id="level_<?php echo $vec["id"] ?>">
@@ -82,7 +90,6 @@ if ($_SESSION["level"] == 0) {
                 <button id="Añadir" type="submit"><a><?php echo $idioma->palabras->boton3 ?></a></button>
             </div>
         </div>
-
 
     <?php } ?>
 
@@ -159,14 +166,14 @@ if ($_SESSION["level"] == 0) {
 
     $(".btn_ban").click(function () {
         let laId = $(this).attr("laId");
-        let minutos = prompt("¿Cuántos minutos quieres banear al usuario?");
+        let minutos = prompt('<?= $js_minutosBan ?>');
         if (!minutos || isNaN(minutos)) return;
         $.ajax({
             type: "post",
             url: "/NextLevelCodex/controladores/control_users.php",
             data: { laId: laId, minutos: minutos, options: 5 },
             success: function (data) {
-                if (data == "baneado") alert("Usuario baneado correctamente");
+                if (data == "baneado") alert('<?= $js_baneado ?>');
                 location.reload();
             }
         });
@@ -179,12 +186,11 @@ if ($_SESSION["level"] == 0) {
             url: "/NextLevelCodex/controladores/control_users.php",
             data: { laId: laId, options: 6 },
             success: function (data) {
-                if (data == "desbaneado") alert("Usuario desbaneado correctamente");
+                if (data == "desbaneado") alert('<?= $js_desbaneado ?>');
                 location.reload();
             }
         });
     });
-
 </script>
 
 </html>

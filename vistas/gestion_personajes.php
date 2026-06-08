@@ -120,17 +120,18 @@ include "../sec/header.php";
 </style>
 
 <div class="main-container">
-    <a href="admin_juegos.php" class="btn"><i class="fas fa-arrow-left"></i> Volver</a>
+    <a href="admin_juegos.php" class="btn"><i class="fas fa-arrow-left"></i> <?= $idioma->palabras->pj_volver ?></a>
     <div style="display:flex; justify-content:space-between; align-items:center; margin-top: var(--spacing-md);">
-        <h1><i class="fas fa-users"></i> Personajes de: <?= htmlspecialchars($juego['titulo']) ?></h1>
+        <h1><i class="fas fa-users"></i> <?= $idioma->palabras->pj_titulo ?> <?= htmlspecialchars($juego['titulo']) ?>
+        </h1>
         <button class="btn btn-primary" onclick="abrirModalPersonaje()">
-            <i class="fas fa-plus"></i> Añadir Personaje
+            <i class="fas fa-plus"></i> <?= $idioma->palabras->pj_añadir ?>
         </button>
     </div>
 
     <!-- Grid de personajes -->
     <div class="personajes-grid" id="gridPersonajes">
-        <p class="text-muted">Cargando...</p>
+        <p class="text-muted"><?= $idioma->palabras->pj_cargando ?></p>
     </div>
 </div>
 
@@ -145,21 +146,22 @@ include "../sec/header.php";
             <img id="detalleImg" src="" alt="" class="modal-detalle-img"
                 onerror="this.src='../assets/img/avatars/default.jpg'">
             <div class="detalle-row">
-                <span class="detalle-label">Rol</span>
+                <span class="detalle-label"><?= $idioma->palabras->pj_rol ?></span>
                 <span class="detalle-valor" id="detalleRol"></span>
             </div>
             <div class="detalle-row">
-                <span class="detalle-label">Ubicación</span>
+                <span class="detalle-label"><?= $idioma->palabras->pj_ubicacion ?></span>
                 <span class="detalle-valor" id="detalleUbicacion"></span>
             </div>
             <div class="detalle-row">
-                <span class="detalle-label">Descripción</span>
+                <span class="detalle-label"><?= $idioma->palabras->pj_descripcion ?></span>
                 <span class="detalle-valor" id="detalleDescripcion"></span>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn" onclick="$('#modalDetalle').hide()">Cerrar</button>
-            <button class="btn btn-primary" id="btnEditarDesdeDetalle"><i class="fas fa-edit"></i> Editar</button>
+            <button class="btn" onclick="$('#modalDetalle').hide()"><?= $idioma->palabras->Cerrar ?></button>
+            <button class="btn btn-primary" id="btnEditarDesdeDetalle"><i class="fas fa-edit"></i>
+                <?= $idioma->palabras->pj_editar ?></button>
         </div>
     </div>
 </div>
@@ -168,38 +170,39 @@ include "../sec/header.php";
 <div id="modalPersonaje" class="modal-overlay" style="display:none;">
     <div class="modal" style="max-width:500px;">
         <div class="modal-header">
-            <h3 class="modal-title" id="modalPersonajeTitulo">Nuevo Personaje</h3>
+            <h3 class="modal-title" id="modalPersonajeTitulo"><?= $idioma->palabras->pj_nuevo_personaje ?></h3>
             <button class="modal-close" onclick="$('#modalPersonaje').hide()">&times;</button>
         </div>
         <div class="modal-body">
             <form id="formPersonaje" enctype="multipart/form-data">
                 <input type="hidden" id="personajeId" name="id">
                 <div class="form-group">
-                    <label>Nombre *</label>
+                    <label><?= $idioma->palabras->pj_nombre ?></label>
                     <input type="text" id="pjNombre" name="nombre" class="input" required>
                 </div>
                 <div class="form-group">
-                    <label>Rol</label>
-                    <input type="text" id="pjRol" name="rol" class="input" placeholder="Principal, Enemigo, Aliado...">
+                    <label><?= $idioma->palabras->pj_rol ?></label>
+                    <input type="text" id="pjRol" name="rol" class="input"
+                        placeholder="<?= $idioma->palabras->pj_placeholder_rol ?>">
                 </div>
                 <div class="form-group">
-                    <label>Ubicación</label>
+                    <label><?= $idioma->palabras->pj_ubicacion ?></label>
                     <input type="text" id="pjUbicacion" name="ubicacion" class="input">
                 </div>
                 <div class="form-group">
-                    <label>Descripción</label>
+                    <label><?= $idioma->palabras->pj_descripcion ?></label>
                     <textarea id="pjDescripcion" name="descripcion" class="input" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Imagen</label>
+                    <label><?= $idioma->palabras->pj_imagen ?></label>
                     <input type="file" id="pjImagen" name="imagen" class="input" accept=".jpg,.jpeg,.png,.webp">
-                    <small class="text-muted">Dejar vacío para mantener la actual.</small>
+                    <small class="text-muted"><?= $idioma->palabras->pj_imagen_info ?></small>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn" onclick="$('#modalPersonaje').hide()">Cancelar</button>
-            <button class="btn btn-primary" onclick="guardarPersonaje()">Guardar</button>
+            <button class="btn" onclick="$('#modalPersonaje').hide()"><?= $idioma->palabras->Cerrar ?></button>
+            <button class="btn btn-primary" onclick="guardarPersonaje()"><?= $idioma->palabras->pj_guardar ?></button>
         </div>
     </div>
 </div>
@@ -221,7 +224,7 @@ include "../sec/header.php";
             var html = "";
 
             if (personajesData.length === 0) {
-                html = '<p class="text-muted">No hay personajes. ¡Añade el primero!</p>';
+                html = '<p class="text-muted"><?= $idioma->palabras->pj_sin_personajes ?></p>';
             } else {
                 personajesData.forEach(function (p) {
                     var img = p.imagen ? '../assets/img/personajes/' + escapeHtml(p.imagen) : '../assets/img/avatars/default.jpg';
@@ -238,7 +241,7 @@ include "../sec/header.php";
                         '</div>' +
                         '<div class="personaje-card-info">' +
                         '<div class="personaje-card-nombre">' + escapeHtml(p.nombre) + '</div>' +
-                        '<div class="personaje-card-rol">' + escapeHtml(p.rol || 'Sin rol') + '</div>' +
+                        '<div class="personaje-card-rol">' + escapeHtml(p.rol || '<?= $idioma->palabras->pj_sin_rol ?>') + '</div>' +
                         '</div>' +
                         '</div>';
                 });
@@ -267,7 +270,7 @@ include "../sec/header.php";
     }
 
     function abrirModalPersonaje() {
-        $("#modalPersonajeTitulo").text("Nuevo Personaje");
+        $("#modalPersonajeTitulo").text("<?= $idioma->palabras->pj_nuevo_personaje ?>");
         $("#formPersonaje")[0].reset();
         $("#personajeId").val("");
         $("#modalPersonaje").show();
@@ -275,7 +278,7 @@ include "../sec/header.php";
 
     function editarPersonaje(id) {
         $.post("../controladores/controlador_admin.php", { opt: 21, id: id }, function (p) {
-            $("#modalPersonajeTitulo").text("Editar Personaje");
+            $("#modalPersonajeTitulo").text("<?= $idioma->palabras->pj_editar_personaje ?>");
             $("#personajeId").val(p.id);
             $("#pjNombre").val(p.nombre);
             $("#pjRol").val(p.rol);
@@ -304,14 +307,14 @@ include "../sec/header.php";
                     $("#modalPersonaje").hide();
                     cargarPersonajes();
                 } else {
-                    alert("Error al guardar: " + (res.error || ""));
+                    alert("<?= $idioma->palabras->pj_error_guardar ?> " + (res.error || ""));
                 }
             }
         });
     }
 
     function eliminarPersonaje(id) {
-        if (!confirm("¿Eliminar este personaje?")) return;
+        if (!confirm("<?= $idioma->palabras->pj_confirmar_eliminar ?>")) return;
         $.post("../controladores/controlador_admin.php", { opt: 24, id: id }, function (res) {
             if (res.success) cargarPersonajes();
         }, "json");

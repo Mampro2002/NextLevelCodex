@@ -4,18 +4,26 @@ include "../sec/sec.php";
 $paginaActiva = 'biblioteca';
 $idioma = simplexml_load_file("../assets/locales/" . $_SESSION["idioma"] . ".xml");
 include "../sec/header.php";
+
+// Variables de idioma para JavaScript
+$js_buscando = addslashes((string) $idioma->palabras->wiki_buscando);
+$js_noJuegos = addslashes((string) $idioma->palabras->wiki_noJuegos);
+$js_errorServidor = addslashes((string) $idioma->palabras->wiki_errorServidor);
+$js_proximamente = addslashes((string) $idioma->palabras->ini_proximamente);
+$js_verFicha = addslashes((string) $idioma->palabras->ini_verFicha);
 ?>
 
 <div class="main-container">
-    <h1><i class="fas fa-book"></i> Biblioteca de Juegos</h1>
+    <h1><i class="fas fa-book"></i> <?= $idioma->palabras->header_biblioteca ?></h1>
 
     <!-- Buscador y filtros -->
     <div class="search-box"
         style="display: flex; gap: var(--spacing-sm); margin-bottom: var(--spacing-sm); flex-wrap: wrap;">
-        <input type="text" id="queryBusqueda" class="input" placeholder="Buscar por título o desarrollador..."
+        <input type="text" id="queryBusqueda" class="input"
+            placeholder="<?= htmlspecialchars((string) $idioma->palabras->wiki_placeholder) ?>"
             style="flex: 1; min-width: 200px;">
         <select id="filtroGenero" class="input" style="max-width: 200px;">
-            <option value="">Todos los géneros</option>
+            <option value=""><?= $idioma->palabras->wiki_todosGeneros ?></option>
             <option value="Acción">Acción</option>
             <option value="Acción/Aventura">Acción/Aventura</option>
             <option value="Aventura">Aventura</option>
@@ -48,10 +56,15 @@ include "../sec/header.php";
             <option value="Terror Psicológico">Terror Psicológico</option>
             <option value="Visual Novel">Visual Novel</option>
         </select>
-        <input type="text" id="filtroDesarrollador" class="input" placeholder="Desarrollador" style="max-width: 200px;">
-        <input type="number" id="filtroAnyo" class="input" placeholder="Año" style="max-width: 110px;" min="1970"
-            max="2030">
-        <button class="btn btn-primary" id="ejecutarBusqueda"><i class="fas fa-search"></i> Buscar</button>
+        <input type="text" id="filtroDesarrollador" class="input"
+            placeholder="<?= htmlspecialchars((string) $idioma->palabras->wiki_placeholderDev) ?>"
+            style="max-width: 200px;">
+        <input type="number" id="filtroAnyo" class="input"
+            placeholder="<?= htmlspecialchars((string) $idioma->palabras->wiki_placeholderAnyo) ?>"
+            style="max-width: 110px;" min="1970" max="2030">
+        <button class="btn btn-primary" id="ejecutarBusqueda">
+            <i class="fas fa-search"></i> <?= $idioma->palabras->amgB ?>
+        </button>
     </div>
 
     <!-- Estado de carga -->
@@ -62,11 +75,11 @@ include "../sec/header.php";
         <table class="table">
             <thead>
                 <tr>
-                    <th>Título</th>
-                    <th>Desarrollador</th>
-                    <th>Lanzamiento</th>
-                    <th>Valoración</th>
-                    <th>Acción</th>
+                    <th><?= $idioma->palabras->wiki_th1 ?></th>
+                    <th><?= $idioma->palabras->wiki_th2 ?></th>
+                    <th><?= $idioma->palabras->wiki_th3 ?></th>
+                    <th><?= $idioma->palabras->wiki_th4 ?></th>
+                    <th><?= $idioma->palabras->wiki_th5 ?></th>
                 </tr>
             </thead>
             <tbody id="cuerpoResultados"></tbody>
@@ -77,6 +90,14 @@ include "../sec/header.php";
 <?php include "../sec/footer.php"; ?>
 
 <script>
+    const lang = {
+        buscando: '<?= $js_buscando ?>',
+        noJuegos: '<?= $js_noJuegos ?>',
+        errorServidor: '<?= $js_errorServidor ?>',
+        proximamente: '<?= $js_proximamente ?>',
+        verFicha: '<?= $js_verFicha ?>'
+    };
+
     // Buscar juegos al hacer clic o al presionar Enter
     $("#ejecutarBusqueda").click(buscarJuegos);
     $("#queryBusqueda").keypress(function (e) {
@@ -89,7 +110,7 @@ include "../sec/header.php";
         let desarrollador = encodeURIComponent($("#filtroDesarrollador").val().trim());
         let anyo = $("#filtroAnyo").val();
 
-        $("#status-busqueda").html('<p class="text-muted"><i class="fas fa-spinner fa-spin"></i> Buscando...</p>');
+        $("#status-busqueda").html('<p class="text-muted"><i class="fas fa-spinner fa-spin"></i> ' + lang.buscando + '</p>');
         $("#cuerpoResultados").empty();
 
         $.ajax({
@@ -108,13 +129,13 @@ include "../sec/header.php";
                 if (data.length > 0) {
                     let html = "";
                     $.each(data, function (i, juego) {
-                        // Construir estrellas según media (campo 'media' devuelto por el controlador)
+                        // Construir estrellas según media
                         let estrellasHTML = '';
                         if (juego.media !== undefined && juego.media !== null && juego.total > 0) {
                             for (let i = 1; i <= 5; i++) {
-                                estrellasHTML += (i <= Math.round(parseFloat(juego.media))) ?
-                                    '<i class="fas fa-star" style="color: var(--warning);"></i>' :
-                                    '<i class="far fa-star" style="color: var(--warning);"></i>';
+                                estrellasHTML += (i <= Math.round(parseFloat(juego.media)))
+                                    ? '<i class="fas fa-star" style="color: var(--warning);"></i>'
+                                    : '<i class="far fa-star" style="color: var(--warning);"></i>';
                             }
                             estrellasHTML += ` <span style="font-size:13px; color:var(--text-secondary);">${parseFloat(juego.media).toFixed(1)} (${juego.total})</span>`;
                         } else {
@@ -125,19 +146,19 @@ include "../sec/header.php";
                             <td><strong>${juego.titulo}</strong></td>
                             <td>${juego.desarrollador || '-'}</td>
                             <td>${(juego.en_desarrollo == 1)
-                                ? '<span class="badge" style="background: var(--warning); color: #000;">Próximamente</span>'
+                                ? `<span class="badge" style="background: var(--warning); color: #000;">${lang.proximamente}</span>`
                                 : (juego.fecha_lanzamiento || '-')}</td>
                             <td>${estrellasHTML}</td>
-                            <td><a href="ficha_juego.php?id=${juego.id}" class="btn btn-sm btn-primary">Ver Ficha</a></td>
+                            <td><a href="ficha_juego.php?id=${juego.id}" class="btn btn-sm btn-primary">${lang.verFicha}</a></td>
                         </tr>`;
                     });
                     $("#cuerpoResultados").html(html);
                 } else {
-                    $("#cuerpoResultados").html('<tr><td colspan="6" class="text-muted" style="text-align: center;">No se encontraron juegos.</td></tr>');
+                    $("#cuerpoResultados").html(`<tr><td colspan="6" class="text-muted" style="text-align: center;">${lang.noJuegos}</td></tr>`);
                 }
             },
             error: function () {
-                $("#status-busqueda").html('<p class="text-danger">Error al conectar con el servidor.</p>');
+                $("#status-busqueda").html(`<p class="text-danger">${lang.errorServidor}</p>`);
             }
         });
     }

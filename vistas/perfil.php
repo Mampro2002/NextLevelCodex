@@ -4,6 +4,7 @@ include "../sec/sec.php";
 include "../modelos/modelo_juegos.php";
 
 $paginaActiva = ''; // No pertenece a una sección principal del nav
+$idioma = simplexml_load_file("../assets/locales/" . $_SESSION["idioma"] . ".xml");
 
 // Obtener datos completos del usuario
 $stmt = $db->prepare("SELECT id, user, nombre, email, avatar, bio, level, amigos, conectado FROM usuarios WHERE id = ?");
@@ -34,7 +35,6 @@ if ($_SESSION['level'] <= 1) {
 }
 
 include "../sec/header.php";
-
 ?>
 
 <div class="main-container">
@@ -47,7 +47,7 @@ include "../sec/header.php";
             <?php if (!empty($usuario['bio'])): ?>
                 <p class="perfil-bio"><?php echo nl2br(htmlspecialchars($usuario['bio'])); ?></p>
             <?php else: ?>
-                <p class="text-muted"><em>Sin biografía</em></p>
+                <p class="text-muted"><em><?= $idioma->palabras->perfil_sinBio ?></em></p>
             <?php endif; ?>
             <p class="text-muted">
                 <i class="fas fa-envelope"></i> <?php echo htmlspecialchars($usuario['email']); ?>
@@ -56,10 +56,12 @@ include "../sec/header.php";
     </div>
 
     <div class="perfil-secciones">
+
         <!-- Colaboradores -->
         <div class="card" style="flex: 1;">
             <div class="card-body">
-                <h2><i class="fas fa-users"></i> Mis Colaboradores (<?php echo count($colaboradores); ?>)</h2>
+                <h2><i class="fas fa-users"></i> <?= $idioma->palabras->perfil_misColaboradores ?>
+                    (<?php echo count($colaboradores); ?>)</h2>
                 <?php if (count($colaboradores) > 0): ?>
                     <div class="lista-colaboradores">
                         <?php foreach ($colaboradores as $col): ?>
@@ -70,16 +72,18 @@ include "../sec/header.php";
                                     <?php echo htmlspecialchars($col['nombre']); ?>
                                     (@<?php echo htmlspecialchars($col['user']); ?>)
                                     <?php if ($col['conectado'] == 1): ?>
-                                        <span style="color: var(--success);"><i class="fas fa-circle"></i> Conectado</span>
+                                        <span style="color: var(--success);"><i class="fas fa-circle"></i>
+                                            <?= $idioma->palabras->fecha7 ?></span>
                                     <?php else: ?>
-                                        <span class="text-muted"><i class="far fa-circle"></i> Desconectado</span>
+                                        <span class="text-muted"><i class="far fa-circle"></i>
+                                            <?= $idioma->palabras->perfil_desconectado ?></span>
                                     <?php endif; ?>
                                 </span>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
-                    <p class="text-muted">Aún no tienes colaboradores.</p>
+                    <p class="text-muted"><?= $idioma->palabras->perfil_sinColaboradores ?></p>
                 <?php endif; ?>
             </div>
         </div>
@@ -88,15 +92,16 @@ include "../sec/header.php";
         <?php if ($_SESSION['level'] <= 1): ?>
             <div class="card" style="flex: 1;">
                 <div class="card-body">
-                    <h2><i class="fas fa-gamepad"></i> Mis Juegos Añadidos (<?php echo count($juegos); ?>)</h2>
+                    <h2><i class="fas fa-gamepad"></i> <?= $idioma->palabras->perfil_misJuegos ?>
+                        (<?php echo count($juegos); ?>)</h2>
                     <?php if (count($juegos) > 0): ?>
                         <div class="table-container">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Título</th>
-                                        <th>Fecha</th>
-                                        <th>Acción</th>
+                                        <th><?= $idioma->palabras->wiki_th1 ?></th>
+                                        <th><?= $idioma->palabras->perfil_fecha ?></th>
+                                        <th><?= $idioma->palabras->wiki_th5 ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -105,14 +110,14 @@ include "../sec/header.php";
                                             <td><?php echo htmlspecialchars($juego['titulo']); ?></td>
                                             <td><?php echo date('d/m/Y', strtotime($juego['fecha_creacion'])); ?></td>
                                             <td><a href="ficha_juego.php?id=<?php echo $juego['id']; ?>"
-                                                    class="btn btn-sm btn-primary">Ver</a></td>
+                                                    class="btn btn-sm btn-primary"><?= $idioma->palabras->perfil_ver ?></a></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
                     <?php else: ?>
-                        <p class="text-muted">No has añadido ningún juego.</p>
+                        <p class="text-muted"><?= $idioma->palabras->perfil_sinJuegos ?></p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -121,7 +126,7 @@ include "../sec/header.php";
         <!-- Juegos Favoritos -->
         <div class="card" style="flex: 1;">
             <div class="card-body">
-                <h2><i class="fas fa-heart"></i> Mis Juegos Favoritos</h2>
+                <h2><i class="fas fa-heart"></i> <?= $idioma->palabras->perfil_misFavoritos ?></h2>
                 <?php
                 $modeloJuegos = new ModeloJuegos();
                 $favoritos = $modeloJuegos->obtenerFavoritos($_SESSION['id']);
@@ -131,16 +136,14 @@ include "../sec/header.php";
                         <?php foreach ($favoritos as $fav): ?>
                             <div class="colaborador-item">
                                 <i class="fas fa-gamepad"></i>
-                                <span>
-                                    <?= htmlspecialchars($fav['titulo']) ?>
-                                </span>
+                                <span><?= htmlspecialchars($fav['titulo']) ?></span>
                                 <a href="ficha_juego.php?id=<?= $fav['id'] ?>" class="btn btn-sm btn-primary"
-                                    style="margin-left: auto;">Ver</a>
+                                    style="margin-left: auto;"><?= $idioma->palabras->perfil_ver ?></a>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
-                    <p class="text-muted">Aún no has marcado juegos como favoritos.</p>
+                    <p class="text-muted"><?= $idioma->palabras->perfil_sinFavoritos ?></p>
                 <?php endif; ?>
             </div>
         </div>
@@ -148,13 +151,11 @@ include "../sec/header.php";
         <!-- Logros -->
         <div class="card" style="flex: 1;">
             <div class="card-body">
-                <h2><i class="fas fa-trophy"></i> Mis Logros</h2>
+                <h2><i class="fas fa-trophy"></i> <?= $idioma->palabras->perfil_misLogros ?></h2>
                 <?php
-                // Verificar logros (otorga los que correspondan)
                 $modeloJuegos = new ModeloJuegos();
                 $modeloJuegos->verificarYOtorgarLogros($_SESSION['id']);
 
-                // Obtener logros del usuario
                 $stmtLogros = $db->prepare("SELECT l.id as id_logro, l.nombre, l.descripcion, l.icono, lu.fecha_obtencion 
                             FROM logros_usuarios lu 
                             JOIN logros l ON lu.id_logro = l.id 
@@ -164,7 +165,6 @@ include "../sec/header.php";
                 $stmtLogros->execute();
                 $logrosObtenidos = $stmtLogros->get_result()->fetch_all(MYSQLI_ASSOC);
 
-                // Sacar los IDs de logros obtenidos (FUERA del bucle)
                 $logrosObtenidosIds = array_column($logrosObtenidos, 'id_logro');
 
                 if (count($logrosObtenidos) > 0): ?>
@@ -186,8 +186,9 @@ include "../sec/header.php";
                     </div>
                     <!-- Todos los logros disponibles -->
                     <details style="margin-top: var(--spacing-md);">
-                        <summary style="cursor: pointer; color: var(--text-secondary); font-size: 14px;">Ver todos los
-                            logros disponibles</summary>
+                        <summary style="cursor: pointer; color: var(--text-secondary); font-size: 14px;">
+                            <?= $idioma->palabras->perfil_verLogros ?>
+                        </summary>
                         <div class="logros-grid"
                             style="display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: var(--spacing-sm); margin-top: var(--spacing-sm);">
                             <?php
@@ -208,10 +209,11 @@ include "../sec/header.php";
                         </div>
                     </details>
                 <?php else: ?>
-                    <p class="text-muted">Aún no has desbloqueado ningún logro.</p>
+                    <p class="text-muted"><?= $idioma->palabras->perfil_sinLogros ?></p>
                 <?php endif; ?>
             </div>
         </div>
+
     </div>
 </div>
 

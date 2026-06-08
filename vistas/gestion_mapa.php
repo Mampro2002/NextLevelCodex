@@ -120,8 +120,8 @@ include "../sec/header.php";
 </style>
 
 <div class="main-container">
-    <a href="admin_juegos.php" class="btn"><i class="fas fa-arrow-left"></i> Volver</a>
-    <h1 style="margin-top:var(--spacing-md);"><i class="fas fa-map"></i> Mapa de:
+    <a href="admin_juegos.php" class="btn"><i class="fas fa-arrow-left"></i> <?= $idioma->palabras->pj_volver ?></a>
+    <h1 style="margin-top:var(--spacing-md);"><i class="fas fa-map"></i> <?= $idioma->palabras->mapa_titulo ?>
         <?= htmlspecialchars($juego['titulo']) ?>
     </h1>
 
@@ -129,15 +129,15 @@ include "../sec/header.php";
     <div class="card" style="margin-top:var(--spacing-lg); margin-bottom:var(--spacing-lg);">
         <div class="card-body" style="display:flex; align-items:center; gap:var(--spacing-lg); flex-wrap:wrap;">
             <div>
-                <h4 style="margin-bottom:var(--spacing-sm);">Imagen del mapa</h4>
-                <small class="text-muted">Sube la imagen del mapa del juego (jpg, png, webp)</small>
+                <h4 style="margin-bottom:var(--spacing-sm);"><?= $idioma->palabras->mapa_imagen_titulo ?></h4>
+                <small class="text-muted"><?= $idioma->palabras->mapa_imagen_subir ?></small>
             </div>
             <form id="formMapaImagen" enctype="multipart/form-data"
                 style="display:flex; gap:var(--spacing-sm); align-items:center; flex:1; min-width:250px;">
                 <input type="hidden" name="id_juego" value="<?= $id_juego ?>">
                 <input type="file" name="mapa_imagen" class="input" accept="image/*" style="flex:1;">
                 <button type="button" class="btn btn-primary" onclick="subirMapaImagen()">
-                    <i class="fas fa-upload"></i> Subir
+                    <i class="fas fa-upload"></i> <?= $idioma->palabras->mapa_subir ?>
                 </button>
             </form>
         </div>
@@ -148,7 +148,7 @@ include "../sec/header.php";
         <!-- Instrucción -->
         <div class="instruccion">
             <i class="fas fa-info-circle" style="color:var(--accent-primary);"></i>
-            Haz <strong>clic en la imagen</strong> para añadir un punto de interés en esa posición.
+            <?= $idioma->palabras->mapa_instruccion ?>
         </div>
 
         <!-- Mapa interactivo -->
@@ -156,22 +156,21 @@ include "../sec/header.php";
             <img src="../assets/img/maps/<?= htmlspecialchars($juego['mapa_imagen']) ?>" id="imagenMapa"
                 alt="Mapa de <?= htmlspecialchars($juego['titulo']) ?>"
                 onerror="this.src='../assets/img/games/default_game.jpg'">
-            <!-- Los pins se insertan aquí por JS -->
         </div>
 
         <div style="margin-top:var(--spacing-lg);">
-            <h4><i class="fas fa-map-marker-alt"></i> Puntos de interés</h4>
+            <h4><i class="fas fa-map-marker-alt"></i> <?= $idioma->palabras->mapa_puntos ?></h4>
             <div class="table-container" style="margin-top:var(--spacing-sm);">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Icono</th>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Pos X (%)</th>
-                            <th>Pos Y (%)</th>
-                            <th>Descripción</th>
-                            <th>Acción</th>
+                            <th><?= $idioma->palabras->mapa_th_icono ?></th>
+                            <th><?= $idioma->palabras->mapa_th_nombre ?></th>
+                            <th><?= $idioma->palabras->mapa_th_tipo ?></th>
+                            <th><?= $idioma->palabras->mapa_th_posx ?></th>
+                            <th><?= $idioma->palabras->mapa_th_posy ?></th>
+                            <th><?= $idioma->palabras->mapa_th_descripcion ?></th>
+                            <th><?= $idioma->palabras->mapa_th_accion ?></th>
                         </tr>
                     </thead>
                     <tbody id="cuerpoPuntos"></tbody>
@@ -182,7 +181,7 @@ include "../sec/header.php";
     <?php else: ?>
         <div class="card" style="text-align:center; padding:var(--spacing-xl);">
             <i class="fas fa-map" style="font-size:48px; color:var(--text-secondary); margin-bottom:var(--spacing-md);"></i>
-            <p class="text-muted">Sube primero la imagen del mapa para poder añadir puntos de interés.</p>
+            <p class="text-muted"><?= $idioma->palabras->mapa_sin_imagen ?></p>
         </div>
     <?php endif; ?>
 </div>
@@ -191,33 +190,34 @@ include "../sec/header.php";
 <div id="modalPunto" class="modal-overlay" style="display:none;">
     <div class="modal" style="max-width:400px;">
         <div class="modal-header">
-            <h3 class="modal-title"><i class="fas fa-map-marker-alt"></i> Nuevo Punto de Interés</h3>
+            <h3 class="modal-title"><i class="fas fa-map-marker-alt"></i> <?= $idioma->palabras->mapa_nuevo_punto ?>
+            </h3>
             <button class="modal-close" onclick="cancelarPin()">&times;</button>
         </div>
         <div class="modal-body">
             <p class="text-muted" style="margin-bottom:var(--spacing-md);">
-                Posición: <strong id="txtPosicion"></strong>
+                <?= $idioma->palabras->mapa_posicion ?> <strong id="txtPosicion"></strong>
             </p>
             <form id="formPunto">
                 <input type="hidden" id="puntoX" name="pos_x">
                 <input type="hidden" id="puntoY" name="pos_y">
                 <div class="form-group">
-                    <label>Nombre *</label>
+                    <label><?= $idioma->palabras->mapa_nombre ?></label>
                     <input type="text" id="puntoNombre" name="nombre" class="input" required
-                        placeholder="Ej: Ciudad de Mondstadt">
+                        placeholder="<?= $idioma->palabras->mapa_placeholder_nombre ?>">
                 </div>
                 <div class="form-group">
-                    <label>Tipo</label>
+                    <label><?= $idioma->palabras->mapa_tipo ?></label>
                     <input type="text" id="puntoTipo" name="tipo" class="input"
-                        placeholder="Ciudad, Mazmorra, Jefe, Tienda...">
+                        placeholder="<?= $idioma->palabras->mapa_placeholder_tipo ?>">
                 </div>
                 <div class="form-group">
-                    <label>Descripción</label>
+                    <label><?= $idioma->palabras->mapa_descripcion ?></label>
                     <textarea id="puntoDescripcion" name="descripcion" class="input" rows="2"
-                        placeholder="Descripción opcional del punto..."></textarea>
+                        placeholder="<?= $idioma->palabras->mapa_placeholder_desc ?>"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Icono del punto</label>
+                    <label><?= $idioma->palabras->mapa_icono_punto ?></label>
                     <div class="icono-selector" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 5px;">
                         <?php
                         $iconos = ['📍', '🏰', '🏔️', '🌊', '🏕️', '🏚️', '🗼', '⛩️', '🛖', '🏠', '⭐', '💎', '⚔️', '🛡️', '❤️', '🔥', '💀', '🎯', '🗝️', '📜'];
@@ -235,9 +235,9 @@ include "../sec/header.php";
             </form>
         </div>
         <div class="modal-footer">
-            <button class="btn" onclick="cancelarPin()">Cancelar</button>
+            <button class="btn" onclick="cancelarPin()"><?= $idioma->palabras->Cerrar ?></button>
             <button class="btn btn-primary" onclick="guardarPunto()">
-                <i class="fas fa-save"></i> Guardar punto
+                <i class="fas fa-save"></i> <?= $idioma->palabras->mapa_guardar_punto ?>
             </button>
         </div>
     </div>
@@ -251,23 +251,19 @@ include "../sec/header.php";
     var pinTempY = null;
     var pinTempEl = null;
 
-    // ── Resaltar icono por defecto al cargar ───────────────────────
     $(document).ready(function () {
         $(".icono-opcion[data-icono='📍']").css("border-color", "var(--accent-primary)");
 
-        // Cargar los puntos después de que la imagen del mapa esté lista
         $('#imagenMapa').on('load', function () {
             cargarPuntosMapa();
         }).each(function () {
             if (this.complete) $(this).trigger('load');
         });
 
-        // Limpiar pin temporal cuando el modal se oculta por cualquier motivo
         $('#modalPunto').on('click', '.modal-close', function () {
             if (pinTempEl) { pinTempEl.remove(); pinTempEl = null; }
         });
 
-        // También al hacer clic fuera del modal (opcional)
         $('#modalPunto').on('click', function (e) {
             if ($(e.target).is('#modalPunto')) {
                 if (pinTempEl) { pinTempEl.remove(); pinTempEl = null; }
@@ -276,7 +272,6 @@ include "../sec/header.php";
         });
     });
 
-    // ── Subir imagen del mapa ───────────────────────────────────────
     function subirMapaImagen() {
         var formData = new FormData($("#formMapaImagen")[0]);
         formData.append("opt", 30);
@@ -291,20 +286,18 @@ include "../sec/header.php";
                 if (res.success) {
                     location.reload();
                 } else {
-                    alert("Error al subir imagen: " + (res.error || ""));
+                    alert("<?= $idioma->palabras->mapa_error_subir ?> " + (res.error || ""));
                 }
             }
         });
     }
 
-    // ── Seleccionar icono del selector visual ──────────────────────
     function seleccionarIcono(emoji, elemento) {
         $("#puntoIcono").val(emoji);
         $(".icono-opcion").css("border-color", "transparent");
         $(elemento).css("border-color", "var(--accent-primary)");
     }
 
-    // ── Clic en la imagen → colocar pin temporal ───────────────────
     $("#mapaWrapper").on("click", function (e) {
         if ($(e.target).closest('.pin').length) return;
 
@@ -340,10 +333,9 @@ include "../sec/header.php";
         $("#modalPunto").hide();
     }
 
-    // ── Guardar punto (CON ICONO) ──────────────────────────────────
     function guardarPunto() {
         var nombre = $("#puntoNombre").val().trim();
-        if (!nombre) { alert("El nombre es obligatorio."); return; }
+        if (!nombre) { alert("<?= $idioma->palabras->mapa_error_nombre ?>"); return; }
 
         var datos = {
             opt: 32,
@@ -367,20 +359,17 @@ include "../sec/header.php";
                     pinTempEl = null;
                     cargarPuntosMapa();
                 } else {
-                    alert("Error al guardar: " + (res.error || ""));
+                    alert("<?= $idioma->palabras->mapa_error_guardar ?> " + (res.error || ""));
                 }
             }
         });
     }
 
-    // ── Eliminar punto ──────────────────────────────────────────────
     function eliminarPunto(id) {
-        if (!confirm("¿Eliminar este punto?")) return;
+        if (!confirm("<?= $idioma->palabras->mapa_confirmar_eliminar ?>")) return;
 
-        // Eliminar visualmente
         $('.pin-real[data-pin-id="' + id + '"]').remove();
 
-        // Eliminar en base de datos y refrescar tabla
         $.ajax({
             type: "post",
             url: "../controladores/controlador_admin.php",
@@ -390,14 +379,13 @@ include "../sec/header.php";
                 if (res.success) {
                     cargarPuntosMapa();
                 } else {
-                    alert("Error al eliminar el punto");
+                    alert("<?= $idioma->palabras->mapa_error_eliminar ?>");
                     cargarPuntosMapa();
                 }
             }
         });
     }
 
-    // ── Cargar puntos (tabla + pins en mapa, CON ICONO) ────────────
     function cargarPuntosMapa() {
         $.ajax({
             type: "post",
@@ -405,7 +393,6 @@ include "../sec/header.php";
             data: { opt: 31, id_juego: idJuego },
             dataType: "json",
             success: function (puntos) {
-                // Limpiar solo los pines reales anteriores
                 $("#mapaWrapper .pin-real").remove();
 
                 var html = "";
@@ -436,7 +423,7 @@ include "../sec/header.php";
                             '</tr>';
                     });
                 } else {
-                    html = '<tr><td colspan="7" class="text-muted" style="text-align:center;">No hay puntos de interés. Haz clic en la imagen para añadir.</td></tr>';
+                    html = '<tr><td colspan="7" class="text-muted" style="text-align:center;"><?= $idioma->palabras->mapa_tabla_vacia ?></td></tr>';
                 }
 
                 $("#cuerpoPuntos").html(html);
@@ -449,7 +436,6 @@ include "../sec/header.php";
         return $('<div>').text(String(text)).html();
     }
 
-    // ── Cerrar modal con Escape ─────────────────────────────────────
     $(document).on('keydown', function (e) {
         if (e.key === 'Escape') cancelarPin();
     });
