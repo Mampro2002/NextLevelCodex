@@ -2,7 +2,7 @@
 include "../sec/sec.php";
 include "../modelos/clase_amigos.php";
 
-// ✅ SEGURIDAD: Verificar sesión activa
+// Verificar sesión activa
 if (!isset($_SESSION['id'])) {
     http_response_code(403);
     echo "error";
@@ -26,7 +26,7 @@ switch ($options) {
             exit;
         }
         $fecha = time();
-        // ✅ SEGURIDAD: id_sol siempre desde sesión
+        // id_sol siempre desde sesión
         $solicitud->solicitud($_SESSION['id'], $id_rec, $fecha);
         break;
 
@@ -36,7 +36,7 @@ switch ($options) {
             echo "error";
             exit;
         }
-        // ✅ SEGURIDAD: id_rec siempre desde sesión, nunca del POST
+        // id_rec siempre desde sesión, nunca del POST
         $solicitud->aceptar($id_sol, $_SESSION['id']);
         break;
 
@@ -64,7 +64,7 @@ switch ($options) {
             echo "error";
             exit;
         }
-        // ✅ SEGURIDAD: Eliminar en ambas direcciones con id_rec desde sesión
+        // Eliminar en ambas direcciones con id_rec desde sesión
         $solicitud->eliminarAmigo($id_sol, $_SESSION['id']);
         $solicitud->eliminarAmigo($_SESSION['id'], $id_sol);
         break;
@@ -75,7 +75,7 @@ switch ($options) {
             echo "error";
             exit;
         }
-        // ✅ SEGURIDAD: id_recep siempre desde sesión
+        // id_recep siempre desde sesión
         $solicitud->desbloquear($_SESSION['id'], $id_block);
         break;
 

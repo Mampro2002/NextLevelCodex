@@ -412,7 +412,7 @@ switch ($opt) {
         if ($resultado) {
             echo json_encode(["success" => true]);
         } else {
-            // ✅ SEGURIDAD: Error logueado internamente, no expuesto al cliente
+
             error_log("Error al insertar punto de mapa para juego $id_juego");
             echo json_encode(["success" => false, "error" => "Error al guardar el punto."]);
         }

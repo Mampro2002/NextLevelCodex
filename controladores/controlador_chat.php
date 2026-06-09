@@ -2,7 +2,7 @@
 include "../sec/sec.php";
 include "../modelos/modelo_chat.php";
 
-// ✅ SEGURIDAD: Verificar sesión activa
+//  Verificar sesión activa
 if (!isset($_SESSION['id'])) {
     http_response_code(403);
     echo json_encode(["error" => "Acceso denegado"]);
@@ -72,13 +72,13 @@ switch ($opt) {
         echo (int) $total;
         break;
 
-    case 6: // ✅ Solo mensajes nuevos desde un ID dado
+    case 6: // Solo mensajes nuevos desde un ID dado
         $desde_id = filter_input(INPUT_POST, 'desde_id', FILTER_VALIDATE_INT) ?? 0;
         $mensajes = $chat->obtenerMensajesDesde($desde_id);
         echo json_encode($mensajes);
         break;
 
-    case 7: // ✅ Solo mensajes privados nuevos desde un ID (polling inteligente)
+    case 7: // Solo mensajes privados nuevos desde un ID (polling inteligente)
         $otro = filter_input(INPUT_POST, 'otro', FILTER_VALIDATE_INT);
         $desde_id = filter_input(INPUT_POST, 'desde_id', FILTER_VALIDATE_INT) ?? 0;
         if (!$otro) {

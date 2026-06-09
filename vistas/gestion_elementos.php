@@ -20,7 +20,7 @@ if (!$juego) {
 
 $nombre_items = $juego['nombre_items'] ?? 'Elementos';
 
-// ✅ Verificar que el usuario es el creador o admin
+// Verificar que el usuario es el creador o admin
 $check = $db->prepare("SELECT creador_id FROM juegos WHERE id = ?");
 $check->bind_param("i", $id_juego);
 $check->execute();
@@ -200,7 +200,8 @@ include "../sec/header.php";
     <div class="modal" style="max-width:500px;">
         <div class="modal-header">
             <h3 class="modal-title" id="modalElementoTitulo"><?= $idioma->palabras->elem_nuevo ?>
-                <?= htmlspecialchars($nombre_items) ?></h3>
+                <?= htmlspecialchars($nombre_items) ?>
+            </h3>
             <button class="modal-close" onclick="$('#modalElemento').hide()">&times;</button>
         </div>
         <div class="modal-body">

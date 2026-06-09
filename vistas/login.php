@@ -1,15 +1,18 @@
 <?php
-$minutosBan = isset($_GET['ban']) ? (int)$_GET['ban'] : 0;
-$errorLogin = isset($_GET['error']) ? (int)$_GET['error'] : 0;
+$minutosBan = isset($_GET['ban']) ? (int) $_GET['ban'] : 0;
+$errorLogin = isset($_GET['error']) ? (int) $_GET['error'] : 0;
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next Level Codex - Login</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&family=Roboto+Mono&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/components.css">
@@ -25,22 +28,27 @@ $errorLogin = isset($_GET['error']) ? (int)$_GET['error'] : 0;
             margin: 0;
             padding: 20px;
         }
+
         .login-container {
             max-width: 400px;
             width: 100%;
         }
+
         .card {
             padding: var(--spacing-xl);
         }
+
         .form-group {
             margin-bottom: var(--spacing-md);
         }
+
         .form-group label {
             display: block;
             margin-bottom: var(--spacing-xs);
             color: var(--text-secondary);
             font-size: 14px;
         }
+
         .theme-toggle-container {
             position: fixed;
             top: 20px;
@@ -48,6 +56,7 @@ $errorLogin = isset($_GET['error']) ? (int)$_GET['error'] : 0;
         }
     </style>
 </head>
+
 <body>
     <div class="theme-toggle-container">
         <button class="theme-toggle" onclick="toggleTheme()">
@@ -60,14 +69,14 @@ $errorLogin = isset($_GET['error']) ? (int)$_GET['error'] : 0;
             Next Level <span>Codex</span>
         </div>
 
-        <!-- ✅ Feedback de ban -->
+        <!-- Feedback de ban -->
         <?php if ($minutosBan > 0): ?>
             <div class="card" style="margin-bottom: var(--spacing-md); background-color: var(--danger); color: white;">
                 ⛔ Usuario baneado. Tiempo restante: <?php echo $minutosBan; ?> minutos.
             </div>
         <?php endif; ?>
 
-        <!-- ✅ Feedback de error de login -->
+        <!-- Feedback de error de login -->
         <?php if ($errorLogin): ?>
             <div class="card" style="margin-bottom: var(--spacing-md); background-color: var(--danger); color: white;">
                 ❌ Usuario o contraseña incorrectos.
@@ -121,7 +130,7 @@ $errorLogin = isset($_GET['error']) ? (int)$_GET['error'] : 0;
                 </div>
                 <div class="form-group">
                     <label>Contraseña (mín. 8 caracteres)</label>
-                    <!-- ✅ SEGURIDAD: mínimo 8 caracteres -->
+                    <!-- mínimo 8 caracteres -->
                     <input type="password" id="pass" class="input" required minlength="8">
                 </div>
                 <div class="form-group">
@@ -131,7 +140,8 @@ $errorLogin = isset($_GET['error']) ? (int)$_GET['error'] : 0;
                         <option value="en">English</option>
                     </select>
                 </div>
-                <button type="button" id="enviarRegistro" class="btn btn-primary" style="width: 100%;">Registrarse</button>
+                <button type="button" id="enviarRegistro" class="btn btn-primary"
+                    style="width: 100%;">Registrarse</button>
             </form>
         </div>
 
@@ -141,69 +151,70 @@ $errorLogin = isset($_GET['error']) ? (int)$_GET['error'] : 0;
         </div>
     </div>
 
-    <!-- ✅ jQuery al final del body, no en el head -->
+    <!-- jQuery al final del body, no en el head -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-    $(document).ready(function() {
+        $(document).ready(function () {
 
-        // Mostrar formulario de registro
-        $("#btnMostrarRegistro").click(function() {
-            $("#log").hide();
-            $("#registro").show();
-            $("#registroButton").hide();
-            $("#Atras").show();
-        });
+            // Mostrar formulario de registro
+            $("#btnMostrarRegistro").click(function () {
+                $("#log").hide();
+                $("#registro").show();
+                $("#registroButton").hide();
+                $("#Atras").show();
+            });
 
-        // Volver al login
-        $("#btnAtras").click(function() {
-            $("#log").show();
-            $("#registro").hide();
-            $("#Atras").hide();
-            $("#registroButton").show();
-            $("#errorRegistro").hide();
-        });
+            // Volver al login
+            $("#btnAtras").click(function () {
+                $("#log").show();
+                $("#registro").hide();
+                $("#Atras").hide();
+                $("#registroButton").show();
+                $("#errorRegistro").hide();
+            });
 
-        // Enviar registro
-        $("#enviarRegistro").click(function() {
-            var nombre  = $("#nombre").val().trim();
-            var usuario = $("#usuario").val().trim();
-            var email   = $("#email").val().trim();
-            var pass    = $("#pass").val();
-            var idioma  = $("#idioma_registro").val();
+            // Enviar registro
+            $("#enviarRegistro").click(function () {
+                var nombre = $("#nombre").val().trim();
+                var usuario = $("#usuario").val().trim();
+                var email = $("#email").val().trim();
+                var pass = $("#pass").val();
+                var idioma = $("#idioma_registro").val();
 
-            // ✅ Validación en el cliente antes de enviar
-            if (!nombre || !usuario || !email || !pass) {
-                $("#errorRegistro").text("Todos los campos son obligatorios.").show();
-                return;
-            }
-            if (pass.length < 8) {
-                $("#errorRegistro").text("La contraseña debe tener al menos 8 caracteres.").show();
-                return;
-            }
-
-            $("#enviarRegistro").prop("disabled", true);
-
-            $.ajax({
-                type: "post",
-                url: "../controladores/control_users.php",
-                data: { options: 3, nombre, usuario, email, pass, idioma },
-                success: function(data) {
-                    data = data.trim();
-                    if (data === "rellenos")  $("#errorRegistro").text("Todos los datos deben estar rellenos.").show();
-                    else if (data === "existe")   $("#errorRegistro").text("Este usuario o email ya existe.").show();
-                    else if (data === "extenso")  $("#errorRegistro").text("Máximo 20 caracteres por campo.").show();
-                    else if (data === "ok")        window.location.href = "../index.php";
-                    else $("#errorRegistro").text("Error inesperado. Inténtalo de nuevo.").show();
-                },
-                error: function() {
-                    $("#errorRegistro").text("Error de conexión con el servidor.").show();
-                },
-                complete: function() {
-                    $("#enviarRegistro").prop("disabled", false);
+                // Validación en el cliente antes de enviar
+                if (!nombre || !usuario || !email || !pass) {
+                    $("#errorRegistro").text("Todos los campos son obligatorios.").show();
+                    return;
                 }
+                if (pass.length < 8) {
+                    $("#errorRegistro").text("La contraseña debe tener al menos 8 caracteres.").show();
+                    return;
+                }
+
+                $("#enviarRegistro").prop("disabled", true);
+
+                $.ajax({
+                    type: "post",
+                    url: "../controladores/control_users.php",
+                    data: { options: 3, nombre, usuario, email, pass, idioma },
+                    success: function (data) {
+                        data = data.trim();
+                        if (data === "rellenos") $("#errorRegistro").text("Todos los datos deben estar rellenos.").show();
+                        else if (data === "existe") $("#errorRegistro").text("Este usuario o email ya existe.").show();
+                        else if (data === "extenso") $("#errorRegistro").text("Máximo 20 caracteres por campo.").show();
+                        else if (data === "ok") window.location.href = "../index.php";
+                        else $("#errorRegistro").text("Error inesperado. Inténtalo de nuevo.").show();
+                    },
+                    error: function () {
+                        $("#errorRegistro").text("Error de conexión con el servidor.").show();
+                    },
+                    complete: function () {
+                        $("#enviarRegistro").prop("disabled", false);
+                    }
+                });
             });
         });
-    });
     </script>
 </body>
+
 </html>

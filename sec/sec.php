@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include "bdd.php";
 
-// ⚠️ Si la petición es AJAX para registro u otras operaciones, no intentar login
+// Si la petición es AJAX para registro u otras operaciones, no intentar login
 $isAjax = isset($_POST['options']);
 
 if (!isset($_SESSION["user"]) && !$isAjax) {

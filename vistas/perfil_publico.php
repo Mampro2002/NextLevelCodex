@@ -3,20 +3,20 @@ include "../sec/bdd.php";
 include "../sec/sec.php";
 $paginaActiva = '';
 
-// ✅ Obtener ID del usuario a ver
+// Obtener ID del usuario a ver
 $id_visto = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 if (!$id_visto) {
     header("location: ../index.php");
     exit;
 }
 
-// ✅ Si intenta ver su propio perfil, redirigir a perfil.php
+// Si intenta ver su propio perfil, redirigir a perfil.php
 if ($id_visto === $_SESSION['id']) {
     header("location: perfil.php");
     exit;
 }
 
-// ✅ Obtener datos del usuario a ver
+// Obtener datos del usuario a ver
 $stmt = $db->prepare("SELECT id, user, nombre, avatar, bio, conectado, perfil_publico, level, amigos FROM usuarios WHERE id = ?");
 $stmt->bind_param("i", $id_visto);
 $stmt->execute();
@@ -27,7 +27,7 @@ if (!$usuario) {
     exit;
 }
 
-// ✅ Determinar relación entre el visitante y el perfil
+// Determinar relación entre el visitante y el perfil
 $esAdmin = ($_SESSION['level'] == 0);
 
 // Obtener amigos actualizados desde BD
@@ -43,7 +43,7 @@ if ($usuario['level'] == 0 && !$esColaborador) {
     exit;
 }
 
-// ✅ Consulta de solicitud enviada (con estado y fecha)
+// Consulta de solicitud enviada (con estado y fecha)
 $stmtSolEnviada = $db->prepare("SELECT statu, fecha FROM domingueros WHERE id_sol = ? AND id_rec = ?");
 $stmtSolEnviada->bind_param("ii", $_SESSION['id'], $id_visto);
 $stmtSolEnviada->execute();
@@ -58,10 +58,10 @@ $stmtSolRecibida->bind_param("ii", $id_visto, $_SESSION['id']);
 $stmtSolRecibida->execute();
 $solicitudRecibida = $stmtSolRecibida->get_result()->fetch_assoc()['total'] > 0;
 
-// ✅ ¿Puede ver el perfil completo?
+// Puede ver el perfil completo
 $puedeVer = $esAdmin || $esColaborador || $usuario['perfil_publico'] == 1;
 
-// ✅ Obtener datos extra solo si puede ver
+// Obtener datos extra solo si puede ver
 $favoritos = [];
 $juegosAnadidos = [];
 

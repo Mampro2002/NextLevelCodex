@@ -18,7 +18,7 @@ if (!$juego) {
     exit;
 }
 
-// ✅ Verificar que el usuario es el creador o admin
+// Verificar que el usuario es el creador o admin
 $check = $db->prepare("SELECT creador_id FROM juegos WHERE id = ?");
 $check->bind_param("i", $id_juego);
 $check->execute();

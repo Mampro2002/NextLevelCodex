@@ -3,7 +3,7 @@ include "sec/sec.php";
 $paginaActiva = 'inicio';
 $idioma = simplexml_load_file("assets/locales/" . $_SESSION["idioma"] . ".xml");
 
-// ✅ RENDIMIENTO: Una sola consulta para totalJuegos y solicitudes pendientes
+// Una sola consulta para totalJuegos y solicitudes pendientes
 $filt = $db->prepare("SELECT COUNT(*) AS total FROM juegos");
 $filt->execute();
 $totalJuegos = $filt->get_result()->fetch_assoc()['total'];
@@ -49,7 +49,7 @@ $juegosRecientes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="assets/css/layout.css">
     <link rel="stylesheet" href="assets/css/perfil.css">
 
-    <!-- ✅ RENDIMIENTO: tema.js en el head para evitar flash de tema incorrecto -->
+    <!-- tema.js en el head para evitar flash de tema incorrecto -->
     <script src="assets/js/tema.js"></script>
 </head>
 

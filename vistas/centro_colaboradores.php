@@ -4,7 +4,7 @@ include "../sec/sec.php";
 $paginaActiva = 'colaboradores';
 $idioma = simplexml_load_file("../assets/locales/" . $_SESSION["idioma"] . ".xml");
 
-// ✅ RENDIMIENTO: Obtener solicitudes pendientes con JOIN en una sola query
+// Obtener solicitudes pendientes con JOIN en una sola query
 $stmtSol = $db->prepare("
     SELECT d.id_sol, d.fecha, u.user, u.nombre
     FROM domingueros d
@@ -15,7 +15,7 @@ $stmtSol->bind_param("i", $_SESSION['id']);
 $stmtSol->execute();
 $solicitudes = $stmtSol->get_result()->fetch_all(MYSQLI_ASSOC);
 
-// ✅ RENDIMIENTO: Obtener amigos con una sola query IN en lugar de N queries
+// Obtener amigos con una sola query IN en lugar de N queries
 $colaboradores = [];
 $stmtAmigos = $db->prepare("SELECT amigos FROM usuarios WHERE id = ?");
 $stmtAmigos->bind_param("i", $_SESSION['id']);
@@ -31,7 +31,7 @@ if (count($vecAmigos) > 0) {
     $colaboradores = $stmtAmigosData->get_result()->fetch_all(MYSQLI_ASSOC);
 }
 
-// ✅ RENDIMIENTO: Obtener bloqueados con JOIN en una sola query
+// Obtener bloqueados con JOIN en una sola query
 $stmtBlock = $db->prepare("
     SELECT b.id_block, u.user, u.nombre
     FROM bloqueados b

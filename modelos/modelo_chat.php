@@ -1,17 +1,20 @@
 <?php
-class ModeloChat {
+class ModeloChat
+{
 
     private $db;
 
-    // ✅ RENDIMIENTO: Una sola conexión inyectada en el constructor
-    public function __construct() {
+    // Una sola conexión inyectada en el constructor
+    public function __construct()
+    {
         global $db;
         $this->db = $db;
     }
 
     // ========== CHAT GLOBAL ==========
 
-    public function obtenerMensajesGlobales($limite = 50) {
+    public function obtenerMensajesGlobales($limite = 50)
+    {
         $sql = "SELECT * FROM (
                     SELECT m.id, m.mensaje, m.fecha, u.user, u.nombre 
                     FROM mensajes_grupales m 
@@ -25,8 +28,9 @@ class ModeloChat {
         return $filt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    // ✅ NUEVO: Solo mensajes nuevos desde un ID dado (para polling inteligente)
-    public function obtenerMensajesDesde($desde_id) {
+    // Solo mensajes nuevos desde un ID dado
+    public function obtenerMensajesDesde($desde_id)
+    {
         $sql = "SELECT m.id, m.mensaje, m.fecha, u.user, u.nombre
                 FROM mensajes_grupales m
                 JOIN usuarios u ON m.emisor = u.id
@@ -38,7 +42,8 @@ class ModeloChat {
         return $filt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function enviarMensajeGlobal($emisor, $mensaje) {
+    public function enviarMensajeGlobal($emisor, $mensaje)
+    {
         $filt = $this->db->prepare("INSERT INTO mensajes_grupales (emisor, mensaje, fecha) VALUES (?, ?, NOW())");
         $filt->bind_param("is", $emisor, $mensaje);
         return $filt->execute();
@@ -46,7 +51,8 @@ class ModeloChat {
 
     // ========== CHAT PRIVADO ==========
 
-    public function obtenerMensajesPrivados($usuario1, $usuario2, $limite = 50) {
+    public function obtenerMensajesPrivados($usuario1, $usuario2, $limite = 50)
+    {
         $sql = "SELECT * FROM (
                     SELECT m.id, m.mensaje, m.fecha, m.leido, 
                            u_emisor.user AS emisor_user, u_emisor.nombre AS emisor_nombre,
@@ -65,8 +71,9 @@ class ModeloChat {
         return $filt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    // ✅ NUEVO: Solo mensajes privados nuevos desde un ID (para polling inteligente)
-    public function obtenerMensajesPrivadosDesde($usuario1, $usuario2, $desde_id) {
+    // Solo mensajes privados nuevos desde un ID (para polling inteligente)
+    public function obtenerMensajesPrivadosDesde($usuario1, $usuario2, $desde_id)
+    {
         $sql = "SELECT m.id, m.mensaje, m.fecha, m.leido,
                        u_emisor.user AS emisor_user, u_emisor.nombre AS emisor_nombre,
                        u_receptor.user AS receptor_user, u_receptor.nombre AS receptor_nombre
@@ -83,23 +90,26 @@ class ModeloChat {
         return $filt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function enviarMensajePrivado($emisor, $receptor, $mensaje) {
+    public function enviarMensajePrivado($emisor, $receptor, $mensaje)
+    {
         $filt = $this->db->prepare("INSERT INTO mensajes_privados (emisor, receptor, mensaje, fecha, leido) VALUES (?, ?, ?, NOW(), 0)");
         $filt->bind_param("iis", $emisor, $receptor, $mensaje);
         return $filt->execute();
     }
 
-    public function marcarComoLeidos($emisor, $receptor) {
+    public function marcarComoLeidos($emisor, $receptor)
+    {
         $filt = $this->db->prepare("UPDATE mensajes_privados SET leido = 1 WHERE emisor = ? AND receptor = ? AND leido = 0");
         $filt->bind_param("ii", $emisor, $receptor);
         return $filt->execute();
     }
 
-    public function contarNoLeidos($usuario) {
+    public function contarNoLeidos($usuario)
+    {
         $filt = $this->db->prepare("SELECT COUNT(*) AS total FROM mensajes_privados WHERE receptor = ? AND leido = 0");
         $filt->bind_param("i", $usuario);
         $filt->execute();
-        return (int)$filt->get_result()->fetch_assoc()['total'];
+        return (int) $filt->get_result()->fetch_assoc()['total'];
     }
 }
 ?>

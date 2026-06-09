@@ -6,7 +6,7 @@ $paginaActiva = '';
 $mensaje = '';
 $error = '';
 
-// ✅ Función reutilizable para validar imágenes
+// Función reutilizable para validar imágenes
 function validarImagenAvatar($fileKey)
 {
     $extensionesPermitidas = ['jpg', 'jpeg', 'png', 'webp'];
@@ -20,7 +20,7 @@ function validarImagenAvatar($fileKey)
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ✅ SEGURIDAD: FILTER_DEFAULT en lugar de FILTER_SANITIZE_SPECIAL_CHARS (deprecado)
+    // FILTER_DEFAULT en lugar de FILTER_SANITIZE_SPECIAL_CHARS (deprecado)
     $accion = trim(filter_input(INPUT_POST, 'accion', FILTER_DEFAULT) ?? '');
 
     if ($accion === 'actualizar_perfil') {
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "La contraseña actual es incorrecta.";
         } elseif ($pass_nueva !== $pass_confirmar) {
             $error = "Las contraseñas nuevas no coinciden.";
-            // ✅ SEGURIDAD: Mínimo 8 caracteres en lugar de 4
+            // Mínimo 8 caracteres
         } elseif (strlen($pass_nueva) < 8) {
             $error = "La contraseña debe tener al menos 8 caracteres.";
         } else {
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif ($accion === 'cambiar_avatar') {
         if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === 0) {
-            // ✅ SEGURIDAD: Validar extensión Y tipo MIME real
+            // Validar extensión Y tipo MIME real
             $ext = validarImagenAvatar('avatar');
             if ($ext === false) {
                 $error = "Formato de imagen no permitido. Usa JPG, PNG o WEBP.";
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "Idioma no válido.";
         }
     } elseif ($accion === 'toggle_perfil_publico') {
-        // ✅ Admin no puede tener perfil público
+        // Admin no puede tener perfil público
         if ($_SESSION['level'] == 0) {
             $error = "Los administradores no pueden tener perfil público.";
         } else {
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ✅ SEGURIDAD: SELECT solo campos necesarios, sin traer la contraseña
+// SELECT solo campos necesarios, sin traer la contraseña
 $stmt = $db->prepare("SELECT nombre, email, avatar, bio, idioma, perfil_publico FROM usuarios WHERE id = ?");
 $stmt->bind_param("i", $_SESSION['id']);
 $stmt->execute();

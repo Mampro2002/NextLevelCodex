@@ -4,7 +4,7 @@ session_start();
 
 include "bdd.php";
 
-// AÑADIR — marcar como desconectado antes de destruir la sesión
+// marcar como desconectado antes de destruir la sesión
 if (isset($_SESSION["id"])) {
     $conectado = 0;
     $filt = $db->prepare("UPDATE usuarios SET conectado = ? WHERE id = ?");
