@@ -20,12 +20,13 @@ if (!$opt) {
 
 function validarImagen($fileKey)
 {
+
     if (!isset($_FILES[$fileKey]) || $_FILES[$fileKey]['error'] !== 0) {
         return null;
     }
 
-    $extensionesPermitidas = ['jpg', 'jpeg', 'png', 'webp'];
-    $tiposMimePermitidos = ['image/jpeg', 'image/png', 'image/webp'];
+    $extensionesPermitidas = ['jpg', 'jpeg', 'png', 'webp', 'avif'];
+    $tiposMimePermitidos = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'];
 
     $ext = strtolower(pathinfo($_FILES[$fileKey]['name'], PATHINFO_EXTENSION));
     $mime = mime_content_type($_FILES[$fileKey]['tmp_name']);
